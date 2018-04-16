@@ -17,11 +17,7 @@ const Spaceship = db.define('spaceship', {
     },
     inventory: {
         type: Sequelize.INTEGER,
-        allowNull: true,
-        validate: {
-            min: { args: 0, msg: 'Please enter integer from 1 to 10' },
-            max: { args: 10, msg: 'Please enter integer from 1 to 10' }
-        }
+        allowNull: true
     },
     vesselType: {
         type: Sequelize.STRING,
