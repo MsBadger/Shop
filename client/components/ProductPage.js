@@ -7,13 +7,9 @@ import { fetchSingleSpaceship } from '../store/spaceship.js'
 export class ProductPage extends Component {
 
 	componentDidMount () {
-		console.log('COMPONENT MOUNTED')
 		const spaceshipId = this.props.match.params.spaceshipId;
-		console.log('THIS IS THE SPACESHIPID', spaceshipId)
 		const productPageThunk = fetchSingleSpaceship(spaceshipId);
-
 		store.dispatch(productPageThunk);
-
 	}
 
 	render () {
