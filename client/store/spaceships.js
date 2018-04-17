@@ -2,7 +2,7 @@ import axios from 'axios';
 
 /*** ACTION TYPES ***/
 const GET_SPACESHIPS = 'GET_SPACESHIPS';
-const GET_BY_CATEGORY = 'GET_SPACESHIP_CATEGORY'
+const GET_BY_VESSEL_TYPE = 'GET_BY_VESSEL_TYPE'
 
 
 /*** ACTION CREATORS ***/
@@ -13,9 +13,9 @@ const getSpaceships = spaceships => {
     }
 }
 //get spaceships by category
-const getByCategory = spaceships => {
+const getByVesselType = spaceships => {
     return {
-        type: GET_SPACESHIP_CATEGORY,
+        type: GET_BY_VESSEL_TYPE,
         spaceships
     }
 }
@@ -30,13 +30,13 @@ export const fetchSpaceships = () => dispatch => {
         .catch(err => console.error('Fetching products/spaceships unsuccessful', err));
 };
 
-export const fetchByCategory = (category) => {
-    axios.get(`/api/products/${category}`)
+export const fetchByVesselType = (vesselType) => {
+    axios.get(`/api/products/${vesselType}`)
         .then(res => res.data)
         .then(spaceships => {
-            dispatch(getByCategory(spaceships))
+            dispatch(getByVesselType(spaceships))
         })
-        .catch(console.error('Fetching products/spaceships by category FAILED', err));
+        .catch(console.error('Fetching products/spaceships by vessel type FAILED', err));
 }
 
 

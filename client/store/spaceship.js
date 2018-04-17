@@ -31,7 +31,7 @@ export const fetchSingleSpaceship = (spaceshipId) => {
 export default function (state = {}, action) {
     switch (action.type) {
         case GET_SPACESHIP:
-            return action.getSpaceships;
+            return action.getSpaceship;
 
         default:
             return state
