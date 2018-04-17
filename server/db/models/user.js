@@ -26,8 +26,30 @@ const User = db.define('user', {
   },
   googleId: {
     type: Sequelize.STRING
-  }
-})
+  },
+ //---------------------------- ADDED --------------------------------
+
+  name: Sequelize.STRING,
+  photo: {
+    type: Sequelize.STRING,
+    defaultValue: '/images/default-photo.jpg'
+  },
+  phone: Sequelize.STRING,
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  } 
+}
+// ,{
+//   scopes: {
+//     populated: () => ({
+//       include: [{
+//         model: db.model('review')
+//       }]
+//     })
+//   }
+// }
+)
 
 module.exports = User
 
