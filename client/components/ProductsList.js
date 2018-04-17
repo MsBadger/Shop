@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+
 function ProductsList(props) {
 
   const { spaceships } = props;
