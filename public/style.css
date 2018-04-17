@@ -1,5 +1,7 @@
 body {
   font-family: sans-serif;
+  background: radial-gradient(rgb(0, 0, 189), rgb(0, 0, 28));
+  color: rgb(2, 229, 254)
 }
 
 a {
@@ -13,9 +15,64 @@ label {
 nav a {
   display: inline-block;
   margin: 1em;
+  color: whitesmoke;
 }
 
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+/* ----------------  HOME PAGE -------------------- */
+.logo {
+  height: 50px;
+  border-radius: 100%;
+  border: 1px solid white;
+  display: inline;
+}
+
+.header {
+  display: inline;
+}
+.home h1 {
+  text-transform: capitalize;
+}
+
+.home {
+  padding: 0 5%;
+  color: rgb(220, 218, 218)
+}
+
+.home-container {
+  padding-top: 80px;
+  width: 90%;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-column: 2;
+  grid-column-gap: 50px;
+}
+
+.home-item a {
+  color:  rgb(2, 229, 254);
+  text-align: center;
+}
+
+.home-item img:hover, .see-all-btn:hover {
+  position: relative;
+  top: -8px;
+  left: -8px;
+  box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+}
+
+.home-item img  {
+  height: 250px;
+  width: 250px;
+  border-radius: 15%;
+}
+
+.see-all-btn {
+  padding: 10px;
+  font-size: 35px;
+  border-radius: 10px;
 }
