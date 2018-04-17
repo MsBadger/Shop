@@ -1,17 +1,16 @@
-
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import store, { fetchSpaceships } from '../store';
 import Navbar from './Navbar'
 import Home from './Home'
-import ProductPage from './ProductPage'
+import ProductsList from './ProductsList'
 
 export default class Main extends Component {
 
-    componentDidMount() {
-        const spaceshipsThunk = fetchSpsceships();
-        store.dispatch(spaceshipsThunk);
-    }
+    // componentDidMount() {
+    //     const spaceshipsThunk = fetchSpaceships();
+    //     store.dispatch(spaceshipsThunk);
+    // }
 
     render() {
         return (
@@ -19,9 +18,8 @@ export default class Main extends Component {
                 <Navbar />
                 <main>
                     <Switch>
+                        <Route exact path="/spaceships" component={ProductsList} />
                         <Route path="/" component={Home} />
-                        <Route path="/spaceships" component={ProductsList} />
-                        <Route path="/spaceships/:spaceshipId" component={ProductPage} />
                         <Redirect to="/" />
                     </Switch>
                 </main>
@@ -29,3 +27,5 @@ export default class Main extends Component {
         );
     }
 }
+
+
