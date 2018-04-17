@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import store from '../store'
 import { fetchSingleSpaceship } from '../store/spaceship.js'
@@ -18,9 +18,15 @@ export class ProductPage extends Component {
 			<div>
 				<h3>{this.props.spaceship.title}</h3>
 				<img src={this.props.spaceship.image} />
-				<span>${this.props.spaceship.priceInMills}</span>
+				<div>${this.props.spaceship.priceInMills}</div>
 				<div>{this.props.spaceship.description}</div>
 				<span>Max. capacity: {this.props.spaceship.capacity} people</span>
+				{ this.props.isAdmin ? 
+					<div className="button">
+          				<Link to="/spaceship/:spaceshipId/edit">Edit Product</Link>
+        			</div> 
+        			: null
+        		}
 			</div>
 		)
 
@@ -30,7 +36,9 @@ export class ProductPage extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		spaceship: state.spaceship
+		spaceship: state.spaceship,
+		user: state.user,
+		isAdmin: state.user.isAdmin
 	};
 };
 

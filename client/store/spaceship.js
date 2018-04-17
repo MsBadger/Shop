@@ -16,12 +16,10 @@ const getSpaceship = spaceship => {
 
 /*** THUNK CREATORS ***/
 export const fetchSingleSpaceship = (spaceshipId) => {
-    console.log('GOT INSIDE THE THUNK')
     return dispatch => {
         return axios.get(`/api/products/${spaceshipId}`)
             .then(res => res.data)
             .then(spaceship => {
-                console.log('THIS IS THE SPECIFIC SPACESHIP', spaceship.title)
                 dispatch(getSpaceship(spaceship))
             })
             .catch(console.error)
