@@ -2,7 +2,8 @@ import axios from 'axios';
 
 /*** ACTION TYPES ***/
 const GET_SPACESHIPS = 'GET_SPACESHIPS';
-const GET_BY_VESSEL_TYPE = 'GET_BY_VESSEL_TYPE'
+const GET_BY_VESSEL_TYPE = 'GET_BY_VESSEL_TYPE';
+const UPDATE_SPACESHIP = 'UPDATE_SPACESHIP';
 
 
 /*** ACTION CREATORS ***/
@@ -19,19 +20,31 @@ const getByVesselType = spaceships => {
         spaceships
     }
 }
+//update product/spaceship, oh baby
+const updateSpaceship = spaceship => {
+    return {
+        type: UPDATE_SPACESHIP,
+        spaceship
+    }
+}
 
 /*** THUNK CREATORS ***/
+//fetch all them spaceships
 export const fetchSpaceships = () => dispatch => {
-    axios.get('/api/products')
-        .then(res => res.data)
+    return axios.get('/api/products')
+        .then(res => {
+            console.log(res.data)
+            return res.data
+        })
         .then(spaceships => {
             dispatch(getSpaceships(spaceships))
         })
         .catch(err => console.error('Fetching products/spaceships unsuccessful', err));
 };
 
-export const fetchByVesselType = (vesselType) => {
-    axios.get(`/api/products/categories/${vesselType}`)
+//fetch spaceship by it's type/category
+export const fetchByVesselType = (vesselType) => dispatch => {
+    return axios.get(`/api/products/categories/${vesselType}`)
         .then(res => res.data)
         .then(spaceships => {
             dispatch(getByVesselType(spaceships))
@@ -39,18 +52,30 @@ export const fetchByVesselType = (vesselType) => {
         .catch(console.error('Fetching products/spaceships by vessel type FAILED', err));
 }
 
+//update a spaceship/product(which is a spaceship, because that is what we are selling)
+export const updateSpaceshipInfo = (id, spaceship) => dispatch => {
+    return axios.put(`api/products/${id}`)
+        .then(res => dispatch(updateSpaceship(res.data)))
+        .catch(err => console.error(`Updating the spaceship product :${spaceship} FAILED`, err))
+};
+
+
 
 /*** REDUCER ***/
 export default function (state = [], action) {
     switch (action.type) {
         case GET_SPACESHIPS:
-            return action.getSpaceships;
+            return action.spaceships;
 
         case GET_BY_VESSEL_TYPE:
-            return action.getByVesselType;
+            return action.spaceships;
 
-        default:
-            return state
+        case UPDATE_SPACESHIP:
+            return state.map(spaceship => (
+                action.spaceship.id === spaceship.id ? action.spaceship : spaceship
+            ))
+
+        default: return state
     }
 }
 

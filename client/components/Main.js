@@ -4,11 +4,12 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import store, { fetchSpaceships } from '../store';
 import Navbar from './Navbar'
 import Home from './Home'
+import ProductsList from './ProductsList'
 
 export default class Main extends Component {
 
     componentDidMount() {
-        const spaceshipsThunk = fetchSpsceships();
+        const spaceshipsThunk = fetchSpaceships();
         store.dispatch(spaceshipsThunk);
     }
 
@@ -18,9 +19,8 @@ export default class Main extends Component {
                 <Navbar />
                 <main>
                     <Switch>
+                        <Route exact path="/spaceships" component={ProductsList} />
                         <Route path="/" component={Home} />
-                        <Route path="/spaceships" component={ProductsList} />
-                        <Route path="/spaceships/id" component={ProductInfo} />
                         <Redirect to="/" />
                     </Switch>
                 </main>
@@ -28,3 +28,4 @@ export default class Main extends Component {
         );
     }
 }
+

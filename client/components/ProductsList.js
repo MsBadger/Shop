@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+
 function ProductsList(props) {
 
   const { spaceships } = props;
@@ -12,8 +13,8 @@ function ProductsList(props) {
           return (
             <li key={spaceship.id}>
               <NavLink to={`/spaceships/${spaceship.id}`}>
+                <img src={spaceship.image} />
                 <span> {spaceship.name}</span>
-                <img> {spaceship.image}</img>
               </NavLink>
             </li>
           );
