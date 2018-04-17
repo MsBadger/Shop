@@ -1,7 +1,9 @@
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> d956da0c9eda31c9f3d5d1cf4bbb3ed3adf0e048
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-
 import createLogger from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
