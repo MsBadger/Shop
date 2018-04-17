@@ -4,6 +4,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import store, { fetchSpaceships } from '../store';
 import Navbar from './Navbar'
 import Home from './Home'
+import ProductPage from './ProductPage'
 import ProductsList from './ProductsList'
 
 export default class Main extends Component {
@@ -19,8 +20,9 @@ export default class Main extends Component {
                 <Navbar />
                 <main>
                     <Switch>
+                        <Route path="/spaceships/:spaceshipId" component={ProductPage} />
                         <Route exact path="/spaceships" component={ProductsList} />
-                        <Route path="/" component={Home} />
+                        <Route exact path="/" component={Home} />
                         <Redirect to="/" />
                     </Switch>
                 </main>
