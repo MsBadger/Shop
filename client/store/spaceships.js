@@ -67,7 +67,7 @@ export default function (state = [], action) {
         case GET_BY_VESSEL_TYPE:
             return action.getByVesselType;
 
-        case UPDATE_SHIP:
+        case UPDATE_SPACESHIP:
             return state.map(spaceship => (
                 action.spaceship.id === spaceship.id ? action.spaceship : spaceship
             ))
