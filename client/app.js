@@ -1,14 +1,20 @@
-import React from 'react'
+import React from 'react';
+import Routes from './routes';
 
-import {Navbar} from './components'
-import Routes from './routes'
+
+import { Main } from './components'
+// import Routes from './routes'
+
+
 
 
 const App = () => {
   return (
     <div>
-      <Navbar />
-      <Routes /> //
+
+      <Main />
+      {/* <Routes />  This is left here to reuse the login iformation TS*/}
+
     </div>
   )
 }
