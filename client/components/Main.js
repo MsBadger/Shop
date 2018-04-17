@@ -19,8 +19,8 @@ export default class Main extends Component {
                 <main>
                     <Switch>
                         <Route path="/" component={Home} />
-                        <Route path="/allShips" component={ProductsList} />
-                        <Route path="/allShips/id" component={ProductInfo} />
+                        <Route path="/spaceships" component={ProductsList} />
+                        <Route path="/spaceships/id" component={ProductInfo} />
                         <Redirect to="/" />
                     </Switch>
                 </main>
