@@ -1,8 +1,5 @@
 import React from 'react';
-import Routes from './routes';
-
-
-import { Main } from './components'
+import Main from './components/Main.js';
 // import Routes from './routes'
 
 
@@ -11,7 +8,6 @@ import { Main } from './components'
 const App = () => {
   return (
     <div>
-
       <Main />
       {/* <Routes />  This is left here to reuse the login iformation TS*/}
 
