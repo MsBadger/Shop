@@ -31,7 +31,7 @@ export const fetchSpaceships = () => dispatch => {
 };
 
 export const fetchByVesselType = (vesselType) => {
-    axios.get(`/api/products/${vesselType}`)
+    axios.get(`/api/products/categories/${vesselType}`)
         .then(res => res.data)
         .then(spaceships => {
             dispatch(getByVesselType(spaceships))
