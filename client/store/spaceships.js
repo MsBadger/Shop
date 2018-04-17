@@ -46,8 +46,8 @@ export default function (state = [], action) {
         case GET_SPACESHIPS:
             return action.getSpaceships;
 
-        case GET_SPACESHIP_CATEGORY:
-            return action.getByCategory;
+        case GET_BY_VESSEL_TYPE:
+            return action.getByVesselType;
 
         default:
             return state
