@@ -7,20 +7,22 @@ function ProductsList(props) {
 
   const { spaceships } = props;
   return (
-    <ul>
+    <div className="all-container">
       {
         spaceships.map(spaceship => {
           return (
-            <li key={spaceship.id}>
+            <span key={spaceship.id} className="all-item">
               <NavLink to={`/spaceships/${spaceship.id}`}>
                 <img src={spaceship.image} />
-                <span> {spaceship.name}</span>
+                <div>
+                  <span> {spaceship.title}</span>
+                </div>
               </NavLink>
-            </li>
+            </span>
           );
         })
       }
-    </ul>
+    </div>
   );
 }
 
