@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import store, { fetchSingleSpaceship } from '../store'
+import store from '../store'
+import { fetchSingleSpaceship } from '../store/spaceship.js'
 
-export default class ProductPage extends Component {
+export class ProductPage extends Component {
 
 	componentDidMount () {
 		console.log('COMPONENT MOUNTED')
 		const spaceshipId = this.props.match.params.spaceshipId;
+		console.log('THIS IS THE SPACESHIPID', spaceshipId)
 		const productPageThunk = fetchSingleSpaceship(spaceshipId);
 
 		store.dispatch(productPageThunk);
@@ -19,6 +21,10 @@ export default class ProductPage extends Component {
 		return (
 			<div>
 				<h3>{this.props.spaceship.title}</h3>
+				<img src={this.props.spaceship.image} />
+				<span>${this.props.spaceship.priceInMills}</span>
+				<div>{this.props.spaceship.description}</div>
+				<span>Max. capacity: {this.props.spaceship.capacity} people</span>
 			</div>
 		)
 
@@ -26,11 +32,11 @@ export default class ProductPage extends Component {
 
 }
 
-// const mapStateToProps = (state) => {
-// 	return {
-// 		spaceship: state.spaceship
-// 	};
-// };
+const mapStateToProps = (state) => {
+	return {
+		spaceship: state.spaceship
+	};
+};
 
-// const ProductPageContainer = withRouter(connect(mapStateToProps)(ProductPage))
-// export default ProductPageContainer
+const ProductPageContainer = withRouter(connect(mapStateToProps)(ProductPage))
+export default ProductPageContainer

@@ -21,8 +21,7 @@ export default class Main extends Component {
                 <main>
                     <Switch>
                         <Route exact path="/spaceships" component={ProductsList} />
-                        <Route path="/" component={Home} />
-                        <Route exact path="/spaceships" component={ProductsList} />
+                        <Route exact path="/" component={Home} />
                         <Route path="/spaceships/:spaceshipId" component={ProductPage} />
                         <Redirect to="/" />
                     </Switch>
