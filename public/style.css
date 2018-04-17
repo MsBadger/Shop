@@ -1,5 +1,7 @@
 body {
   font-family: sans-serif;
+  background: radial-gradient(rgb(0, 0, 189), rgb(0, 0, 28));
+  color: rgb(2, 229, 254)
 }
 
 a {
@@ -13,9 +15,37 @@ label {
 nav a {
   display: inline-block;
   margin: 1em;
+  color: whitesmoke;
 }
 
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+/* ----------------  HOME PAGE -------------------- */
+
+.home h1 {
+  text-transform: capitalize;
+}
+
+.home {
+  color: rgb(220, 218, 218)
+}
+
+.home-container {
+  text-align: center;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-column: 2;
+  grid-column-gap: 50px;
+}
+
+.home-item a {
+  text-align: center;
+}
+.home-item img {
+  height: 400px;
+  width: 400px;
+
 }
