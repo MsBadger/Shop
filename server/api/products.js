@@ -9,9 +9,8 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/category/:vesselType', (req, res, next) => {
-	console.log('THIS THIS THIS is req.params.vesselType', req.params.vesselType)
 	Spaceship.findAll({
-		where: { vesselType : req.params.vesselType.toString() }
+		where: { vesselType : req.params.vesselType }
 	})
 	.then(spaceships => res.json(spaceships))
 	.catch(next)
