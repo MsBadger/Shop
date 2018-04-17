@@ -6,8 +6,10 @@ import {logout} from '../store'
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
-  <img src="/images/logo_sq.jpg" className="logo"/>
+  <Link to={'/'}>
+    <img src="/images/logo_sq.jpg" className="logo" />
     <h1 className="header">Aquila Spaceships Store</h1>
+  </Link>    
     <nav>
       {isLoggedIn ? (
         <div>
