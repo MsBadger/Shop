@@ -7,3 +7,9 @@ router.get('/', (req, res, next) => {
     .then(spaceships => res.json(spaceships))
     .catch(next)
 })
+
+router.get('/:productId', (req, res, next) => {
+	Spaceship.findById(req.params.productId)
+	.then(spaceship => res.json(spaceship))
+	.catch(next)
+})
