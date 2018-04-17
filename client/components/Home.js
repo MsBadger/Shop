@@ -19,11 +19,14 @@ console.log('rendering home page')
             <span className="sub-title"> 
                 <h3>Please explore the options and login to buy</h3>  
             </span>
-
+            <Link to={ `/spaceships`}>
+                <button className="see-all-btn">See All Spaceships</button>
+            </Link>
+            <br/>
             <div className="home-container">
                 {categories.map( (category, ind) => (
                     <span key={ind} className="home-item">
-                        <Link to={ `/allShips/${category[0]}`}>
+                        <Link to={ `/spaceships/${category[0]}`}>
                             <h3>{category[0].toUpperCase()}</h3>
                             <img src={category[1]} />
                         </Link>
