@@ -3,9 +3,10 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import store, { fetchSingleSpaceship } from '../store'
 
-export class ProductPage extends Component {
+export default class ProductPage extends Component {
 
 	componentDidMount () {
+		console.log('COMPONENT MOUNTED')
 		const spaceshipId = this.props.match.params.spaceshipId;
 		const productPageThunk = fetchSingleSpaceship(spaceshipId);
 
@@ -25,11 +26,11 @@ export class ProductPage extends Component {
 
 }
 
-const mapStateToProps = (state) => {
-	return {
-		spaceship: state.spaceship;
-	};
-};
+// const mapStateToProps = (state) => {
+// 	return {
+// 		spaceship: state.spaceship
+// 	};
+// };
 
-const ProductPageContainer = withRouter(connect(mapStateToProps)(ProductPage))
-export default ProductPageContainer
+// const ProductPageContainer = withRouter(connect(mapStateToProps)(ProductPage))
+// export default ProductPageContainer

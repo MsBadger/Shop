@@ -32,7 +32,10 @@ const updateSpaceship = spaceship => {
 //fetch all them spaceships
 export const fetchSpaceships = () => dispatch => {
     return axios.get('/api/products')
-        .then(res => res.data)
+        .then(res => {
+            console.log(res.data)
+            return res.data
+        })
         .then(spaceships => {
             dispatch(getSpaceships(spaceships))
         })
@@ -62,10 +65,10 @@ export const updateSpaceshipInfo = (id, spaceship) => dispatch => {
 export default function (state = [], action) {
     switch (action.type) {
         case GET_SPACESHIPS:
-            return action.getSpaceships;
+            return action.spaceships;
 
         case GET_BY_VESSEL_TYPE:
-            return action.getByVesselType;
+            return action.spaceships;
 
         case UPDATE_SPACESHIP:
             return state.map(spaceship => (

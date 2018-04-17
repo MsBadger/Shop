@@ -9,10 +9,10 @@ import ProductsList from './ProductsList'
 
 export default class Main extends Component {
 
-    // componentDidMount() {
-    //     const spaceshipsThunk = fetchSpaceships();
-    //     store.dispatch(spaceshipsThunk);
-    // }
+    componentDidMount() {
+        const spaceshipsThunk = fetchSpaceships();
+        store.dispatch(spaceshipsThunk);
+    }
 
     render() {
         return (
