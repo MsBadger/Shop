@@ -30,6 +30,7 @@ class Main extends Component {
                 <main>
                     <Switch>
 
+                        <Route path="/spaceships/category/:vesselType" component={ProductsList} />
                         <Route path="/spaceships/:spaceshipId" component={ProductPage} />
                         <Route exact path="/spaceships" component={ProductsList} />
                         <Route exact path="/" component={Home} />

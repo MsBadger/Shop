@@ -6,22 +6,33 @@ import { connect } from 'react-redux';
 function ProductsList(props) {
 
   const { spaceships } = props;
+  let proxyVar = [];
+
+  if (props.match.params.vesselType) {
+    proxyVar = spaceships.filter(spaceship => spaceship.vesselType === props.match.params.vesselType)
+  }
+  else {
+    proxyVar = spaceships
+  }
+
   return (
     <div className="all-container">
-      {
-        spaceships.map(spaceship => {
-          return (
-            <span key={spaceship.id} className="all-item">
-              <NavLink to={`/spaceships/${spaceship.id}`}>
-                <img src={spaceship.image} />
-                <div>
-                  <span> {spaceship.title}</span>
-                </div>
-              </NavLink>
-            </span>
-          );
-        })
+
+      {proxyVar.map((spaceship, idx) => {
+        return (
+          <span key={idx} className="all-item">
+            <NavLink to={`/spaceships/${spaceship.id}`}>
+              <img src={spaceship.image} />
+              <div>
+                <span> {spaceship.title}</span>
+              </div>
+            </NavLink>
+          </span>
+        );
+      })
+
       }
+
     </div>
   );
 }
@@ -33,3 +44,4 @@ const mapStateToProps = function (state) {
 };
 
 export default withRouter(connect(mapStateToProps)(ProductsList));
+
