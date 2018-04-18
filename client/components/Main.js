@@ -6,6 +6,7 @@ import Navbar from './Navbar'
 import Home from './Home'
 import ProductPage from './ProductPage'
 import ProductsList from './ProductsList'
+import UpdateSpaceship from './editProductForm';
 
 export default class Main extends Component {
 
@@ -20,6 +21,7 @@ export default class Main extends Component {
                 <Navbar />
                 <main>
                     <Switch>
+                        <Route path="/update/spaceship/:id" component={UpdateSpaceship} />
                         <Route path="/spaceships/:spaceshipId" component={ProductPage} />
                         <Route exact path="/spaceships" component={ProductsList} />
                         <Route exact path="/" component={Home} />
