@@ -15,18 +15,22 @@ export class ProductPage extends Component {
 	render() {
 		const spaceshipId = this.props.match.params.spaceshipId;
 		return (
-			<div>
-				<h3>{this.props.spaceship.title}</h3>
-				<img src={this.props.spaceship.image} />
-				<div>${this.props.spaceship.priceInMills}</div>
-				<div>{this.props.spaceship.description}</div>
-				<span>Max. capacity: {this.props.spaceship.capacity} people</span>
-				{this.props.isAdmin ?
-					<div className="button">
-						<Link to={`/spaceships/edit/${spaceshipId}`}>Edit Product</Link>
-					</div>
-					: null
-				}
+			<div className="single">
+				<span>
+					<h3>{this.props.spaceship.title}</h3>
+					<img src={this.props.spaceship.image} />
+				</span>
+				<span className="single-details">
+					<div>${this.props.spaceship.priceInMills}</div>
+					<div>{this.props.spaceship.description}</div>
+					<span>Max. capacity: {this.props.spaceship.capacity} people</span>
+					{this.props.isAdmin ?
+						<div className="button">
+							<Link to={`/spaceships/edit/${spaceshipId}`}>Edit Product</Link>
+						</div>
+						: null
+					}
+				</span>
 			</div>
 		)
 
