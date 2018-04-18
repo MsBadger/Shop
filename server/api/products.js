@@ -32,8 +32,10 @@ router.put('/:productId', (req, res, next) => {
   })
 
 router.post('/new-product', (req, res, next) => {
-	console.log('GOT INSIDE THE POST ROUTE')
 	Spaceship.create(req.body)
-	  .then(spaceship => res.json(spaceship))
+	  .then(spaceship => {
+	  	console.log('THIS IS THE CREATED SPACESHIP', spaceship)
+	  	res.json(spaceship)
+	  })
 	  .catch(next)
   })
