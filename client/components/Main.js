@@ -3,11 +3,13 @@ import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import store, { fetchSpaceships } from '../store';
-import Navbar from './Navbar'
-import Home from './Home'
-import ProductPage from './ProductPage'
-import ProductsList from './ProductsList'
-import UpdateSpaceship from './editProductForm';
+import { Login, Signup, UserHome, Navbar, Home, ProductPage, ProductsList } from './index.js'
+// import Navbar from './Navbar';
+// import Home from './Home';
+// import ProductPage from './ProductPage';
+// import ProductsList from './ProductsList';
+import { me } from '../store'
+
 
 class Main extends Component {
 
