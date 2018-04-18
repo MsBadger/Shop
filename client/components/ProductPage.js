@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+qimport React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import store from '../store'
@@ -6,13 +6,13 @@ import { fetchSingleSpaceship } from '../store/spaceship.js'
 
 export class ProductPage extends Component {
 
-	componentDidMount () {
+	componentDidMount() {
 		const spaceshipId = this.props.match.params.spaceshipId;
 		const productPageThunk = fetchSingleSpaceship(spaceshipId);
 		store.dispatch(productPageThunk);
 	}
 
-	render () {
+	render() {
 
 		return (
 			<div>
@@ -21,12 +21,12 @@ export class ProductPage extends Component {
 				<div>${this.props.spaceship.priceInMills}</div>
 				<div>{this.props.spaceship.description}</div>
 				<span>Max. capacity: {this.props.spaceship.capacity} people</span>
-				{ this.props.isAdmin ? 
+				{this.props.isAdmin ?
 					<div className="button">
-          				<Link to="/spaceship/:spaceshipId/edit">Edit Product</Link>
-        			</div> 
-        			: null
-        		}
+						<Link to="/spaceship/:spaceshipId/edit">Edit Product</Link>
+					</div>
+					: null
+				}
 			</div>
 		)
 
