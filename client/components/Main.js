@@ -29,12 +29,8 @@ class Main extends Component {
                 <Navbar />
                 <main>
                     <Switch>
-<<<<<<< HEAD
                         <Route path="/update/spaceship/:id" component={UpdateSpaceship} />
-=======
-
                         <Route path="/spaceships/category/:vesselType" component={ProductsList} />
->>>>>>> 1c8eb7289ab9da62bb27dd8bc7c5f81091d914f9
                         <Route path="/spaceships/:spaceshipId" component={ProductPage} />
                         <Route exact path="/spaceships" component={ProductsList} />
                         <Route exact path="/" component={Home} />
