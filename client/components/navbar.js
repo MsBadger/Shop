@@ -31,18 +31,12 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
               </ul>
           </div>
         ) : (
-          // <span class="dropdown">
-          //   {/* The navbar will show these links before you log in */}
-          //   <Link to="/login">Login</Link>
-          //   <Link to="/signup">Sign Up</Link>
-          // </span>
-            <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul className="nav navbar-nav">
-                    <li><Link to="/login">Login</Link></li>
-                    <li><Link to="/signup">Sign Up</Link></li>
-                </ul>
-            </div>
-          
+          <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul className="nav navbar-nav">
+                  <li><Link to="/login">Login</Link></li>
+                  <li><Link to="/signup">Sign Up</Link></li>
+              </ul>
+          </div>
         )}
       </span>
     </nav>

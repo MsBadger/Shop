@@ -4,6 +4,7 @@ import axios from 'axios';
 const GET_SPACESHIPS = 'GET_SPACESHIPS';
 const GET_BY_VESSEL_TYPE = 'GET_BY_VESSEL_TYPE';
 const UPDATE_SPACESHIP = 'UPDATE_SPACESHIP';
+const ADD_SPACESHIP = 'ADD_SPACESHIP'
 
 
 /*** ACTION CREATORS ***/
@@ -24,6 +25,13 @@ const getByVesselType = spaceships => {
 const updateSpaceship = spaceship => {
     return {
         type: UPDATE_SPACESHIP,
+        spaceship
+    }
+}
+
+export const addSpaceship = spaceship => {
+    return {
+        type: ADD_SPACESHIP,
         spaceship
     }
 }
@@ -74,6 +82,9 @@ export default function (state = [], action) {
             return state.map(spaceship => (
                 action.spaceship.id === spaceship.id ? action.spaceship : spaceship
             ))
+
+        case ADD_SPACESHIP:
+            return state.concat([action.spaceship])
 
         default: return state
     }
