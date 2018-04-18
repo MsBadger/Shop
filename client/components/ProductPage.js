@@ -13,7 +13,7 @@ export class ProductPage extends Component {
 	}
 
 	render() {
-
+		const spaceshipId = this.props.match.params.spaceshipId;
 		return (
 			<div>
 				<h3>{this.props.spaceship.title}</h3>
@@ -23,7 +23,7 @@ export class ProductPage extends Component {
 				<span>Max. capacity: {this.props.spaceship.capacity} people</span>
 				{this.props.isAdmin ?
 					<div className="button">
-						<Link to="/spaceship/:spaceshipId/edit">Edit Product</Link>
+						<Link to={`/spaceships/edit/${spaceshipId}`}>Edit Product</Link>
 					</div>
 					: null
 				}

@@ -68,6 +68,21 @@ export default class UpdateSpaceship extends Component {
 
 
     render() {
+        let warning;
+        if (!this.state.title) {
+            warning = 'Please enter a name using letters!'
+        } else if (!this.state.price) {
+            warning = 'Please enter a price using numbers, you RASCAL!'
+        }
+        else if (!this.state.capacity) {
+            warning = 'For realzies? Enter the capacity using numbers, PPPLEASEEEE!'
+        }
+        //disable the button if admin does not behave
+        let functional = false;
+        if (!this.state.title || !this.state.price || !this.state.capacity) {
+            functional = true;
+        }
+
 
         return (
             <div>
@@ -95,7 +110,7 @@ export default class UpdateSpaceship extends Component {
                     <div>
                         <label>Price:
                         <input
-                                type='text'
+                                type='decimal'
                                 onChange={this.handleChange}
                                 name='type'
                                 value={this.state.price}
@@ -105,7 +120,7 @@ export default class UpdateSpaceship extends Component {
                     <div>
                         <label>Inventory:
                         <input
-                                type='text'
+                                type='integer'
                                 onChange={this.handleChange}
                                 name='year'
                                 value={this.state.inventory}
@@ -125,7 +140,7 @@ export default class UpdateSpaceship extends Component {
                     <div>
                         <label>Capacity:
                         <input
-                                type='text'
+                                type='integer'
                                 onChange={this.handleChange}
                                 name='description'
                                 value={this.state.capacity}
@@ -143,11 +158,12 @@ export default class UpdateSpaceship extends Component {
                         </label>
                     </div>
 
-                    <button type="submit" className='button'>UPDATE</button>
-
+                    <button type="submit" className='button' disabled={functional}>UPDATE</button>
+                    {
+                        warning && <div className='alert alert-warning'>{warning}</div>
+                    }
                 </form>
             </div>
-
         )
     }
 }
