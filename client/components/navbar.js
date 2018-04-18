@@ -1,12 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {logout} from '../store'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { logout } from '../store'
 
 const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
   <div>
+<<<<<<< HEAD
+=======
   <Link to={'/'}>
+>>>>>>> 1c8eb7289ab9da62bb27dd8bc7c5f81091d914f9
     <img src="/images/logo_sq.jpg" className="logo" />
     <h1 className="header">Aquila Spaceships Store</h1>
   </Link>    
@@ -20,6 +23,14 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
           </a>
         </div>
       ) : (
+<<<<<<< HEAD
+          <div>
+            {/* The navbar will show these links before you log in */}
+            <Link to="/login">Login</Link>
+            <Link to="/signup">Sign Up</Link>
+          </div>
+        )}
+=======
         <div>
           {/* The navbar will show these links before you log in */}
           <Link to="/login">Login</Link>
@@ -27,6 +38,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
         </div>
       )}
       { isAdmin ? <Link to={'/spaceships/new'}>Add New Spaceship</Link> : null }
+>>>>>>> 1c8eb7289ab9da62bb27dd8bc7c5f81091d914f9
     </nav>
     <hr />
   </div>
