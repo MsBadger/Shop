@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import store, { updateSpaceshipInfo } from '../store';
 import { Link, Redirect } from 'react-router-dom'
-import { fetchSingleSpaceship } from '../store/spaceship';
+import { addSpaceship } from '../store/spaceships';
 import axios from 'axios';
 
 
@@ -35,13 +35,10 @@ export default class AddSpaceship extends Component {
         };
 
         axios.post('/api/products/new-product', spaceship)
-            .then(res => console.log(res))
+            .then(res => {
+                addSpaceship(res)
+            })
             .catch(err => console.error(err))
-
-        // store.dispatch(updateSpaceshipInfo(id, spaceship))
-        //     .then((dispatch) => {
-        //         this.props.history.push('/spaceships');
-        //     })
     }
 
 
