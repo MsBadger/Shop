@@ -26,9 +26,7 @@ router.put('/:productId', (req, res, next) => {
 	Spaceship.findOne({where: {
 		id: req.params.productId
 	}})
-		.then( spaceshipToUpdate => {
-			return spaceshipToUpdate.update(req.body)
-		})
+		.then( spaceshipToUpdate => spaceshipToUpdate.update(req.body))
 		.then(spaceshipUpdated => res.json(spaceshipUpdated))
 		.catch(next)
   })
