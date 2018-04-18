@@ -11,7 +11,6 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
         <img src="/images/logo_sq.jpg" className="logo" />
         <h1 className="header">Aquila Spaceships Store</h1>
       </Link> 
-
       <div className="dropdown">
         <button className="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Menu
