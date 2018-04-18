@@ -6,14 +6,14 @@ import { fetchSingleSpaceship } from '../store/spaceship.js'
 
 export class ProductPage extends Component {
 
-	componentDidMount () {
+	componentDidMount() {
 		const spaceshipId = this.props.match.params.spaceshipId;
 		const productPageThunk = fetchSingleSpaceship(spaceshipId);
 		store.dispatch(productPageThunk);
 	}
 
-	render () {
-
+	render() {
+		const spaceshipId = this.props.match.params.spaceshipId;
 		return (
 			<div>
 				<h3>{this.props.spaceship.title}</h3>
@@ -21,12 +21,12 @@ export class ProductPage extends Component {
 				<div>${this.props.spaceship.priceInMills}</div>
 				<div>{this.props.spaceship.description}</div>
 				<span>Max. capacity: {this.props.spaceship.capacity} people</span>
-				{ this.props.isAdmin ? 
+				{this.props.isAdmin ?
 					<div className="button">
-          				<Link to="/spaceship/:spaceshipId/edit">Edit Product</Link>
-        			</div> 
-        			: null
-        		}
+						<Link to={`/spaceships/edit/${spaceshipId}`}>Edit Product</Link>
+					</div>
+					: null
+				}
 			</div>
 		)
 
