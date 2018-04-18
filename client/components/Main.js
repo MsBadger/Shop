@@ -3,7 +3,8 @@ import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import store, { fetchSpaceships } from '../store';
-import { Login, Signup, UserHome, Navbar, Home, ProductPage, ProductsList } from './index.js'
+import { Login, Signup, UserHome, Navbar, Home, ProductPage, ProductsList } from './index.js';
+import { UpdateSpaceship } from './UpdateSpaceship';
 // import Navbar from './Navbar';
 // import Home from './Home';
 // import ProductPage from './ProductPage';
