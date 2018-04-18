@@ -24,6 +24,9 @@ form div {
 }
 
 /* ----------------  HOME PAGE -------------------- */
+.nav-container {
+  float: right;
+}
 .logo {
   height: 50px;
   border-radius: 100%;
