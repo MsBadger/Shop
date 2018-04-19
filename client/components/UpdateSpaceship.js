@@ -26,13 +26,13 @@ export default class UpdateSpaceship extends Component {
 
         this.unsubscribe = store.subscribe(() => {
             this.setState({
-                title: store.getState().spaceship.title,
-                description: store.getState().spaceship.description,
-                price: store.getState().spaceship.price,
-                inventory: store.getState().spaceship.inventory,
-                vesselType: store.getState().spaceship.vesselType,
-                capacity: store.getState().spaceship.capacity,
-                image: store.getState().spaceship.image
+                title: store.getState().spaceship.title || '',
+                description: store.getState().spaceship.description || '',
+                price: store.getState().spaceship.price || '',
+                inventory: store.getState().spaceship.inventory || '',
+                vesselType: store.getState().spaceship.vesselType || '',
+                capacity: store.getState().spaceship.capacity || '',
+                image: store.getState().spaceship.image || ''
             })
         })
         store.dispatch(fetchSingleSpaceship(id));
@@ -57,7 +57,7 @@ export default class UpdateSpaceship extends Component {
         const id = this.props.match.params.id
         store.dispatch(updateSpaceshipInfo(id, spaceship))
             .then((dispatch) => {
-                this.props.history.push('/spaceships');
+                this.props.history.push(`/spaceships/${id}`);
             })
     }
 
@@ -68,20 +68,20 @@ export default class UpdateSpaceship extends Component {
 
 
     render() {
-        let warning;
-        if (!this.state.title) {
-            warning = 'Please enter a name using letters!'
-        } else if (!this.state.price) {
-            warning = 'Please enter a price using numbers, you RASCAL!'
-        }
-        else if (!this.state.capacity) {
-            warning = 'For realzies? Enter the capacity using numbers, PPPLEASEEEE!'
-        }
-        //disable the button if admin does not behave
-        let functional = false;
-        if (!this.state.title || !this.state.price || !this.state.capacity) {
-            functional = true;
-        }
+        // let warning;
+        // if (!this.state.title) {
+        //     warning = 'Please enter a name using letters!'
+        // } else if (!this.state.price) {
+        //     warning = 'Please enter a price using numbers, you RASCAL!'
+        // }
+        // else if (!this.state.capacity) {
+        //     warning = 'For realzies? Enter the capacity using numbers, PPPLEASEEEE!'
+        // }
+        // //disable the button if admin does not behave
+        // let functional = false;
+        // if (!this.state.title || !this.state.price || !this.state.capacity) {
+        //     functional = true;
+        // }
 
 
         return (
@@ -92,7 +92,7 @@ export default class UpdateSpaceship extends Component {
                         <input
                                 type='text'
                                 onChange={this.handleChange}
-                                name='make'
+                                name='title'
                                 value={this.state.title}
                             />
                         </label>
@@ -102,7 +102,7 @@ export default class UpdateSpaceship extends Component {
                         <input
                                 type='text'
                                 onChange={this.handleChange}
-                                name='model'
+                                name='description'
                                 value={this.state.description}
                             />
                         </label>
@@ -112,7 +112,7 @@ export default class UpdateSpaceship extends Component {
                         <input
                                 type='decimal'
                                 onChange={this.handleChange}
-                                name='type'
+                                name='price'
                                 value={this.state.price}
                             />
                         </label>
@@ -122,7 +122,7 @@ export default class UpdateSpaceship extends Component {
                         <input
                                 type='integer'
                                 onChange={this.handleChange}
-                                name='year'
+                                name='inventory'
                                 value={this.state.inventory}
                             />
                         </label>
@@ -132,7 +132,7 @@ export default class UpdateSpaceship extends Component {
                         <input
                                 type='text'
                                 onChange={this.handleChange}
-                                name='cost'
+                                name='vesselType'
                                 value={this.state.vesselType}
                             />
                         </label>
@@ -142,7 +142,7 @@ export default class UpdateSpaceship extends Component {
                         <input
                                 type='integer'
                                 onChange={this.handleChange}
-                                name='description'
+                                name='capacity'
                                 value={this.state.capacity}
                             />
                         </label>
@@ -152,18 +152,18 @@ export default class UpdateSpaceship extends Component {
                         <input
                                 type='text'
                                 onChange={this.handleChange}
-                                name='imageUrl'
+                                name='image'
                                 value={this.state.image}
                             />
                         </label>
                     </div>
 
-                    <button type="submit" className='button' disabled={functional}>UPDATE</button>
-                    {
-                        warning && <div className='alert alert-warning'>{warning}</div>
-                    }
+                    <button type="submit" className='button' >UPDATE</button>
                 </form>
             </div>
         )
     }
 }
+                                    //    {
+                                    //         warning && <div className='alert alert-warning'>{warning}</div>
+                                    //     } 
