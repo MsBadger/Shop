@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'
+
 
 export const Cart = (props) => {
 
@@ -36,11 +38,11 @@ const mapState = (state) => {
     }
 }
 
-export default connect(mapState)(UserHome)
+export default connect(mapState)(Cart)
 
 /**
  * PROP TYPES
- */
-UserHome.propTypes = {
-    email: PropTypes.string
-}
+//  */
+// UserHome.propTypes = {
+//     email: PropTypes.string
+// }
