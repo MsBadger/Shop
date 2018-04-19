@@ -68,20 +68,38 @@ export default class UpdateSpaceship extends Component {
 
 
     render() {
-        // let warning;
-        // if (!this.state.title) {
-        //     warning = 'Please enter a name using letters!'
-        // } else if (!this.state.price) {
-        //     warning = 'Please enter a price using numbers, you RASCAL!'
-        // }
-        // else if (!this.state.capacity) {
-        //     warning = 'For realzies? Enter the capacity using numbers, PPPLEASEEEE!'
-        // }
-        // //disable the button if admin does not behave
-        // let functional = false;
-        // if (!this.state.title || !this.state.price || !this.state.capacity) {
-        //     functional = true;
-        // }
+        function isUrl(s) {
+           var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+           return regexp.test(s);
+        }
+        let warning;
+        if (!this.state.title) {
+            warning = 'Please enter a name using letters!'
+        } else if (!this.state.price ) {
+            warning = 'Please enter a price, you RASCAL!'
+        } else if ( isNaN ( Number(this.state.price) ) ) {
+            warning = 'The price has to be a number, silly'
+        } else if (!this.state.capacity) {
+            warning = 'For realzies? Enter the capacity using numbers, PPPLEASEEEE!'
+        } else if ( isNaN ( Number(this.state.capacity) ) ) {
+            warning = 'The capacity has to be a number, silly'
+        } else if (!this.state.image) {
+            warning = 'Please add an image URL'
+        } else if (!isUrl(this.state.image)) {
+            warning = 'Please enter a real URL'
+        }
+        //disable the button if admin does not behave
+        let functional = false;
+        if (
+            !this.state.title || 
+            !this.state.price || 
+            isNaN ( Number(this.state.price) ) || 
+            !this.state.capacity || 
+            isNaN ( Number(this.state.capacity) ) ||
+            !this.state.image ||
+            !isUrl(this.state.image) ) {
+            functional = true;
+        }
 
 
         return (
@@ -158,12 +176,13 @@ export default class UpdateSpaceship extends Component {
                         </label>
                     </div>
 
-                    <button type="submit" className='button' >UPDATE</button>
+                    <button type="submit" className='button' disabled={functional}>UPDATE</button>
+                    {
+                        warning && <div className='alert alert-warning'>{warning}</div>
+                    } 
                 </form>
             </div>
         )
     }
 }
-                                    //    {
-                                    //         warning && <div className='alert alert-warning'>{warning}</div>
-                                    //     } 
+                                    
