@@ -1,5 +1,7 @@
 const User = require('./user');
 const Spaceship = require('./spaceship');
+const Order = require('./order');
+const LineItems = require('./lineItems')
 // const db = require('../db.js')
 
 
@@ -16,6 +18,15 @@ const Spaceship = require('./spaceship');
  * for example, we can say: const {User} = require('../db/models')
  * instead of: const User = require('../db/models/user')
  */
+
+Order.belongsTo(User); // meaning Order will have user_id column and associated methods
+User.hasMany(Order);// Adds methods to the user model 
+
+Spaceship.belongsToMany(Order, { through: LineItems })
+Order.belongsToMany(Spaceship, { through: LineItems })
+
+
+
 module.exports = {
-  User, Spaceship
+  User, Spaceship, Order, LineItems
 }
