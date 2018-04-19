@@ -14,6 +14,11 @@ export class ProductPage extends Component {
 
 	render() {
 		const spaceshipId = this.props.match.params.spaceshipId;
+		let inventoryArr = [];
+		for (let i = 1; i <= this.props.spaceship.inventory; i++) {
+			inventoryArr.push(i);
+		}
+
 		return (
 			<div className="single">
 				<span>
@@ -24,12 +29,28 @@ export class ProductPage extends Component {
 					<div>${this.props.spaceship.priceInMills}</div>
 					<div>{this.props.spaceship.description}</div>
 					<span>Max. capacity: {this.props.spaceship.capacity} people</span>
-					{this.props.isAdmin ?
-						<div className="button">
-							<Link to={`/spaceships/edit/${spaceshipId}`}>Edit Product</Link>
+
+					<form onSubmit={this.props.handleSubmit}>
+						<div>
+							<select name="quantitySelection"> {inventoryArr.length ? inventoryArr.map(quantity => {
+								return (
+									<option key={quantity} value={quantity}>{quantity}</option>
+								)
+							})
+								: <option value="0"> Out Of Stock </option>
+							}
+							</select>
+
+							<button className="button" type="submit"> Add To Cart </button>
+
+							{this.props.isAdmin ?
+								<div className="button">
+									<Link to={`/spaceships/edit/${spaceshipId}`}>Edit Product</Link>
+								</div>
+								: null
+							}
 						</div>
-						: null
-					}
+					</form>
 				</span>
 			</div>
 		)
@@ -42,9 +63,18 @@ const mapStateToProps = (state) => {
 	return {
 		spaceship: state.spaceship,
 		user: state.user,
-		isAdmin: state.user.isAdmin
+		isAdmin: state.user.isAdmin,
+
 	};
 };
 
+const mapDispatchToProps = (dispatch, ownProps) => {
+	return {
+		handleSubmit: function (event) {
+			event.preventDefault();
+
+		}
+	}
+}
 const ProductPageContainer = withRouter(connect(mapStateToProps)(ProductPage))
 export default ProductPageContainer

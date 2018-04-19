@@ -31,4 +31,15 @@ router.get('/:userId/cart', (req, res, next) => {
       res.json(products)
     })
     .catch(next)
-}) 
+})
+
+
+router.post('/:userId/cart', (req, res, next) => {
+  LineItems.create(
+    req.body)
+    .then(newLine => {
+      console.log("This is NEW LINE", newLine)
+      res.json(newLine)
+    })
+    .catch(next)
+})
