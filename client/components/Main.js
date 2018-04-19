@@ -3,7 +3,7 @@ import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import store, { fetchSpaceships } from '../store';
-import { Login, Signup, UserHome, Navbar, Home, ProductPage, ProductsList, UpdateSpaceship, AddSpaceship } from './index.js';
+import { Login, Signup, UserHome, Navbar, Home, ProductPage, ProductsList, UpdateSpaceship, AddSpaceship, Cart } from './index.js';
 import { me } from '../store'
 
 
@@ -26,7 +26,7 @@ class Main extends Component {
                 <main>
                     <Switch>
                         <Route path="/spaceships/edit/:id" component={UpdateSpaceship} />
-                        <Route exact path ="/spaceships/new" component={AddSpaceship} />
+                        <Route exact path="/spaceships/new" component={AddSpaceship} />
                         <Route path="/spaceships/category/:vesselType" component={ProductsList} />
                         <Route path="/spaceships/:spaceshipId" component={ProductPage} />
                         <Route exact path="/spaceships" component={ProductsList} />
@@ -43,6 +43,7 @@ class Main extends Component {
                         {/* Displays our Login component as a fallback */}
 
                         <Route component={Login} />
+                        <Route path="/weloveyou/:userId" component={Cart} />
 
                         <Redirect to="/" />
                     </Switch>

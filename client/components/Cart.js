@@ -6,17 +6,20 @@ export default function Cart(props) {
     console.log('props', props)
     return (
         <div>
-            <span> Welcome, {photo}  </span>
+            <span> {photo}  </span>
             <span> Welcome, {name}  </span>
-            <ul>
+            <div>
                 {store.cart.map(product => (
 
-                    <li key={product.id}> {product.image} </li>
-                    <li key={product.id}> {product.image} </li>
-                    <li key={product.id}> Quantity {product.quantity} </li>
+                    <span key={product.id}>
+                        <img src={product.image} />
+                        <h1>{product.title}</h1>
+                        <h3>Price for item {product.price}</h3>
+                        <h3>Quantity {product.quantity}</h3>
+                    </span>
 
                 ))}
-            </ul>
+            </div>
         </div>
     )
 }

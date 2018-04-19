@@ -6,7 +6,7 @@ import history from '../history'
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
-const GET_CART = 'GET_CART'
+
 
 /**
  * INITIAL STATE
@@ -19,8 +19,6 @@ const defaultUser = {}
 const getUser = user => ({ type: GET_USER, user })
 const removeUser = () => ({ type: REMOVE_USER })
 
-const getCart = cart => ({ type: GET_CART, cart })
-
 /**
  * THUNK CREATORS
  */
@@ -29,10 +27,6 @@ export const me = () =>
     axios.get('/auth/me')
       .then(res =>
         dispatch(getUser(res.data || defaultUser)))
-      .then(() => {
-        axios.get('/api/users/:userId/cart')
-          .then(res => dispatch(getCart(res.data)))
-      })
       .catch(err => console.log(err))
 
 export const auth = (email, password, method) =>
@@ -62,8 +56,6 @@ export default function (state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
       return action.user;
-    case GET_CART:
-      return action.cart;
     case REMOVE_USER:
       return defaultUser;
     default:
