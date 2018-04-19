@@ -62,6 +62,7 @@ export const fetchByVesselType = (vesselType) => dispatch => {
 
 //update a spaceship/product(which is a spaceship, because that is what we are selling)
 export const updateSpaceshipInfo = (id, spaceship) => dispatch => {
+    console.log('THIS IS THE PAYLOAD', spaceship)
     return axios.put(`api/products/${id}`)
         .then(res => dispatch(updateSpaceship(res.data)))
         .catch(err => console.error(`Updating the spaceship product :${spaceship} FAILED`, err))
