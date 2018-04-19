@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Cart(props) {
+export const Cart = (props) => {
+
     const { name, photo } = props
     console.log('props', props)
     return (
@@ -9,9 +10,9 @@ export default function Cart(props) {
             <span> {photo}  </span>
             <span> Welcome, {name}  </span>
             <div>
-                {store.cart.map(product => (
+                {store.cart.map((product, ind) => (
 
-                    <span key={product.id}>
+                    <span key={ind}>
                         <img src={product.image} />
                         <h1>{product.title}</h1>
                         <h3>Price for item {product.price}</h3>
@@ -22,4 +23,24 @@ export default function Cart(props) {
             </div>
         </div>
     )
+}
+
+
+/**
+ * CONTAINER
+ */
+const mapState = (state) => {
+    return {
+        email: state.user.email,
+        cart: state.spaceships
+    }
+}
+
+export default connect(mapState)(UserHome)
+
+/**
+ * PROP TYPES
+ */
+UserHome.propTypes = {
+    email: PropTypes.string
 }

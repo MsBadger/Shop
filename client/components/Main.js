@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import store, { fetchSpaceships } from '../store';
 import { Login, Signup, UserHome, Navbar, Home, ProductPage, ProductsList, UpdateSpaceship, AddSpaceship, Cart } from './index.js';
-import { me } from '../store'
+import { me, myCart } from '../store'
 
 
 class Main extends Component {
@@ -68,6 +68,7 @@ const mapDispatch = (dispatch) => {
     return {
         loadInitialData() {
             dispatch(me())
+                .then(() => dispatch(myCart()))
         }
     }
 }
