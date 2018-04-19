@@ -1,5 +1,6 @@
 body {
-  font-family: sans-serif;
+  width: 100vw;
+  font-family: 'Gugi', cursive;
   background: radial-gradient(rgb(0, 0, 189), rgb(0, 0, 28));
   color: rgb(2, 229, 254)
 }
@@ -27,15 +28,19 @@ form div {
 .nav-container {
   float: right;
 }
+
 .logo {
-  height: 50px;
+  height: 75px;
   border-radius: 100%;
   border: 1px solid white;
   display: inline;
+  margin-right: 30px;
 }
 
 .header {
   display: inline;
+  position: relative;
+  top: 15px;
 }
 .home h1 {
   text-transform: capitalize;
@@ -80,7 +85,6 @@ form div {
   border-radius: 10px;
 }
 
-
 .all-container {
   padding-top: 80px;
   width: 90%;
@@ -107,4 +111,38 @@ form div {
   height: 250px;
   width: 250px;
   border-radius: 15%;
+}
+
+/* ----------------------------- NAV ------------------------- */
+
+.dropdown {
+ float: right;
+ margin: 30px;
+}
+
+.dropdown {
+  position: relative;
+  left: -150px;
+}
+
+/* ------------------------------- SINGLE ---------------------- */
+.single img {
+  height: 30vw;
+  width: 30vw;
+  border-radius: 30px;
+  border: 1px solid rgb(2, 229, 254);
+  box-shadow: 5px 5px 3px black;
+}
+
+.single-details {
+ padding-top: 40px;
+ font-size: 25px;
+ color: white;
+}
+
+.single {
+  font-family: 'Gugi', cursive;
+  padding: 5%;
+  display: grid;
+  grid-template-columns: 40% 60%;
 }
