@@ -43,3 +43,30 @@ router.post('/:userId/cart', (req, res, next) => {
     })
     .catch(next)
 })
+
+//This is the route to clear the WHOLE cart  
+// We're saying req.body will have the order Id as a property
+router.delete('/:userId/cart', (req, res, next) => {
+  LineItems.destroy({
+    where: { orderId: req.body.orderId }
+  })
+    .then(deletedItem => {
+      res.status(204).send("Successfully deleted cart")
+    })
+    .catch(next)
+}
+)
+
+//The following route will be used to delete just one line item
+
+router.delete('/:userId/cart/line', (req, res, next) => {
+  LineItems.destroy({
+    where: { id: req.body.id }
+  })
+    .then(singleItem => {
+      res.status(204).send("Successfully deleted item")
+    })
+    .catch(next)
+}
+)
+
