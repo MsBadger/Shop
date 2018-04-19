@@ -10,14 +10,10 @@ router.get('/', (req, res, next) => {
 
 //after user logged in -> grab the cart associated with this id
 router.get('/:userId/cart', (req, res, next) => {
-    Order.findById({
+    List.findById({
         where: {
             userId: req.body.params.userId
-        },
-        include: [{
-            model: spaceship,
-            as: 'products'
-        }]
+        }
     })
         .then(cart => res.json(cart))
         .catch(next)
