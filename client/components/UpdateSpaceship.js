@@ -7,7 +7,6 @@ import { fetchSingleSpaceship } from '../store/spaceship';
 export default class UpdateSpaceship extends Component {
     constructor(props) {
         super(props);
-        console.log('SHOW ME YOUR PROPS!', this.props)
 
         this.state = {
             title: '',
@@ -27,13 +26,13 @@ export default class UpdateSpaceship extends Component {
 
         this.unsubscribe = store.subscribe(() => {
             this.setState({
-                title: store.getState().spaceship.title,
-                description: store.getState().spaceship.description,
-                price: store.getState().spaceship.price,
-                inventory: store.getState().spaceship.inventory,
-                vesselType: store.getState().spaceship.vesselType,
-                capacity: store.getState().spaceship.capacity,
-                image: store.getState().spaceship.image
+                title: store.getState().spaceship.title || '',
+                description: store.getState().spaceship.description || '',
+                price: store.getState().spaceship.price || '',
+                inventory: store.getState().spaceship.inventory || '',
+                vesselType: store.getState().spaceship.vesselType || '',
+                capacity: store.getState().spaceship.capacity || '',
+                image: store.getState().spaceship.image || ''
             })
         })
         store.dispatch(fetchSingleSpaceship(id));
@@ -57,14 +56,13 @@ export default class UpdateSpaceship extends Component {
 
         const id = this.props.match.params.id
         store.dispatch(updateSpaceshipInfo(id, spaceship))
-        // .then((dispatch) => {
-        //     this.props.history.push('/spaceships');
-        // })
+            .then((dispatch) => {
+                this.props.history.push(`/spaceships/${id}`);
+            })
     }
 
 
     handleChange(event) {
-        console.log('ARE YOU HHHHHHHHH:', event.target)
         this.setState({ [event.target.name]: event.target.value })
     }
 
@@ -85,7 +83,7 @@ export default class UpdateSpaceship extends Component {
         //     functional = true;
         // }
 
-        console.log('GIVE ME THE STATE OR GIVE ME DEATH', this.state)
+
         return (
             <div>
                 <form onSubmit={this.handleSubmit} className='form'>

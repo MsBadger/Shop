@@ -22,15 +22,28 @@ router.get('/:productId', (req, res, next) => {
 		.catch(next)
 })
 
+// router.put('/:productId', (req, res, next) => {
+// 	console.log('ARE YOU IN HERE???')
+// 	Spaceship.findOne({
+// 		where: {
+// 			id: req.params.productId
+// 		}
+// 	})
+// 		.then(spaceshipToUpdate => spaceshipToUpdate.update(req.body))
+// 		.then(spaceshipUpdated => res.json(spaceshipUpdated))
+// 		.catch(next)
+// })
+
 router.put('/:productId', (req, res, next) => {
-	console.log('ARE YOU IN HERE???')
-	Spaceship.findOne({
-		where: {
-			id: req.params.productId
-		}
-	})
+	const productId = req.params.productId;
+	// console.log('GGGGGGGGGG', req.body)
+
+	Spaceship.findById(productId)
 		.then(spaceshipToUpdate => spaceshipToUpdate.update(req.body))
-		.then(spaceshipUpdated => res.json(spaceshipUpdated))
+		.then(spaceshipUpdated => {
+			console.log('spaceshipUpdated', spaceshipUpdated)
+			res.json(spaceshipUpdated)
+		})
 		.catch(next)
 })
 
