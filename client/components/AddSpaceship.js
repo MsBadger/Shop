@@ -36,7 +36,12 @@ export default class AddSpaceship extends Component {
 
         axios.post('/api/products/new-product', spaceship)
             .then(res => {
-                addSpaceship(res)
+                let formattedRes = res.data;
+                console.log('this is res.data: ', formattedRes)
+                addSpaceship(formattedRes)
+            })
+            .then(() => { 
+                this.props.history.push('/spaceships')
             })
             .catch(err => console.error(err))
     }
@@ -48,6 +53,10 @@ export default class AddSpaceship extends Component {
 
 
     render() {
+        function isUrl(s) {
+           var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+           return regexp.test(s);
+        }
         let warning;
         if (!this.state.title) {
             warning = 'Please enter a name using letters!'
@@ -59,10 +68,21 @@ export default class AddSpaceship extends Component {
             warning = 'For realzies? Enter the capacity using numbers, PPPLEASEEEE!'
         } else if ( isNaN ( Number(this.state.capacity) ) ) {
             warning = 'The capacity has to be a number, silly'
+        } else if (!this.state.image) {
+            warning = 'Please add an image URL'
+        } else if (!isUrl(this.state.image)) {
+            warning = 'Please enter a real URL'
         }
         //disable the button if admin does not behave
         let functional = false;
-        if (!this.state.title || !this.state.price || !this.state.capacity) {
+        if (
+            !this.state.title || 
+            !this.state.price || 
+            isNaN ( Number(this.state.price) ) || 
+            !this.state.capacity || 
+            isNaN ( Number(this.state.capacity) ) ||
+            !this.state.image ||
+            !isUrl(this.state.image) ) {
             functional = true;
         }
 

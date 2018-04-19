@@ -1,6 +1,6 @@
 const Promise = require('bluebird');
 const db = require('./db/db.js')
-const { Spaceship, User } = require('./db/models')
+const { Spaceship, User, Order, LineItems } = require('./db/models')
 
 const spaceships = [
 	{
@@ -84,8 +84,39 @@ const spaceships = [
 		vesselType: 'conference',
 		capacity: 1000,
 		image: 'https://cnet1.cbsistatic.com/img/O8RwAH1Wd3MZX8OhbXAZ9NrylmQ=/936x527/2017/12/20/19b0b6cc-e74c-4a16-8167-596ef97a9251/dreadnought-cnet.jpg'
+	},
+	{
+		title: 'Brewbacca',
+		description: 'When you need your employees to stop putsing around, send them to space',
+		price: 11,
+		inventory: 2,
+		vesselType: 'conference',
+		capacity: 1000,
+		image: 'http://farm6.static.flickr.com/5252/5457840662_43df6ee2e9_b.jpg'
+	},
+	{
+		title: 'Wrath of God',
+		description: 'Do you need an explanation?',
+		price: 4,
+		inventory: 4,
+		vesselType: 'military',
+		capacity: 10000,
+		image: 'https://i.imgur.com/O49r42B.jpg'
+	},
+	{
+		title: 'Love Bleeder',
+		description: 'When you need music to drown your love',
+		price: 100,
+		inventory: 1,
+		vesselType: 'romance',
+		capacity: 2,
+		image: 'https://i.pinimg.com/originals/af/de/9d/afde9db543db129665722cde7a24eaf8.jpg'
 	}
 ]
+
+
+
+
 
 // --------------------------------------------- USERS START ----------------------------------------------
 
@@ -96,91 +127,91 @@ const toonAvatar = require('cartoon-avatar');
 const numUsers = 100;
 const emails = chance.unique(chance.email, numUsers);
 
-function doTimes (n, fn) {
-  const results = [];
-  while (n--) {
-    results.push(fn());
-  }
-  return results;
+function doTimes(n, fn) {
+	const results = [];
+	while (n--) {
+		results.push(fn());
+	}
+	return results;
 }
 
-function randPhoto (gender) {
-  gender = gender.toLowerCase();
-  const id = chance.natural({
-    min: 1,
-    max: gender === 'female' ? 114 : 129
-  });
-  return toonAvatar.generate_avatar({ gender: gender, id: id });
+function randPhoto(gender) {
+	gender = gender.toLowerCase();
+	const id = chance.natural({
+		min: 1,
+		max: gender === 'female' ? 114 : 129
+	});
+	return toonAvatar.generate_avatar({ gender: gender, id: id });
 }
 
-function randUser () {
-  const gender = chance.gender();
-  return User.build({
-    name: [chance.first({gender: gender}), chance.last()].join(' '),
-    photo: randPhoto(gender),
-    phone: chance.phone(),
-    email: emails.pop(),
-    password: chance.word(),
-    isAdmin: chance.weighted([true, false], [5, 95])
-  });
+function randUser() {
+	const gender = chance.gender();
+	return User.build({
+		name: [chance.first({ gender: gender }), chance.last()].join(' '),
+		photo: randPhoto(gender),
+		phone: chance.phone(),
+		email: emails.pop(),
+		password: chance.word(),
+		isAdmin: chance.weighted([true, false], [5, 95])
+	});
 }
 
-function randTitle () {
-  const numWords = chance.natural({
-    min: 1,
-    max: 8
-  });
-  return chance.sentence({words: numWords})
-  .replace(/\b\w/g, function (m) {
-    return m.toUpperCase();
-  })
-  .slice(0, -1);
+function randTitle() {
+	const numWords = chance.natural({
+		min: 1,
+		max: 8
+	});
+	return chance.sentence({ words: numWords })
+		.replace(/\b\w/g, function (m) {
+			return m.toUpperCase();
+		})
+		.slice(0, -1);
 }
 
-function randStory (createdUsers) {
-  const user = chance.pick(createdUsers);
-  const numPars = chance.natural({
-    min: 3,
-    max: 20
-  });
-  return Story.build({
-    author_id: user.id,
-    title: randTitle(),
-    paragraphs: chance.n(chance.paragraph, numPars)
-  });
+function randStory(createdUsers) {
+	const user = chance.pick(createdUsers);
+	const numPars = chance.natural({
+		min: 3,
+		max: 20
+	});
+	return Story.build({
+		author_id: user.id,
+		title: randTitle(),
+		paragraphs: chance.n(chance.paragraph, numPars)
+	});
 }
 
-function generateUsers () {
-  const users = doTimes(numUsers, randUser);
-  users.push(User.build({
-    name: 'Zeke Nierenberg',
-    photo: 'http://learndotresources.s3.amazonaws.com/workshop/55e5c92fe859dc0300619bc8/zeke-astronaut.png',
-    phone: '(510) 295-5523',
-    email: 'zeke@zeke.zeke',
-    password: '123',
-    isAdmin: false
-  }));
-  users.push(User.build({
-    name: 'Omri Bernstein',
-    photo: 'http://learndotresources.s3.amazonaws.com/workshop/55e5c92fe859dc0300619bc8/sloth.jpg',
-    phone: '(781) 854-8854',
-    email: 'omri@omri.omri',
-    password: '123',
-    isAdmin: true
-  }));
-  users.push(User.build({
-    name: 'Kate Humphrey',
-    photo: 'https://learndotresources.s3.amazonaws.com/workshop/59ea65d1badb1d0004bf4ca3/baby%20hippo.jpg',
-    phone: '(555) 623-7878',
-    email: 'kate@kate.kate',
-    password: '7890',
-    isAdmin: true
-  }));
-  return users;
+function generateUsers() {
+	const users = doTimes(numUsers, randUser);
+	users.push(User.build({
+		name: 'Zeke Nierenberg',
+		photo: 'http://learndotresources.s3.amazonaws.com/workshop/55e5c92fe859dc0300619bc8/zeke-astronaut.png',
+		phone: '(510) 295-5523',
+		email: 'zeke@zeke.zeke',
+		password: '123',
+		isAdmin: false
+	}));
+	users.push(User.build({
+		name: 'Omri Bernstein',
+		photo: 'http://learndotresources.s3.amazonaws.com/workshop/55e5c92fe859dc0300619bc8/sloth.jpg',
+		phone: '(781) 854-8854',
+		email: 'omri@omri.omri',
+		password: '123',
+		isAdmin: true
+	}));
+	users.push(User.build({
+		name: 'Kate Humphrey',
+		photo: 'https://learndotresources.s3.amazonaws.com/workshop/59ea65d1badb1d0004bf4ca3/baby%20hippo.jpg',
+		phone: '(555) 623-7878',
+		email: 'kate@kate.kate',
+		password: '7890',
+		isAdmin: true
+	}));
+	return users;
 }
 
-function createUsers () {
-  return Promise.map(generateUsers(), user => user.save());
+function createUsers() {
+	return Promise.map(generateUsers(), user => user.save());
 }
 
 
@@ -189,16 +220,142 @@ function createUsers () {
 
 // --------------------------------------------- USERS END ----------------------------------------------
 
-const seed = () =>
-	Promise.all(spaceships.map(spaceship => {
-		Spaceship.create(spaceship)
+const orders = [
+	{
+		status: "open",
+		userId: 101
+	},
+	{
+		status: "open",
+		userId: 1
+	},
+	{
+		status: "open",
+		userId: 2
+	},
+	{
+		status: "open",
+		userId: 3
+	},
+	{
+		status: "open",
+		userId: 4
+	},
+	{
+		status: "closed",
+		userId: 101
+	},
+	{
+		status: "closed",
+		userId: 1
+	},
+	{
+		status: "closed",
+		userId: 2
+	},
+	{
+		status: "closed",
+		userId: 3
+	},
+	{
+		status: "closed",
+		userId: 4
+	},
+	{
+		status: "shipped",
+		userId: 101
+	},
+	{
+		status: "shipped",
+		userId: 1
+	},
+	{
+		status: "shipped",
+		userId: 2
+	},
+	{
+		status: "shipped",
+		userId: 3
+	},
+	{
+		status: "shipped",
+		userId: 4
 	}
+]
+
+const lineItems = [
+	{
+		quantity: 2,
+		spaceshipId: 1,
+		orderId: 1
+	},
+	{
+		quantity: 2,
+		spaceshipId: 2,
+		orderId: 2
+	},
+	{
+		quantity: 3,
+		spaceshipId: 3,
+		orderId: 3
+	},
+	{
+		quantity: 4,
+		spaceshipId: 4,
+		orderId: 4
+	},
+	{
+		quantity: 1,
+		spaceshipId: 5,
+		orderId: 5
+	},
+	{
+		quantity: 2,
+		spaceshipId: 6,
+		orderId: 1
+	},
+	{
+		quantity: 3,
+		spaceshipId: 7,
+		orderId: 2
+	},
+	{
+		quantity: 4,
+		spaceshipId: 8,
+		orderId: 3
+	},
+	{
+		quantity: 1,
+		spaceshipId: 9,
+		orderId: 1
+	},
+	{
+		quantity: 2,
+		spaceshipId: 10,
+		orderId: 2
+	},
+]
+
+
+
+const seed = () =>
+	Promise.all(spaceships.map(spaceship =>
+		Spaceship.create(spaceship)
 	))
-		.then ( () => createUsers())
+		.then(() => createUsers())
+		.then(() =>
+			Promise.all(orders.map(order =>
+				Order.create(order)
+			)))
+		.then(() =>
+			Promise.all(lineItems.map(lineItem =>
+				LineItems.create(lineItem)
+			)))
 		.catch(err => {
 			console.error(err)
 			console.log('create failed');
 		})
+
 
 const main = () => {
 	db.sync({ force: true })
