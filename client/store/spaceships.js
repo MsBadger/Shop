@@ -7,6 +7,7 @@ const UPDATE_SPACESHIP = 'UPDATE_SPACESHIP';
 const ADD_SPACESHIP = 'ADD_SPACESHIP'
 
 
+
 /*** ACTION CREATORS ***/
 const getSpaceships = spaceships => {
     return {
@@ -62,7 +63,7 @@ export const fetchByVesselType = (vesselType) => dispatch => {
 
 //update a spaceship/product(which is a spaceship, because that is what we are selling)
 export const updateSpaceshipInfo = (id, spaceship) => dispatch => {
-    return axios.put(`api/products/${id}`)
+    return axios.put(`/api/products/${id}`, spaceship)
         .then(res => dispatch(updateSpaceship(res.data)))
         .catch(err => console.error(`Updating the spaceship product :${spaceship} FAILED`, err))
 };
