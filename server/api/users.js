@@ -20,7 +20,7 @@ router.get('/', (req, res, next) => {
 router.get('/:userId/cart', (req, res, next) => {
   Order.findOrCreate({
     where: {
-      userId: req.params.userId,
+      userId: Number(req.params.userId),
       status: 'open'
     }
     ,

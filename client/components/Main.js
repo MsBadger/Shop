@@ -3,7 +3,8 @@ import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import store, { fetchSpaceships } from '../store';
-import { Login, Signup, UserHome, Navbar, Home, ProductPage, ProductsList, UpdateSpaceship, AddSpaceship } from './index.js';
+import { Login, Signup, UserHome, Navbar, Home, ProductPage, ProductsList, UpdateSpaceship, AddSpaceship, Cart } from './index.js';
+// import Cart from './Cart';
 import { me } from '../store'
 
 
@@ -15,6 +16,9 @@ class Main extends Component {
         const spaceshipsThunk = fetchSpaceships();
 
         store.dispatch(spaceshipsThunk);
+
+        // this.props.loadTheCart()
+
     }
 
     render() {
@@ -25,8 +29,9 @@ class Main extends Component {
                 <Navbar />
                 <main>
                     <Switch>
+                        <Route path="/weloveyou/:userId" component={Cart} />
                         <Route path="/spaceships/edit/:id" component={UpdateSpaceship} />
-                        <Route exact path ="/spaceships/new" component={AddSpaceship} />
+                        <Route exact path="/spaceships/new" component={AddSpaceship} />
                         <Route path="/spaceships/category/:vesselType" component={ProductsList} />
                         <Route path="/spaceships/:spaceshipId" component={ProductPage} />
                         <Route exact path="/spaceships" component={ProductsList} />
@@ -47,7 +52,7 @@ class Main extends Component {
                         <Redirect to="/" />
                     </Switch>
                 </main>
-            </div >
+            </div>
         );
     }
 }
@@ -59,7 +64,8 @@ const mapState = (state) => {
     return {
         // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
         // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-        isLoggedIn: !!state.user.id
+        isLoggedIn: !!state.user.id,
+        userId: state.user.id
     }
 }
 
@@ -67,9 +73,11 @@ const mapDispatch = (dispatch) => {
     return {
         loadInitialData() {
             dispatch(me())
+
         }
     }
 }
+
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes

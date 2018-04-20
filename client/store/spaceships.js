@@ -39,17 +39,19 @@ export const addSpaceship = spaceship => {
 
 /*** THUNK CREATORS ***/
 //fetch all them spaceships
-export const fetchSpaceships = () => dispatch => {
-    return axios.get('/api/products')
-        .then(res => {
-            console.log(res.data)
-            return res.data
-        })
-        .then(spaceships => {
-            dispatch(getSpaceships(spaceships))
-        })
-        .catch(err => console.error('Fetching products/spaceships unsuccessful', err));
-};
+export const fetchSpaceships = () => {
+    return dispatch => {
+        return axios.get('/api/products')
+            .then(res => {
+                console.log(res.data)
+                return res.data
+            })
+            .then(spaceships => {
+                dispatch(getSpaceships(spaceships))
+            })
+            .catch(err => console.error('Fetching products/spaceships unsuccessful', err));
+    };
+}
 
 //fetch spaceship by it's type/category
 export const fetchByVesselType = (vesselType) => dispatch => {
