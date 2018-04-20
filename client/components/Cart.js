@@ -1,48 +1,73 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
+import { myCart } from '../store'
 
+export class Cart extends Component {
 
-export const Cart = (props) => {
+    componentDidMount() {
+        console.log("HOLLO CART 22")
+        this.props.loadTheCart(this.props.userId)
+    }
 
-    const { name, photo } = props
-    console.log('props', props)
-    return (
-        <div>
-            <span> {photo}  </span>
-            <span> Welcome, {name}  </span>
+    render() {
+        console.log("HOLLO CART")
+        const { name, photo, cart } = this.props;
+        console.log('props', this.props)
+        return (
             <div>
-                {store.cart.map((product, ind) => (
+                <h1>TEST</h1>
 
-                    <span key={ind}>
-                        <img src={product.image} />
-                        <h1>{product.title}</h1>
-                        <h3>Price for item {product.price}</h3>
-                        <h3>Quantity {product.quantity}</h3>
-                    </span>
+                <span> {photo}  </span>
+                <span> Welcome, {name}  </span>
+                <div>
+                    {cart.map((product, ind) => (
 
-                ))}
+                        <span key={ind}>
+                            <img src={product.image} />
+                            <h1>{product.title}</h1>
+                            <h3>Price for item {product.price}</h3>
+                            <h3>Quantity {product.quantity}</h3>
+                        </span>
+
+                    ))}
+                </div>
+
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 
 /**
  * CONTAINER
  */
-const mapState = (state) => {
+const mapState = (state, ownProps) => {
     return {
+        userId: ownProps.match.params.userId,
         email: state.user.email,
         cart: state.spaceships
     }
 }
 
-export default connect(mapState)(Cart)
+
+const mapDispatch = (dispatch) => {
+    return {
+        loadTheCart(id) {
+            console.log('fetching the cart')
+            console.log('AN ID : ', id);
+            dispatch(myCart(id))
+        }
+    }
+}
+
+
+
+export default connect(mapState, mapDispatch)(Cart)
 
 /**
  * PROP TYPES
-//  */
+// //  */
 // UserHome.propTypes = {
 //     email: PropTypes.string
 // }

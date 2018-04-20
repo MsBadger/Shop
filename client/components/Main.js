@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import store, { fetchSpaceships } from '../store';
 import { Login, Signup, UserHome, Navbar, Home, ProductPage, ProductsList, UpdateSpaceship, AddSpaceship, Cart } from './index.js';
-import { me, myCart } from '../store'
+// import Cart from './Cart';
+import { me } from '../store'
 
 
 class Main extends Component {
@@ -15,8 +16,8 @@ class Main extends Component {
         const spaceshipsThunk = fetchSpaceships();
 
         store.dispatch(spaceshipsThunk);
-        console.log(this.props)
-        this.props.loadTheCart(this.props.userId)
+
+        // this.props.loadTheCart()
 
     }
 
@@ -28,6 +29,7 @@ class Main extends Component {
                 <Navbar />
                 <main>
                     <Switch>
+                        <Route path="/weloveyou/:userId" component={Cart} />
                         <Route path="/spaceships/edit/:id" component={UpdateSpaceship} />
                         <Route exact path="/spaceships/new" component={AddSpaceship} />
                         <Route path="/spaceships/category/:vesselType" component={ProductsList} />
@@ -46,12 +48,11 @@ class Main extends Component {
                         {/* Displays our Login component as a fallback */}
 
                         <Route component={Login} />
-                        <Route path="/weloveyou/:userId" component={Cart} />
 
                         <Redirect to="/" />
                     </Switch>
                 </main>
-            </div >
+            </div>
         );
     }
 }
@@ -73,10 +74,6 @@ const mapDispatch = (dispatch) => {
         loadInitialData() {
             dispatch(me())
 
-        },
-        loadTheCart(userId) {
-            console.log('fetching the cart')
-            dispatch(myCart(userId))
         }
     }
 }
