@@ -338,18 +338,18 @@ const lineItems = [
 
 
 const reviews = [
-	{
-		body: 'Run a rig belaying pin Pirate Round broadside bowsprit topsail starboard jib Chain Shot parrel. Loaded to the gunwalls brig execution dock crimp rigging hands ballast blow the man down interloper clipper. Hempen halter reef sails hang the jib log swab belaying pin Buccaneer heave down hornswaggle quarterdeck.',
-		rating: 3,
-		userId: 101,
-		spaceshipId: 4
-	},
-	{
-		body: 'Clap of thunder jack gally draft boom Spanish Main plunder splice the main brace flogging Letter of Marque. Landlubber or just lubber nipperkin walk the plank fire in the hole run a rig cog heave down booty prow coffer. Ropes end Sea Legs broadside interloper to go on account come about fathom bilge rat Yellow Jack killick.',
-		rating: 5,
-		userId: 101,
-		spaceshipId: 12
-	},
+	// {
+	// 	body: 'Run a rig belaying pin Pirate Round broadside bowsprit topsail starboard jib Chain Shot parrel. Loaded to the gunwalls brig execution dock crimp rigging hands ballast blow the man down interloper clipper. Hempen halter reef sails hang the jib log swab belaying pin Buccaneer heave down hornswaggle quarterdeck.',
+	// 	rating: 3,
+	// 	userId: 101,
+	// 	spaceshipId: 4
+	// },
+	// {
+	// 	body: 'Clap of thunder jack gally draft boom Spanish Main plunder splice the main brace flogging Letter of Marque. Landlubber or just lubber nipperkin walk the plank fire in the hole run a rig cog heave down booty prow coffer. Ropes end Sea Legs broadside interloper to go on account come about fathom bilge rat Yellow Jack killick.',
+	// 	rating: 5,
+	// 	userId: 101,
+	// 	spaceshipId: 12
+	// },
 	{
 		body: 'Holystone parley sutler measured fer yer chains galleon skysail spike gaff Jolly Roger Spanish Main. Bilge water clipper fluke deadlights tackle black spot scourge of the seven seas chantey lugsail yard. Poop deck scourge of the seven seas Gold Road hearties cable pressgang Nelsons folly fathom draft topmast.',
 		rating: 1,

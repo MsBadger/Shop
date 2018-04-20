@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../db.js');
+const { Review } = require('./index.js')
 
 const Spaceship = db.define('spaceship', {
     title: {
@@ -39,8 +40,17 @@ const Spaceship = db.define('spaceship', {
         validate: {
             isUrl: true
         }
+    },
+    // avgRating: {
+    //     type: Sequelize.NUMBER,
+    //     defaultValue: 0,
+    // }
 
-    }
+
 })
+
+// Spaceship.prototype.avgRating = () => {
+
+// }
 
 module.exports = Spaceship
