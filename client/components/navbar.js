@@ -13,11 +13,11 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin, userId }) => (
       </Link>
 
 
-
-      <Link to={`/weloveyou/${userId}`}>
-        <img src='/images/cart.jpg' className='cart' />
-      </Link>
-
+      { isLoggedIn &&
+        <Link to={`/weloveyou/${userId}`}>
+          <img src='/images/cart.jpg' className='cart' />
+        </Link>
+      }
 
       <div className="dropdown">
         <button className="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

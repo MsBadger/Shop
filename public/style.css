@@ -125,7 +125,7 @@ form div {
   left: -150px;
 }
 
-.cart {
+.cart { 
   height: 75px;
   border-radius: 100%;
   border: 3px solid white;
@@ -151,4 +151,18 @@ form div {
   padding: 5%;
   display: grid;
   grid-template-columns: 40% 60%;
+}
+
+/* ------------------------------- CART ---------------------- */
+
+.cart-page {
+  padding-left: 80px;
+}
+
+hr {
+  border-top: 1px solid #ccc;
+}
+
+.remove-btn {
+  margin-left: 30px;
 }

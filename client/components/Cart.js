@@ -1,37 +1,83 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { myCart } from '../store'
+import { myCart, removeCart , removeItem } from '../store'
 
 export class Cart extends Component {
 
+    constructor () {
+        super() ;
+        this.handleCartDelete = this.handleCartDelete.bind(this);
+        this.handleItemDelete = this.handleItemDelete.bind(this);
+    }
+
     componentDidMount() {
-        console.log("HOLLO CART 22")
         this.props.loadTheCart(this.props.userId)
     }
 
+    handleCartDelete () {
+        this.props.removeCart(this.props.userId);
+        this.props.loadTheCart(this.props.userId);
+    }
+
+    handleItemDelete (e) {
+        console.log('TARGET' , e.target)
+        let args = e.target.name.split('-'); // [spshpId, orId]
+        this.props.removeItem(args[0], args[1]);
+        this.props.loadTheCart(this.props.userId);
+    }
+
+
     render() {
-        console.log("HOLLO CART")
         const { name, photo, cart } = this.props;
-        console.log('props', this.props)
-        //console.log("STATE", this.state.spaceships)
+
+
+        let inventoryOb = {}
+        if (cart.length) {  
+                cart[0].spaceships.map((spaceship) => {
+                var arrOfNum = []; 
+                for(var i=1; i <= spaceship.inventory; i++) {
+                    arrOfNum.push(i)
+                }
+                inventoryOb[spaceship.id] = arrOfNum;
+            })
+        }
+
         return (
             <div>
-                <h1>TEST</h1>
-
-                <span> {photo}  </span>
+                <img src={photo} />
                 <span> Welcome, {name}  </span>
-                <div>
-                    {cart.map((product, ind) => (
+                <div className='cart-page'>
+                <button className='remove-btn' onClick={this.handleCartDelete} >❌ REMOVE CART</button> <br/>
 
-                        <span key={ind}>
-                            <img src={product.image} />
-                            <h1>{product.title}</h1>
-                            <h3>Price for item {product.price}</h3>
-                            <h3>Quantity {product.quantity}</h3>
-                        </span>
+                <br/>
+                
+                { cart.length ?
 
-                    ))}
+                    (cart[0].spaceships.map((spaceship) => (
+                        <span key={spaceship.id} className='home-item'>
+                            <img src={spaceship.image} />
+                            <h1>{spaceship.title}</h1>
+                            <h5>Capacity {spaceship.capacity}</h5>
+                            <h3>Price per item {spaceship.priceInMills}</h3>
+
+                            <select name="quantitySelection"> {
+                                inventoryOb[spaceship.id]
+                                ? inventoryOb[spaceship.id].map(quantity => {
+								return (
+									<option key={quantity} value={quantity}>{quantity}</option>
+								)
+							})
+								: <option value="0"> Out Of Stock </option>
+							}
+							</select>
+
+                            <button className='remove-btn' name={spaceship.id +'-'+ cart[0].id} onClick={this.handleItemDelete}>❌ REMOVE ITEM</button>
+                            <hr/>
+                        </span>)))
+
+                    : null
+                    }
                 </div>
 
             </div>
@@ -44,11 +90,12 @@ export class Cart extends Component {
  * CONTAINER
  */
 const mapState = (state, ownProps) => {
-    console.log("state what ? ", state)
     return {
+        photo: state.user.photo,
+        name: state.user.name,
         userId: ownProps.match.params.userId,
         email: state.user.email,
-        cart: state.spaceships
+        cart: state.cart
     }
 }
 
@@ -56,9 +103,13 @@ const mapState = (state, ownProps) => {
 const mapDispatch = (dispatch) => {
     return {
         loadTheCart(id) {
-            console.log('fetching the cart')
-            console.log('AN ID : ', id);
             dispatch(myCart(id))
+        },
+        removeCart (id)  {
+            dispatch(removeCart(id))
+        },
+        removeItem (spaceshipId, orderId) {
+            dispatch(removeItem(spaceshipId, orderId))
         }
     }
 }
