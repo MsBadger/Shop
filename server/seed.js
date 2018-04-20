@@ -1,6 +1,6 @@
 const Promise = require('bluebird');
 const db = require('./db/db.js')
-const { Spaceship, User, Order, LineItems } = require('./db/models')
+const { Spaceship, User, Order, LineItems, Review } = require('./db/models')
 
 const spaceships = [
 	{
@@ -337,6 +337,52 @@ const lineItems = [
 ]
 
 
+const reviews = [
+	{
+		body: 'Run a rig belaying pin Pirate Round broadside bowsprit topsail starboard jib Chain Shot parrel. Loaded to the gunwalls brig execution dock crimp rigging hands ballast blow the man down interloper clipper. Hempen halter reef sails hang the jib log swab belaying pin Buccaneer heave down hornswaggle quarterdeck.',
+		rating: 3,
+		userId: 101,
+		spaceshipId: 4
+	},
+	{
+		body: 'Clap of thunder jack gally draft boom Spanish Main plunder splice the main brace flogging Letter of Marque. Landlubber or just lubber nipperkin walk the plank fire in the hole run a rig cog heave down booty prow coffer. Ropes end Sea Legs broadside interloper to go on account come about fathom bilge rat Yellow Jack killick.',
+		rating: 5,
+		userId: 101,
+		spaceshipId: 12
+	},
+	{
+		body: 'Holystone parley sutler measured fer yer chains galleon skysail spike gaff Jolly Roger Spanish Main. Bilge water clipper fluke deadlights tackle black spot scourge of the seven seas chantey lugsail yard. Poop deck scourge of the seven seas Gold Road hearties cable pressgang Nelsons folly fathom draft topmast.',
+		rating: 1,
+		userId: 10,
+		spaceshipId: 2
+	},
+	{
+		body: 'Spanish Main. Bilge water clipper fluke deadlights tackle black spot scourge of the seven seas chantey lugsail yard. Poop deck Holystone parley sutler measured fer yer chains galleon skysail spike gaff Jolly Roger Spanish Main. Bilge water clipper fluke deadlights tackle black spot scourge of the seven seas chantey.',
+		rating: 3,
+		userId: 101,
+		spaceshipId: 2
+	},
+	{
+		body: 'Sweet roll tart brownie tart oat cake. Gummies dragée chupa chups biscuit chocolate bar cheesecake dessert tootsie roll. Tootsie roll sweet donut marzipan topping sweet roll ice cream. Croissant topping topping. Donut caramels ice cream tart chupa chups dragée. Jelly fruitcake jujubes lemon drops chocolate carrot cake sugar plum. Cheesecake donut tootsie roll sweet roll topping gingerbread macaroon topping dragée. Chocolate cake sesame snaps lemon drops cheesecake cheesecake candy sugar plum.',
+		rating: 4,
+		userId: 102,
+		spaceshipId: 2
+	},
+	{
+		body: 'Sugar plum jelly gummies chocolate caramels dragée powder. Pastry cookie cheesecake tiramisu tiramisu jelly. Pie brownie topping chocolate bar wafer soufflé icing dessert. Chupa chups topping dragée biscuit pie jujubes ice cream pie icing. Lollipop gummies toffee biscuit chupa chups lemon drops chocolate bar tiramisu. Tiramisu jelly-o sugar plum cupcake chocolate bar halvah tart.',
+		rating: 1,
+		userId: 102,
+		spaceshipId: 12
+	},
+	{
+		body: 'Oat cake candy canes chocolate marshmallow pudding candy carrot cake biscuit. Wafer chocolate soufflé. Brownie macaroon macaroon jujubes biscuit. Biscuit sesame snaps icing chocolate danish gummies pudding tootsie roll cake. Carrot cake cotton candy liquorice bonbon cake. Jujubes cupcake danish. Sweet carrot cake jujubes. Marshmallow lemon drops powder tart sugar plum muffin tootsie roll cake donut. Chocolate bar toffee biscuit oat cake sugar plum sesame snaps chocolate cake.',
+		rating: 5,
+		userId: 102,
+		spaceshipId: 11
+	}
+]
+
+
 
 const seed = () =>
 	Promise.all(spaceships.map(spaceship =>
@@ -350,6 +396,10 @@ const seed = () =>
 		.then(() =>
 			Promise.all(lineItems.map(lineItem =>
 				LineItems.create(lineItem)
+			)))
+		.then(() =>
+			Promise.all(reviews.map(review =>
+				Review.create(review)
 			)))
 		.catch(err => {
 			console.error(err)
@@ -373,6 +423,11 @@ const main = () => {
 }
 
 main();
+
+
+
+
+
 
 
 
