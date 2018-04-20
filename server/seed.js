@@ -223,7 +223,7 @@ function createUsers() {
 const orders = [
 	{
 		status: "open",
-		userId: 101
+		userId: 102
 	},
 	{
 		status: "open",
@@ -243,7 +243,7 @@ const orders = [
 	},
 	{
 		status: "closed",
-		userId: 101
+		userId: 102
 	},
 	{
 		status: "closed",
@@ -263,7 +263,7 @@ const orders = [
 	},
 	{
 		status: "shipped",
-		userId: 101
+		userId: 102
 	},
 	{
 		status: "shipped",
