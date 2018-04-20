@@ -14,6 +14,7 @@ export class Cart extends Component {
         console.log("HOLLO CART")
         const { name, photo, cart } = this.props;
         console.log('props', this.props)
+        //console.log("STATE", this.state.spaceships)
         return (
             <div>
                 <h1>TEST</h1>
@@ -43,6 +44,7 @@ export class Cart extends Component {
  * CONTAINER
  */
 const mapState = (state, ownProps) => {
+    console.log("state what ? ", state)
     return {
         userId: ownProps.match.params.userId,
         email: state.user.email,

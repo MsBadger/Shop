@@ -19,12 +19,14 @@ const getCart = cart => ({ type: GET_CART, cart })
 /**
  * THUNK CREATORS
  */
-export const myCart = (userId) =>
-    dispatch =>
-        axios.get(`/api/users/${userId}/cart`)
-            .then(res => dispatch(getCart(res.data)))
-            .catch(err => console.log(err))
-
+export const myCart = (userId) => dispatch => {
+    return axios.get(`/api/users/${userId}/cart`)
+        .then(res => res.data)
+        .then(items => {
+            dispatch(getCart(items))
+        })
+        .catch(err => console.log(err))
+}
 /**
  * REDUCER
  */
