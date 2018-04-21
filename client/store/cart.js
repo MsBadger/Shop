@@ -5,8 +5,6 @@ import history from '../history'
  * ACTION TYPES
  */
 const GET_CART = 'GET_CART'
-// const REMOVE_CART = 'REMOVE_CART'
-// const REMOVE_ITEM = 'REMOVE_ITEM'
 
 /**
  * INITIAL STATE
@@ -17,8 +15,6 @@ const currentCart = [];
  * ACTION CREATORS
  */
 const getCart = cart => ({ type: GET_CART, cart })
-// const removeCart = () => ({ type: REMOVE_CART })
-// const removeItem = itemId => ({ type: REMOVE_ITEM, itemId })
 /**
  * THUNK CREATORS
  */
@@ -36,8 +32,8 @@ export const removeCart = (userId) => dispatch => {
 }
 
 // '/:userId/cart/:orderId/:spaceshipId'
-export const removeItem = (spaceshipId, orderId) => dispatch => {
-    return axios.delete(`/:userId/cart/${orderId}/${spaceshipId}`)
+export const removeItem = (userId, orderId, spaceshipId) => dispatch => {
+    return axios.delete(`/api/users/${userId}/cart/${orderId}/${spaceshipId}`)
         .then( () => {console.log('item was deleted')} )
         .catch(err => console.log(err))
 }

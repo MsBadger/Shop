@@ -43,7 +43,6 @@ export const fetchSpaceships = () => {
     return dispatch => {
         return axios.get('/api/products')
             .then(res => {
-                console.log(res.data)
                 return res.data
             })
             .then(spaceships => {

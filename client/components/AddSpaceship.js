@@ -37,7 +37,6 @@ export default class AddSpaceship extends Component {
         axios.post('/api/products/new-product', spaceship)
             .then(res => {
                 let formattedRes = res.data;
-                console.log('this is res.data: ', formattedRes)
                 addSpaceship(formattedRes)
             })
             .then(() => { 
