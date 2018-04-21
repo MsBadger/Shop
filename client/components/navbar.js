@@ -6,24 +6,21 @@ import { logout } from '../store'
 
 const Navbar = ({ handleClick, isLoggedIn, isAdmin, userId }) => (
   <div>
-    <nav className="navbar navbar-inverse navbar-static-top" role="navigation">
-      <Link to={'/'}>
-        <img src="/images/logo_sq.jpg" className="logo" />
-        <h1 className="header">Aquila Spaceships Store</h1>
-      </Link>
-
-
-      { isLoggedIn &&
-        <Link to={`/weloveyou/${userId}`}>
-          <img src='/images/cart.jpg' className='cart' />
+    {/*<nav className="navbar navbar-inverse navbar-static-top" role="navigation">*/}
+    <nav className="header-container">
+      <span>
+        <Link to={'/'}>
+          <img src="/images/logo_sq.jpg" className="logo" />
+          <h1 className="header">Aquila Spaceships</h1>
         </Link>
-      }
+      </span>
+
 
       <div className="dropdown">
-        <button className="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button className="btn btn-secondary dropdown-toggle btn-lg" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Menu
         </button>
-        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <div className="dropdown-menu dropdown-menu-right " aria-labelledby="dropdownMenuButton">
           {isLoggedIn
             ? <Link to="/home" className="dropdown-item">Account Home</Link>
             : <Link to="/login" className="dropdown-item" >Login</Link>}
@@ -34,7 +31,15 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin, userId }) => (
         </div>
       </div>
 
+      { isLoggedIn ?
+        <span className='cart-icon'>
+          <Link to={`/weloveyou/${userId}`}>
+            <img src='/images/cart.jpg'  />
+          </Link>
+        </span> : <span></span>
+      }
 
+    <span className="header-underline"><hr /></span>
     </nav>
   </div>
 )

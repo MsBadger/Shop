@@ -18,11 +18,10 @@ export class Cart extends Component {
     handleCartDelete () {
         this.props.removeCart(this.props.userId);
         this.props.loadTheCart(this.props.userId);
+        // this.props.history.push('/')
     }
 
     handleItemDelete (event) {
-        // let args = event.target.name.split('-'); 
-        // console.log('args', args)
         let userId = this.props.userId;
         let orderId = event.target.name.split('-')[0]
         let spaceshipId = event.target.name.split('-')[1]
@@ -35,7 +34,7 @@ export class Cart extends Component {
     render() {
         const { name, photo, cart } = this.props;
 
-
+        //create dropdown for quantities
         let inventoryOb = {}
         if (cart.length) {  
                 cart[0].spaceships.map((spaceship) => {
@@ -49,39 +48,43 @@ export class Cart extends Component {
 
         return (
             <div>
-                <img src={photo} className='avatar'/>
+                <img src={photo} className="avatar"/>
                 <span> Welcome, {name}  </span>
-                <div className='cart-page'>
-                <button className='remove-btn' onClick={this.handleCartDelete} >❌ REMOVE CART</button> <br/>
-
+                <button className="remove-cart-btn" onClick={this.handleCartDelete} >❌ REMOVE CART</button> <br/>
+                <div className="cart-page">
                 <br/>
                 <hr/>
-                { cart.length  ?
+                { cart.length && cart[0].spaceships.length 
+                    ? (cart[0].spaceships.map((spaceship) => (
+                        <span key={spaceship.id} className="cart-container" >
+                            <span  className="home-item cart-item">
+                                <img src={spaceship.image} />
+                            </span>
+                            <span  className="home-item cart-item">
+                                <h1>{spaceship.title}</h1>
+                                <h5 className="white" className="item-details">Capacity {spaceship.capacity}</h5>
+                                <h5 className="white" >Price per item {spaceship.priceInMills}</h5>
 
-                    (cart[0].spaceships.map((spaceship) => (
-                        <span key={spaceship.id} className='home-item'>
-                            <img src={spaceship.image} />
-                            <h1>{spaceship.title}</h1>
-                            <h5>Capacity {spaceship.capacity}</h5>
-                            <h3>Price per item {spaceship.priceInMills}</h3>
+                                <select name="quantitySelection"> {
+                                    inventoryOb[spaceship.id]
+                                    ? inventoryOb[spaceship.id].map(quantity => {
+                                    return (
+                                        <option key={quantity} value={quantity}>{quantity}</option>
+                                    )
+                                })
+                                    : <option value="0"> Out Of Stock </option>
+                                }
+                                </select>
 
-                            <select name="quantitySelection"> {
-                                inventoryOb[spaceship.id]
-                                ? inventoryOb[spaceship.id].map(quantity => {
-								return (
-									<option key={quantity} value={quantity}>{quantity}</option>
-								)
-							})
-								: <option value="0"> Out Of Stock </option>
-							}
-							</select>
-
-                            <button className='remove-btn' name={ cart[0].id +'-'+ spaceship.id } onClick={this.handleItemDelete}>❌ REMOVE ITEM</button>
-                            <hr/>
-                        </span>)))
-
-                    : <h3>No Items in your cart</h3>
-                    }
+                                <button className="remove-btn" name={ cart[0].id +'-'+ spaceship.id } onClick={this.handleItemDelete}>❌ REMOVE ITEM</button>
+                                </span> 
+                                <span></span>
+                                <span className="item-devider" ><hr  /></span>
+                                </span>
+                            )))
+                            
+                            : <h3>Your cart is empty</h3>
+                        }
                 </div>
 
             </div>
