@@ -20,10 +20,14 @@ export class Cart extends Component {
         this.props.loadTheCart(this.props.userId);
     }
 
-    handleItemDelete (e) {
-        console.log('TARGET' , e.target)
-        let args = e.target.name.split('-'); // [spshpId, orId]
-        this.props.removeItem(args[0], args[1]);
+    handleItemDelete (event) {
+        // let args = event.target.name.split('-'); 
+        // console.log('args', args)
+        let userId = this.props.userId;
+        let orderId = event.target.name.split('-')[0]
+        let spaceshipId = event.target.name.split('-')[1]
+
+        this.props.removeItem(userId, orderId, spaceshipId);
         this.props.loadTheCart(this.props.userId);
     }
 
@@ -45,14 +49,14 @@ export class Cart extends Component {
 
         return (
             <div>
-                <img src={photo} />
+                <img src={photo} className='avatar'/>
                 <span> Welcome, {name}  </span>
                 <div className='cart-page'>
                 <button className='remove-btn' onClick={this.handleCartDelete} >❌ REMOVE CART</button> <br/>
 
                 <br/>
-                
-                { cart.length ?
+                <hr/>
+                { cart.length  ?
 
                     (cart[0].spaceships.map((spaceship) => (
                         <span key={spaceship.id} className='home-item'>
@@ -72,11 +76,11 @@ export class Cart extends Component {
 							}
 							</select>
 
-                            <button className='remove-btn' name={spaceship.id +'-'+ cart[0].id} onClick={this.handleItemDelete}>❌ REMOVE ITEM</button>
+                            <button className='remove-btn' name={ cart[0].id +'-'+ spaceship.id } onClick={this.handleItemDelete}>❌ REMOVE ITEM</button>
                             <hr/>
                         </span>)))
 
-                    : null
+                    : <h3>No Items in your cart</h3>
                     }
                 </div>
 
@@ -108,8 +112,8 @@ const mapDispatch = (dispatch) => {
         removeCart (id)  {
             dispatch(removeCart(id))
         },
-        removeItem (spaceshipId, orderId) {
-            dispatch(removeItem(spaceshipId, orderId))
+        removeItem (userId, orderId, spaceshipId) {
+            dispatch(removeItem(userId, orderId, spaceshipId))
         }
     }
 }

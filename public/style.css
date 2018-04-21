@@ -166,3 +166,10 @@ hr {
 .remove-btn {
   margin-left: 30px;
 }
+
+.avatar {
+  margin: 0 0 30px 100px;
+  height: 100px;
+  width: 100px;
+  border-radius: 100%;
+}

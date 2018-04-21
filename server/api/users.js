@@ -16,7 +16,7 @@ router.get('/', (req, res, next) => {
 
 // router.get('/:userId')
 
-//after user logged in -> grab the cart associated with this id
+// GET CART
 router.get('/:userId/cart', (req, res, next) => {
   Order.findOrCreate({
     where: {
@@ -33,7 +33,7 @@ router.get('/:userId/cart', (req, res, next) => {
     .catch(next)
 })
 
-
+// CREATE NEW CART
 router.post('/:userId/cart', (req, res, next) => {
   LineItems.create(
     req.body)
@@ -43,7 +43,7 @@ router.post('/:userId/cart', (req, res, next) => {
     })
     .catch(next)
 })
-
+// DELETE CART
 //This is the route to clear the WHOLE cart  
 // We're saying req.body will have the order Id as a property
 router.delete('/:userId/cart', (req, res, next) => {
@@ -60,14 +60,14 @@ router.delete('/:userId/cart', (req, res, next) => {
 }
 )
 
+// DELETE ITEM
 //The following route will be used to delete just one line item
-
 router.delete('/:userId/cart/:orderId/:spaceshipId', (req, res, next) => {
   LineItems.destroy({
     where: { spaceshipId: Number(req.params.spaceshipId) ,
              orderId: Number(req.params.orderId)  }
-  })
-    .then(singleItem => {
+    })
+    .then( () => {
       res.status(204).send("Successfully deleted item")
     })
     .catch(next)
