@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import store from '../store'
-import { fetchSingleSpaceship } from '../store/spaceship.js'
+import store from '../store';
+import { fetchSingleSpaceship } from '../store/spaceship.js';
+import { fetchReviews } from '../store/review.js'
+import axios from 'axios'
 
 export class ProductPage extends Component {
 
 	componentDidMount() {
 		const spaceshipId = this.props.match.params.spaceshipId;
 		const productPageThunk = fetchSingleSpaceship(spaceshipId);
+		const reviewsThunk = fetchReviews(spaceshipId);
 		store.dispatch(productPageThunk);
+		store.dispatch(reviewsThunk);
 	}
 
 	render() {
@@ -18,7 +22,7 @@ export class ProductPage extends Component {
 		for (let i = 1; i <= this.props.spaceship.inventory; i++) {
 			inventoryArr.push(i);
 		}
-
+		console.log('these are the reviews', this.props.reviews)
 		return (
 			<div className="single">
 				<span>
@@ -29,6 +33,21 @@ export class ProductPage extends Component {
 					<div>${this.props.spaceship.priceInMills}</div>
 					<div>{this.props.spaceship.description}</div>
 					<span>Max. capacity: {this.props.spaceship.capacity} people</span>
+					<div>
+						<h2>Reviews</h2>
+						{	
+							// this.props.reviews ? console.log('this.props.reviews[0]', this.props.reviews[0]) : console.log('there are nor eviews')
+							this.props.reviews ?
+							this.props.reviews.map((review) => {
+								return (
+									<div>
+										<div>Rating: {review.rating}</div>
+										<div>{review.snippet}</div>
+									</div>
+								)
+							}) : null
+						}
+					</div>
 
 					<form onSubmit={this.props.handleSubmit}>
 						<div>
@@ -60,10 +79,12 @@ export class ProductPage extends Component {
 }
 
 const mapStateToProps = (state) => {
+	console.log('this is the state', state)
 	return {
 		spaceship: state.spaceship,
 		user: state.user,
 		isAdmin: state.user.isAdmin,
+		reviews: state.reviews
 
 	};
 };
