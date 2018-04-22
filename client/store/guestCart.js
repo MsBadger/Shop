@@ -23,14 +23,11 @@ export const guestItemDelete = itemId => ({ type: REMOVE_GUEST_ITEM, itemId});
 export default function (state = guestCartDefaul, action) {
     switch (action.type) {
         case ADD_TO_GUEST_CART:
-            return state.guestCart.concat([action.itemId]);
+            return state.concat([action.itemId]);
         case  DELETE_GUEST_CART:
             return [];
         case  REMOVE_GUEST_ITEM:
-        console.log('inside of reducer', state.guestCart)
-        var newstate = state.filter(id => id !== Number(action.itemId))   
-        console.log('newstate', newstate)
-            return newstate
+            return state.filter(id => id !== Number(action.itemId))   
         default:
             return state;
     }

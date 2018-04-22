@@ -214,10 +214,26 @@ hr {
   float: right;
 }
 
+
+.remove-cart-btn-guest {
+  margin: 10px 80px ;
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+
 .cart-item {
   text-align: left;
 }
 
 .item-details {
   margin-top: 80px;
+}
+
+.login-form {
+  padding-left: 80px;
+}
+
+.buttons-rows {
+  grid-template-columns: 100%;
+  grid-template-rows: 50% 50%;
 }

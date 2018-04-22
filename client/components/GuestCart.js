@@ -40,10 +40,17 @@ export class GuestCart extends Component {
 
 
         return (
-            <div>
-            <img src="https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/57.png" className="avatar"/>
-            <span> Welcome, Guest  </span>
-            <button className="remove-cart-btn" onClick={this.handleGuestCartDelete} >❌ CLEAN CART</button> <br/>
+        <div>
+            <div className="cart-container" >
+                <span >
+                    <img src="https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/57.png" className="avatar"/>
+                    <span> Welcome, Guest  </span>
+                </span>
+                <span className="buttons-rows">
+                    <button className="remove-cart-btn-guest" onClick={()=>{}} > ✅ SINGUP & SAVE CART </button> <br/>
+                    <button className="remove-cart-btn-guest" onClick={this.handleGuestCartDelete} >🔆 CLEAN CART</button> <br/>
+                </span>
+            </div>
             <div className="cart-page">
             <br/>
             <hr/>
@@ -79,7 +86,7 @@ export class GuestCart extends Component {
                         : <h3>Your cart is empty</h3>
                     }
             </div>
-            </div>
+        </div>
         )
     }
 }

@@ -32,7 +32,7 @@ export class Cart extends Component {
 
 
     render() {
-        const { name, photo, cart } = this.props;
+        const { name, photo, cart , email} = this.props;
 
         //create dropdown for quantities
         let inventoryOb = {}
@@ -49,8 +49,8 @@ export class Cart extends Component {
         return (
             <div>
                 <img src={photo} className="avatar"/>
-                <span> Welcome, {name}  </span>
-                <button className="remove-cart-btn" onClick={this.handleCartDelete} >❌ CLEAN CART</button> <br/>
+                {name ?  <span> Welcome, {name}  </span> : <span> Welcome, {email}  </span> }
+                <button className="remove-cart-btn" onClick={this.handleCartDelete} >🔆 CLEAN CART</button> <br/>
                 <div className="cart-page">
                 <br/>
                 <hr/>
