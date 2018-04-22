@@ -1,23 +1,26 @@
 import React, { Component } from 'react';
 const toonAvatar = require('cartoon-avatar'); 
 import { connect } from 'react-redux';
+import { myCart, guestCartDelete , guestItemDelete } from '../store'
 
 export class GuestCart extends Component {
 
     constructor () {
         super() ;
-        // this.handleGuestCartDelete = this.handleGuestCartDelete.bind(this);
-        // this.handleGuestItemDelete = this.handleGuestItemDelete.bind(this);
+        this.handleGuestCartDelete = this.handleGuestCartDelete.bind(this);
+        this.handleGuestItemDelete = this.handleGuestItemDelete.bind(this);
     }
 
     // componentDidMount() {
     // }
 
-    // handleGuestCartDelete () {
-    // }
+    handleGuestCartDelete () {
+        this.props.guestCartDelete()
+    }
 
-    // handleGuestItemDelete (event) {
-    // }
+    handleGuestItemDelete (event) {
+        this.props.guestItemDelete(Number(event.target.name))
+    }
 
     render() {
         const { spaceships, guestCart } = this.props;
@@ -35,9 +38,10 @@ export class GuestCart extends Component {
             })
         }
 
+
         return (
             <div>
-            <img src={toonAvatar.generate_avatar()} className="avatar"/>
+            <img src="https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/57.png" className="avatar"/>
             <span> Welcome, Guest  </span>
             <button className="remove-cart-btn" onClick={this.handleGuestCartDelete} >❌ REMOVE CART</button> <br/>
             <div className="cart-page">
@@ -65,7 +69,7 @@ export class GuestCart extends Component {
                             }
                             </select>
 
-                            <button className="remove-btn" name={ '???' } onClick={this.handleGuestItemDelete}>❌ REMOVE ITEM</button>
+                            <button className="remove-btn" name={spaceship.id} onClick={this.handleGuestItemDelete}>❌ REMOVE ITEM</button>
                             </span> 
                             <span></span>
                             <span className="item-devider" ><hr  /></span>
@@ -95,6 +99,12 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
     return {
+        guestCartDelete () {
+            dispatch(guestCartDelete())
+        },
+        guestItemDelete (itemId) {
+            dispatch(guestItemDelete(itemId))
+        }
     }
 }
 
