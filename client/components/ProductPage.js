@@ -22,13 +22,23 @@ export class ProductPage extends Component {
 		for (let i = 1; i <= this.props.spaceship.inventory; i++) {
 			inventoryArr.push(i);
 		}
-		console.log('these are the reviews', this.props.reviews)
+
 		return (
 			<div className="single">
 				<span>
 					<h3>{this.props.spaceship.title}</h3>
 					<img src={this.props.spaceship.image} />
 				</span>
+				<div>Average Rating: {
+
+					this.props.reviews ?
+					Math.round(this.props.reviews.map((reviewObj) => {
+			      		return reviewObj.rating;
+			    	}).reduce((a, b) => a + b, 0) / this.props.reviews.length) :
+			    	null
+
+				}
+				</div>
 				<span className="single-details">
 					<div>${this.props.spaceship.priceInMills}</div>
 					<div>{this.props.spaceship.description}</div>
@@ -36,11 +46,11 @@ export class ProductPage extends Component {
 					<div>
 						<h2>Reviews</h2>
 						{	
-							// this.props.reviews ? console.log('this.props.reviews[0]', this.props.reviews[0]) : console.log('there are nor eviews')
+
 							this.props.reviews ?
 							this.props.reviews.map((review) => {
 								return (
-									<div>
+									<div key={this.props.reviews.map(function(review2) { return review2.body; }).indexOf(review.body)}>
 										<div>Rating: {review.rating}</div>
 										<div>{review.snippet}</div>
 									</div>
@@ -91,6 +101,16 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
 	return {
+		// avgRating = function () {
+		// 	if (this.props.reviews) {
+		// 		let ratings = Math.round(this.props.reviews.map((reviewObj) => {
+		//       return reviewObj.rating;
+		//     }).reduce((a, b) => a + b, 0) / this.props.reviews.length)
+		// 	} else {
+		// 		return null;
+		// 	}
+		// },
+
 		handleSubmit: function (event) {
 			event.preventDefault();
 
