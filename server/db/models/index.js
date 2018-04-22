@@ -1,10 +1,10 @@
 const User = require('./user');
 const Spaceship = require('./spaceship');
 const Order = require('./order');
-const LineItems = require('./lineItems')
-const Review = require('./review')
+const LineItems = require('./lineItems');
+const Review = require('./review');
 
-
+console.log('spaceship model in index.js', Spaceship)
 
 Order.belongsTo(User); // meaning Order will have user_id column and associated methods
 User.hasMany(Order);// Adds methods to the user model 
@@ -19,8 +19,6 @@ User.hasMany(Review);
 //reviews associations for spacehip (product)
 Review.belongsTo(Spaceship);
 Spaceship.hasMany(Review);
-
-
 
 module.exports = {
   User, Spaceship, Order, LineItems, Review

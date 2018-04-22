@@ -350,12 +350,12 @@ const reviews = [
 	// 	userId: 101,
 	// 	spaceshipId: 12
 	// },
-	{
-		body: 'Holystone parley sutler measured fer yer chains galleon skysail spike gaff Jolly Roger Spanish Main. Bilge water clipper fluke deadlights tackle black spot scourge of the seven seas chantey lugsail yard. Poop deck scourge of the seven seas Gold Road hearties cable pressgang Nelsons folly fathom draft topmast.',
-		rating: 1,
-		userId: 10,
-		spaceshipId: 2
-	},
+	// {
+	// 	body: 'Holystone parley sutler measured fer yer chains galleon skysail spike gaff Jolly Roger Spanish Main. Bilge water clipper fluke deadlights tackle black spot scourge of the seven seas chantey lugsail yard. Poop deck scourge of the seven seas Gold Road hearties cable pressgang Nelsons folly fathom draft topmast.',
+	// 	rating: 1,
+	// 	userId: 10,
+	// 	spaceshipId: 2
+	// },
 	{
 		body: 'Spanish Main. Bilge water clipper fluke deadlights tackle black spot scourge of the seven seas chantey lugsail yard. Poop deck Holystone parley sutler measured fer yer chains galleon skysail spike gaff Jolly Roger Spanish Main. Bilge water clipper fluke deadlights tackle black spot scourge of the seven seas chantey.',
 		rating: 3,
@@ -368,18 +368,18 @@ const reviews = [
 		userId: 102,
 		spaceshipId: 2
 	},
-	{
-		body: 'Sugar plum jelly gummies chocolate caramels dragée powder. Pastry cookie cheesecake tiramisu tiramisu jelly. Pie brownie topping chocolate bar wafer soufflé icing dessert. Chupa chups topping dragée biscuit pie jujubes ice cream pie icing. Lollipop gummies toffee biscuit chupa chups lemon drops chocolate bar tiramisu. Tiramisu jelly-o sugar plum cupcake chocolate bar halvah tart.',
-		rating: 1,
-		userId: 102,
-		spaceshipId: 12
-	},
-	{
-		body: 'Oat cake candy canes chocolate marshmallow pudding candy carrot cake biscuit. Wafer chocolate soufflé. Brownie macaroon macaroon jujubes biscuit. Biscuit sesame snaps icing chocolate danish gummies pudding tootsie roll cake. Carrot cake cotton candy liquorice bonbon cake. Jujubes cupcake danish. Sweet carrot cake jujubes. Marshmallow lemon drops powder tart sugar plum muffin tootsie roll cake donut. Chocolate bar toffee biscuit oat cake sugar plum sesame snaps chocolate cake.',
-		rating: 5,
-		userId: 102,
-		spaceshipId: 11
-	}
+	// {
+	// 	body: 'Sugar plum jelly gummies chocolate caramels dragée powder. Pastry cookie cheesecake tiramisu tiramisu jelly. Pie brownie topping chocolate bar wafer soufflé icing dessert. Chupa chups topping dragée biscuit pie jujubes ice cream pie icing. Lollipop gummies toffee biscuit chupa chups lemon drops chocolate bar tiramisu. Tiramisu jelly-o sugar plum cupcake chocolate bar halvah tart.',
+	// 	rating: 1,
+	// 	userId: 102,
+	// 	spaceshipId: 12
+	// },
+	// {
+	// 	body: 'Oat cake candy canes chocolate marshmallow pudding candy carrot cake biscuit. Wafer chocolate soufflé. Brownie macaroon macaroon jujubes biscuit. Biscuit sesame snaps icing chocolate danish gummies pudding tootsie roll cake. Carrot cake cotton candy liquorice bonbon cake. Jujubes cupcake danish. Sweet carrot cake jujubes. Marshmallow lemon drops powder tart sugar plum muffin tootsie roll cake donut. Chocolate bar toffee biscuit oat cake sugar plum sesame snaps chocolate cake.',
+	// 	rating: 5,
+	// 	userId: 102,
+	// 	spaceshipId: 11
+	// }
 ]
 
 

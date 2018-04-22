@@ -19,6 +19,13 @@ export class ProductPage extends Component {
 			inventoryArr.push(i);
 		}
 
+		let ratings = []
+        // this.props.spaceship.review.map((reviewObj) => {
+        //     ratings.push(reviewObj.rating)
+        // })
+        // let avg = ratings.reduce((a, b) => a + b, 0) / ratings.length
+        
+        console.log('first review?', this.props.reviews)
 		return (
 			<div className="single">
 				<span>
@@ -62,9 +69,9 @@ export class ProductPage extends Component {
 const mapStateToProps = (state) => {
 	return {
 		spaceship: state.spaceship,
+		reviews: state.spaceship.reviews,
 		user: state.user,
 		isAdmin: state.user.isAdmin,
-
 	};
 };
 

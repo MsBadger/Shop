@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Spaceship } = require('../db/models')
+const { Spaceship, Review } = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
@@ -15,9 +15,14 @@ router.get('/category/:vesselType', (req, res, next) => {
 		.then(spaceships => res.json(spaceships))
 		.catch(next)
 })
+// Pug.findAll({ // we want to find all the pugs, and include their owners
+//     include: [{model: Owner}]
+//   })
+
+
 
 router.get('/:productId', (req, res, next) => {
-	Spaceship.findById(req.params.productId)
+	Spaceship.findById(req.params.productId, {include: [{model: Review}]})
 		.then(spaceship => res.json(spaceship))
 		.catch(next)
 })

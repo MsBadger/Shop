@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize');
 const db = require('../db.js');
-const { Review } = require('./index.js')
+const Review  = require('./review');
+
+console.log('this is our review model imported in spaceship', Review);
 
 const Spaceship = db.define('spaceship', {
     title: {
@@ -41,13 +43,53 @@ const Spaceship = db.define('spaceship', {
             isUrl: true
         }
     },
-    // avgRating: {
-    //     type: Sequelize.NUMBER,
-    //     defaultValue: 0,
-    // }
+    avgRating: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
 
+        // type: Sequelize.VIRTUAL,
+        // defaultValue: 0,
+        // get () {
+        //     Review.findAll({
+        //         where: { spaceshipId: this.id }
+        //     })
+        //     .then((reviews) => {
+        //         let ratings = []
+        //         reviews.map((reviewObj) => {
+        //             ratings.push(reviewObj.rating)
+        //         })
+        //         let avg = ratings.reduce((a, b) => a + b, 0) / ratings.length
+        //         return avg.get();
+        //     })
+        // }
+            //     let ratings = []
+            //     reviews.map((reviewObj) => {
+            //         ratings.push(reviewObj.rating)
+            //     })
+            //     console.log('THESE ARE THE RATINGS:', ratings)
+            //     let avg = ratings.reduce((a, b) => a + b, 0) / ratings.length
+            //     console.log("OUR AVERAGE", avg)
+            //     // return avg;
+            //     Spaceship.findById(reviewInstance.spaceshipId)
+            // .then((spaceship) => console.log('I AM YOUR FATHER!', spaceship))
+    }
 
-})
+});
+
+// Spaceship.prototype.avgRating = function () {
+//     Review.findAll({
+//         where: { spaceshipId: this.id }
+//     })
+//     .then((reviews) => {
+//         let ratings = []
+//         reviews.map((reviewObj) => {
+//             ratings.push(reviewObj.rating)
+//         })
+//         let avg = ratings.reduce((a, b) => a + b, 0) / ratings.length
+//         return avg;
+//     })
+// }
+
 
 // Spaceship.prototype.avgRating = () => {
 
