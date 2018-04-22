@@ -1,0 +1,103 @@
+import React, { Component } from 'react';
+const toonAvatar = require('cartoon-avatar'); 
+import { connect } from 'react-redux';
+
+export class GuestCart extends Component {
+
+    constructor () {
+        super() ;
+        // this.handleGuestCartDelete = this.handleGuestCartDelete.bind(this);
+        // this.handleGuestItemDelete = this.handleGuestItemDelete.bind(this);
+    }
+
+    // componentDidMount() {
+    // }
+
+    // handleGuestCartDelete () {
+    // }
+
+    // handleGuestItemDelete (event) {
+    // }
+
+    render() {
+        const { spaceships, guestCart } = this.props;
+        let productsToDisplay = [];
+        let inventoryOb = {};
+        if (guestCart.length ) {
+            productsToDisplay = spaceships.filter(item => guestCart.includes(item.id));
+            //create dropdown for quantities: 
+            productsToDisplay.map((spaceship) => {
+                let arrOfNum = []; 
+                for (let i = 1; i <= spaceship.inventory; i++) {
+                    arrOfNum.push(i)
+                }
+                inventoryOb[spaceship.id] = arrOfNum;
+            })
+        }
+
+        return (
+            <div>
+            <img src={toonAvatar.generate_avatar()} className="avatar"/>
+            <span> Welcome, Guest  </span>
+            <button className="remove-cart-btn" onClick={this.handleGuestCartDelete} >❌ REMOVE CART</button> <br/>
+            <div className="cart-page">
+            <br/>
+            <hr/>
+            { productsToDisplay.length 
+                ? (productsToDisplay.map((spaceship) => (
+                    <span key={spaceship.id} className="cart-container" >
+                        <span  className="home-item cart-item">
+                            <img src={spaceship.image} />
+                        </span>
+                        <span  className="home-item cart-item">
+                            <h1>{spaceship.title}</h1>
+                            <h5 className="white" className="item-details">Capacity {spaceship.capacity}</h5>
+                            <h5 className="white" >Price per item {spaceship.priceInMills}</h5>
+
+                            <select name="quantitySelection"> {
+                                inventoryOb[spaceship.id]
+                                ? inventoryOb[spaceship.id].map(quantity => {
+                                return (
+                                    <option key={quantity} value={quantity}>{quantity}</option>
+                                )
+                            })
+                                : <option value="0"> Out Of Stock </option>
+                            }
+                            </select>
+
+                            <button className="remove-btn" name={ '???' } onClick={this.handleGuestItemDelete}>❌ REMOVE ITEM</button>
+                            </span> 
+                            <span></span>
+                            <span className="item-devider" ><hr  /></span>
+                            </span>
+                        )))
+                        
+                        : <h3>Your cart is empty</h3>
+                    }
+            </div>
+            </div>
+        )
+    }
+}
+
+
+
+/**
+ * CONTAINER
+ */
+const mapState = (state) => {
+    return {
+        guestCart: state.guestCart,
+        spaceships: state.spaceships
+    }
+}
+
+
+const mapDispatch = (dispatch) => {
+    return {
+    }
+}
+
+
+
+export default connect(mapState, mapDispatch)(GuestCart)

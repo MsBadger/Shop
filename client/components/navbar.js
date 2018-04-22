@@ -31,12 +31,17 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin, userId }) => (
         </div>
       </div>
 
-      { isLoggedIn ?
-        <span className='cart-icon'>
-          <Link to={`/weloveyou/${userId}`}>
-            <img src='/images/cart.jpg'  />
-          </Link>
-        </span> : <span></span>
+      { isLoggedIn 
+        ? <span className='cart-icon'>
+            <Link to={`/weloveyou/${userId}`}>
+              <img src='/images/cart.jpg'  />
+            </Link>
+          </span> 
+          : <span className='cart-icon'>
+              <Link to={`/weloveyou/agent007`}>
+                <img src='/images/cart.jpg'  />
+              </Link>
+            </span> 
       }
 
     <span className="header-underline"><hr /></span>

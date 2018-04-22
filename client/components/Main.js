@@ -3,7 +3,8 @@ import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import store, { fetchSpaceships } from '../store';
-import { Login, Signup, UserHome, Navbar, Home, ProductPage, ProductsList, UpdateSpaceship, AddSpaceship, Cart } from './index.js';
+import { Login, Signup, UserHome, Navbar, Home, ProductPage, ProductsList, 
+    UpdateSpaceship, AddSpaceship, Cart , GuestCart} from './index.js';
 // import Cart from './Cart';
 import { me } from '../store'
 
@@ -29,6 +30,7 @@ class Main extends Component {
                 <Navbar />
                 <main>
                     <Switch>
+                        <Route exact path="/weloveyou/agent007" component={GuestCart} />
                         <Route path="/weloveyou/:userId" component={Cart} />
                         <Route path="/spaceships/edit/:id" component={UpdateSpaceship} />
                         <Route exact path="/spaceships/new" component={AddSpaceship} />

@@ -12,4 +12,5 @@ export { default as AddSpaceship } from './AddSpaceship';
 export { default as UpdateSpaceship } from './UpdateSpaceship';
 export { Login, Signup } from './auth-form';
 export { default as Cart } from './Cart';
+export { default as GuestCart } from './GuestCart';
 
