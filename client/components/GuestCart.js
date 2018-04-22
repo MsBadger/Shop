@@ -43,7 +43,7 @@ export class GuestCart extends Component {
             <div>
             <img src="https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/57.png" className="avatar"/>
             <span> Welcome, Guest  </span>
-            <button className="remove-cart-btn" onClick={this.handleGuestCartDelete} >❌ REMOVE CART</button> <br/>
+            <button className="remove-cart-btn" onClick={this.handleGuestCartDelete} >❌ CLEAN CART</button> <br/>
             <div className="cart-page">
             <br/>
             <hr/>

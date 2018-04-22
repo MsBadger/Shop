@@ -50,7 +50,7 @@ export class Cart extends Component {
             <div>
                 <img src={photo} className="avatar"/>
                 <span> Welcome, {name}  </span>
-                <button className="remove-cart-btn" onClick={this.handleCartDelete} >❌ REMOVE CART</button> <br/>
+                <button className="remove-cart-btn" onClick={this.handleCartDelete} >❌ CLEAN CART</button> <br/>
                 <div className="cart-page">
                 <br/>
                 <hr/>
