@@ -28,10 +28,11 @@ export const me = () =>
       .then(res =>
         dispatch(getUser(res.data || defaultUser)))
       .catch(err => console.log(err))
-
-export const auth = (email, password, method) =>
+      
+//NEW VERSION OF AUTH THUNK 
+export const auth = (email, password, method, guestCart) =>
   dispatch =>
-    axios.post(`/auth/${method}`, { email, password })
+    axios.post(`/auth/${method}`, { email, password, guestCart })
       .then(res => {
         dispatch(getUser(res.data))
         history.push('/home')
@@ -39,6 +40,19 @@ export const auth = (email, password, method) =>
         dispatch(getUser({ error: authError }))
       })
       .catch(dispatchOrHistoryErr => console.error(dispatchOrHistoryErr))
+
+//PREVIOUS VERSION OF AUTH THUNK 
+// export const auth = (email, password, method) =>
+// dispatch =>
+//   axios.post(`/auth/${method}`, { email, password })
+//     .then(res => {
+//       dispatch(getUser(res.data))
+//       history.push('/home')
+//     }, authError => { // rare example: a good use case for parallel (non-catch) error handler
+//       dispatch(getUser({ error: authError }))
+//     })
+//     .catch(dispatchOrHistoryErr => console.error(dispatchOrHistoryErr))
+
 
 export const logout = () =>
   dispatch =>

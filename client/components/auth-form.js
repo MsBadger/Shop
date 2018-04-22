@@ -7,7 +7,7 @@ import {auth} from '../store'
  * COMPONENT
  */
 const AuthForm = (props) => {
-  const {name, displayName, handleSubmit, error} = props
+  const {name, displayName, handleSubmit, error, guestCart} = props
 
   return (
     <div className="login-form">
@@ -49,7 +49,8 @@ const mapSignup = (state) => {
   return {
     name: 'signup',
     displayName: 'Sign Up',
-    error: state.user.error
+    error: state.user.error,
+    // guestCart: state.guestCart // this assignment doesnot work ??
   }
 }
 
@@ -60,7 +61,8 @@ const mapDispatch = (dispatch) => {
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      const guestCart = [1,2,3] //forth argument added - guest cart, should be taken from state.guestCart array
+      dispatch(auth(email, password, formName, guestCart))
     }
   }
 }

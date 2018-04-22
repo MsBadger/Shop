@@ -27,7 +27,6 @@ router.get('/:userId/cart', (req, res, next) => {
     include: [{ model: Spaceship }]
   })
     .then(products => {
-      console.log('products', products)
       res.json(products)
     })
     .catch(next)

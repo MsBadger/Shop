@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 const toonAvatar = require('cartoon-avatar'); 
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { myCart, guestCartDelete , guestItemDelete } from '../store'
 
@@ -41,13 +42,13 @@ export class GuestCart extends Component {
 
         return (
         <div>
-            <div className="cart-container" >
+            <div className="cart-header" >
                 <span >
                     <img src="https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/57.png" className="avatar"/>
                     <span> Welcome, Guest  </span>
                 </span>
                 <span className="buttons-rows">
-                    <button className="remove-cart-btn-guest" onClick={()=>{}} > ✅ SINGUP & SAVE CART </button> <br/>
+                    <Link to="/signup" > <button className="remove-cart-btn-guest" > ✅ SINGUP & SAVE CART </button> </Link> <br/>
                     <button className="remove-cart-btn-guest" onClick={this.handleGuestCartDelete} >🔆 CLEAN CART</button> <br/>
                 </span>
             </div>
