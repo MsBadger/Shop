@@ -26,16 +26,31 @@ describe('thunk creators', () => {
         store.clearActions();
     })
 
-    describe('fetchSingleSpaceship', (spaceshipId) => {
-        it('eventually dispatches the GET_SPACESHIP action', () => {
-            const fakeSpaceship = { title: 'LoveHater', id: 1 }
-            mockAxios.onGet(`/api/products/${spaceshipId}`).replyOnce(200, fakeSpaceship)
+
+    describe('fetchSingleSpaceship', () => {
+        it('fetches a specific spaceship/product', () => {
+            const response = [
+                {
+                    title: 'Bombatronster',
+                    spaceshipId: '1',
+                    description: 'Humble killer with a heart of gold',
+                    price: 23,
+                    inventory: 10,
+                    vesselType: 'Romance',
+                    capacity: 2334,
+                    image: 'http://i66.tinypic.com/2iut2l0.jpg'
+                }];
+            const action = [
+                {
+                    'type': 'GET_SPACESHIP',
+                    'payload': response
+                }
+            ];
+            mockAxios.onGet(`/api/products/:${spaceshipId}`).reply(200, response);
+
             return store.dispatch(fetchSingleSpaceship())
                 .then(() => {
-                    const action = store.getAction()
-                    expect(action[0].type).to.be.equal('GET_SPACESHIP')
-                    expect(action[0].spaceship).to.be.deep.equal(fakeSpaceship)
-                    expect(action[0].id).to.be.deep.equal(fakeSpaceship.id)
+                    expect(store.getActions()).to.deep.equal(action);
                 })
         })
     })
