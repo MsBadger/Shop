@@ -4,6 +4,7 @@ import axios from 'axios';
 const GET_SPACESHIP = 'GET_SPACESHIP';
 
 
+
 /*** ACTION CREATORS ***/
 //get single spaceship
 const getSpaceship = spaceship => {
@@ -12,6 +13,7 @@ const getSpaceship = spaceship => {
         spaceship
     }
 }
+
 
 
 /*** THUNK CREATORS ***/
@@ -25,6 +27,7 @@ export const fetchSingleSpaceship = (spaceshipId) => {
             .catch(console.error)
     }
 }
+
 
 
 /*** REDUCER ***/

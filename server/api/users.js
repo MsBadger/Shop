@@ -48,10 +48,10 @@ router.post('/:userId/cart', (req, res, next) => {
 // We're saying req.body will have the order Id as a property
 router.delete('/:userId/cart', (req, res, next) => {
   Order.destroy({
-    where: { 
-    userId: Number(req.params.userId),
-    status: 'open' 
-  }
+    where: {
+      userId: Number(req.params.userId),
+      status: 'open'
+    }
   })
     .then(() => {
       res.status(204).send("Successfully deleted cart")
@@ -64,8 +64,10 @@ router.delete('/:userId/cart', (req, res, next) => {
 
 router.delete('/:userId/cart/:orderId/:spaceshipId', (req, res, next) => {
   LineItems.destroy({
-    where: { spaceshipId: Number(req.params.spaceshipId) ,
-             orderId: Number(req.params.orderId)  }
+    where: {
+      spaceshipId: Number(req.params.spaceshipId),
+      orderId: Number(req.params.orderId)
+    }
   })
     .then(singleItem => {
       res.status(204).send("Successfully deleted item")
@@ -73,4 +75,21 @@ router.delete('/:userId/cart/:orderId/:spaceshipId', (req, res, next) => {
     .catch(next)
 }
 )
+
+
+//Route to add a new item to the cart 
+router.post('/:userId/cart/:orderId/:spaceshipId', (req, res, next) => {
+  LineItems.create(
+    {
+      quantity: req.body.quantity,
+      spaceshipId: req.params.spaceshipId,
+      orderId: req.params.orderId
+    })
+    .then(newLine => {
+      console.log("This is NEW LINE", newLine)
+      res.json(newLine)
+    })
+    .catch(next)
+})
+
 

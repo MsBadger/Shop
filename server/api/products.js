@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Spaceship } = require('../db/models')
+const { Spaceship, LineItems } = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
@@ -52,3 +52,4 @@ router.post('/new-product', (req, res, next) => {
 		.then(spaceship => res.json(spaceship))
 		.catch(next)
 })
+
