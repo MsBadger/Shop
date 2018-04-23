@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import store, { fetchSpaceships } from '../store';
+import store, { fetchSpaceships, me } from '../store';
 import { Login, Signup, UserHome, Navbar, Home, ProductPage, ProductsList, 
     UpdateSpaceship, AddSpaceship, Cart , GuestCart} from './index.js';
-// import Cart from './Cart';
-import { me } from '../store'
+
 
 
 class Main extends Component {
@@ -17,9 +16,6 @@ class Main extends Component {
         const spaceshipsThunk = fetchSpaceships();
 
         store.dispatch(spaceshipsThunk);
-
-        // this.props.loadTheCart()
-
     }
 
     render() {
