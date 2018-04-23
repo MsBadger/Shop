@@ -16,21 +16,40 @@ router.get('/', (req, res, next) => {
 
 // router.get('/:userId')
 
-// GET CART
+// NEW GET CART
 router.get('/:userId/cart', (req, res, next) => {
-  Order.findOrCreate({
-    where: {
-      userId: Number(req.params.userId),
-      status: 'open'
-    }
-    ,
-    include: [{ model: Spaceship }]
-  })
-    .then(products => {
-      res.json(products)
+
+    Order.findOrCreate({
+      where: {
+        userId: Number(req.params.userId),
+        status: 'open'
+      }
+      ,
+      include: [{ model: Spaceship }]
     })
-    .catch(next)
+      .then(products => {
+        res.json(products)
+      })
+      .catch(next)}
 })
+
+// // PREVIOUS GET CART
+// router.get('/:userId/cart', (req, res, next) => {
+//   Order.findOrCreate({
+//     where: {
+//       userId: Number(req.params.userId),
+//       status: 'open'
+//     }
+//     ,
+//     include: [{ model: Spaceship }]
+//   })
+//     .then(products => {
+//       res.json(products)
+//     })
+//     .catch(next)
+// })
+
+
 
 // CREATE NEW CART
 router.post('/:userId/cart', (req, res, next) => {

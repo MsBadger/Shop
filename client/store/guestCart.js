@@ -1,4 +1,11 @@
-
+// store -- I refresh and my cart is lost. So even for an unauthenticated user this is not okay
+    // Backend
+        // session --> req.session.cart
+            // don't worry about situations like. User logins in and adds to cart. User logsout and adds to cart. User then logs in again (carts should merge)
+    // Frontend
+        // localStorage -- JSON
+        // SessionStorage -- JSON
+        // IndexedDB
 /**
  * ACTION TYPES
  */
