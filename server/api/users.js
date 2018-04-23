@@ -18,19 +18,35 @@ router.get('/', (req, res, next) => {
 
 // GET CART
 router.get('/:userId/cart', (req, res, next) => {
-  Order.findOrCreate({
-    where: {
-      userId: Number(req.params.userId),
-      status: 'open'
-    }
-    ,
-    include: [{ model: Spaceship }]
-  })
-    .then(products => {
-      console.log('products', products)
-      res.json(products)
+  if (req.params.userId === "guest") {
+    Order.findOrCreate({
+      where: {
+        sessionId: req.session.id,
+        status: 'open'
+      }
+      ,
+      include: [{ model: Spaceship }]
     })
-    .catch(next)
+      .then(cart => {
+        console.log('cart from guest', cart)
+        res.json(cart)
+      })
+  }
+  else {
+    Order.findOrCreate({
+      where: {
+        userId: Number(req.params.userId),
+        status: 'open'
+      }
+      ,
+      include: [{ model: Spaceship }]
+    })
+      .then(products => {
+        console.log('products', products)
+        res.json(products)
+      })
+      .catch(next)
+  }
 })
 
 // CREATE NEW CART
@@ -48,10 +64,10 @@ router.post('/:userId/cart', (req, res, next) => {
 // We're saying req.body will have the order Id as a property
 router.delete('/:userId/cart', (req, res, next) => {
   Order.destroy({
-    where: { 
-    userId: Number(req.params.userId),
-    status: 'open' 
-  }
+    where: {
+      userId: Number(req.params.userId),
+      status: 'open'
+    }
   })
     .then(() => {
       res.status(204).send("Successfully deleted cart")
@@ -64,13 +80,32 @@ router.delete('/:userId/cart', (req, res, next) => {
 //The following route will be used to delete just one line item
 router.delete('/:userId/cart/:orderId/:spaceshipId', (req, res, next) => {
   LineItems.destroy({
-    where: { spaceshipId: Number(req.params.spaceshipId) ,
-             orderId: Number(req.params.orderId)  }
-    })
-    .then( () => {
+    where: {
+      spaceshipId: Number(req.params.spaceshipId),
+      orderId: Number(req.params.orderId)
+    }
+  })
+    .then(() => {
       res.status(204).send("Successfully deleted item")
     })
     .catch(next)
 }
 )
+
+
+//Route to add a new item to the cart 
+router.post('/:userId/cart/:orderId/:spaceshipId', (req, res, next) => {
+  LineItems.create(
+    {
+      quantity: req.body.quantity,
+      spaceshipId: req.params.spaceshipId,
+      orderId: req.params.orderId
+    })
+    .then(newLine => {
+      console.log("This is NEW LINE", newLine)
+      res.json(newLine)
+    })
+    .catch(next)
+})
+
 

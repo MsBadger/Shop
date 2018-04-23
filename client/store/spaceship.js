@@ -13,6 +13,7 @@ const getSpaceship = spaceship => {
 }
 
 
+
 /*** THUNK CREATORS ***/
 export const fetchSingleSpaceship = (spaceshipId) => {
     return dispatch => {
@@ -24,6 +25,7 @@ export const fetchSingleSpaceship = (spaceshipId) => {
             .catch(console.error)
     }
 }
+
 
 
 /*** REDUCER ***/

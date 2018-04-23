@@ -19,13 +19,13 @@ router.get('/category/:vesselType', (req, res, next) => {
 router.get('/reviews/:productId', (req, res, next) => {
 	console.log('got to my backend reviews route')
 	Review.findAll({
-        where: { spaceshipId: req.params.productId }
-    })
-    	.then(reviews => {
-    		console.log('inside backend api, found these reviews:', reviews)
-    		res.json(reviews)
-    		})
-    	.catch(next)
+		where: { spaceshipId: req.params.productId }
+	})
+		.then(reviews => {
+			console.log('inside backend api, found these reviews:', reviews)
+			res.json(reviews)
+		})
+		.catch(next)
 })
 
 router.get('/:productId', (req, res, next) => {
@@ -65,3 +65,4 @@ router.post('/new-product', (req, res, next) => {
 		.then(spaceship => res.json(spaceship))
 		.catch(next)
 })
+
