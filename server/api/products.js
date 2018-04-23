@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Spaceship } = require('../db/models')
+const { Spaceship, Review } = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
@@ -14,6 +14,18 @@ router.get('/category/:vesselType', (req, res, next) => {
 	})
 		.then(spaceships => res.json(spaceships))
 		.catch(next)
+})
+
+router.get('/reviews/:productId', (req, res, next) => {
+	console.log('got to my backend reviews route')
+	Review.findAll({
+        where: { spaceshipId: req.params.productId }
+    })
+    	.then(reviews => {
+    		console.log('inside backend api, found these reviews:', reviews)
+    		res.json(reviews)
+    		})
+    	.catch(next)
 })
 
 router.get('/:productId', (req, res, next) => {
@@ -33,6 +45,7 @@ router.get('/:productId', (req, res, next) => {
 // 		.then(spaceshipUpdated => res.json(spaceshipUpdated))
 // 		.catch(next)
 // })
+
 
 router.put('/:productId', (req, res, next) => {
 	const productId = req.params.productId;
