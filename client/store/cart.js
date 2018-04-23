@@ -45,8 +45,8 @@ export const removeCart = (userId) => dispatch => {
 }
 
 // '/:userId/cart/:orderId/:spaceshipId'
-export const removeItem = (spaceshipId, orderId) => dispatch => {
-    return axios.delete(`/:userId/cart/${orderId}/${spaceshipId}`)
+export const removeItem = (userId, orderId, spaceshipId) => dispatch => {
+    return axios.delete(`/api/users/${userId}/cart/${orderId}/${spaceshipId}`)
         .then(() => { console.log('item was deleted') })
         .catch(err => console.log(err))
 }

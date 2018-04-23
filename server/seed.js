@@ -185,7 +185,7 @@ function generateUsers() {
 	const users = doTimes(numUsers, randUser);
 	users.push(User.build({
 		name: 'Zeke Nierenberg',
-		photo: 'http://learndotresources.s3.amazonaws.com/workshop/55e5c92fe859dc0300619bc8/zeke-astronaut.png',
+		photo: toonAvatar.generate_avatar({gender: 'male'}),
 		phone: '(510) 295-5523',
 		email: 'zeke@zeke.zeke',
 		password: '123',
@@ -193,7 +193,7 @@ function generateUsers() {
 	}));
 	users.push(User.build({
 		name: 'Omri Bernstein',
-		photo: 'http://learndotresources.s3.amazonaws.com/workshop/55e5c92fe859dc0300619bc8/sloth.jpg',
+		photo: toonAvatar.generate_avatar({gender: 'male'}),
 		phone: '(781) 854-8854',
 		email: 'omri@omri.omri',
 		password: '123',
@@ -201,10 +201,10 @@ function generateUsers() {
 	}));
 	users.push(User.build({
 		name: 'Kate Humphrey',
-		photo: 'https://learndotresources.s3.amazonaws.com/workshop/59ea65d1badb1d0004bf4ca3/baby%20hippo.jpg',
+		photo: toonAvatar.generate_avatar({gender: 'female'}),
 		phone: '(555) 623-7878',
 		email: 'kate@kate.kate',
-		password: '7890',
+		password: '123',
 		isAdmin: true
 	}));
 	return users;
