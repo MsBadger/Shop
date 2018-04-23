@@ -18,19 +18,35 @@ router.get('/', (req, res, next) => {
 
 // GET CART
 router.get('/:userId/cart', (req, res, next) => {
-  Order.findOrCreate({
-    where: {
-      userId: Number(req.params.userId),
-      status: 'open'
-    }
-    ,
-    include: [{ model: Spaceship }]
-  })
-    .then(products => {
-      console.log('products', products)
-      res.json(products)
+  if (req.params.userId === "guest") {
+    Order.findOrCreate({
+      where: {
+        sessionId: req.session.id,
+        status: 'open'
+      }
+      ,
+      include: [{ model: Spaceship }]
     })
-    .catch(next)
+      .then(cart => {
+        console.log('cart from guest', cart)
+        res.json(cart)
+      })
+  }
+  else {
+    Order.findOrCreate({
+      where: {
+        userId: Number(req.params.userId),
+        status: 'open'
+      }
+      ,
+      include: [{ model: Spaceship }]
+    })
+      .then(products => {
+        console.log('products', products)
+        res.json(products)
+      })
+      .catch(next)
+  }
 })
 
 // CREATE NEW CART

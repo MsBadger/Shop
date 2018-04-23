@@ -56,11 +56,16 @@ export const removeItem = (userId, orderId, spaceshipId) => dispatch => {
 // "quantity": 13,
 // "spaceshipId": 3,
 // "orderId": 1
-export const postToCart = (spaceshipId, orderId, ) => {
+export const postToCart = (userId, spaceshipId, orderId, quantity) => {
     return dispatch => {
-        return axios.post('/:userId/cart/:orderId/:spaceshipId')
+        return axios.post(`/${userId}/cart/${orderId}/${spaceshipId}`, { quantity })
+            .then(res => {
+                dispatch(addToCart(res.data))
+            })
+            .catch(err => console.log(err))
     }
 }
+
 /**
  * REDUCER
  */
