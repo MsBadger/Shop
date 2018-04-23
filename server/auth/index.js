@@ -33,7 +33,7 @@ router.post('/signup', (req, res, next) => {
     .then( user => {
       Order.create({userId: user.id, status: 'open'})
         .then( order => {
-          req.body.guestCart.map(spaceshipId => 
+          req.body.guestCart.map(spaceshipId =>
             LineItems.create({orderId: order.id, spaceshipId: spaceshipId, quantity: 1})
           )
         })
@@ -61,8 +61,6 @@ router.post('/signup', (req, res, next) => {
 //       }
 //     })
 // })
-
-
 
 
 router.post('/logout', (req, res) => {
