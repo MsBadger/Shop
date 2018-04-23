@@ -3,7 +3,6 @@ import axios from 'axios';
 /*** ACTION TYPES ***/
 const GET_SPACESHIP = 'GET_SPACESHIP';
 
-
 /*** ACTION CREATORS ***/
 //get single spaceship
 const getSpaceship = spaceship => {
@@ -12,6 +11,7 @@ const getSpaceship = spaceship => {
         spaceship
     }
 }
+
 
 
 /*** THUNK CREATORS ***/
@@ -27,12 +27,12 @@ export const fetchSingleSpaceship = (spaceshipId) => {
 }
 
 
+
 /*** REDUCER ***/
 export default function (state = {}, action) {
     switch (action.type) {
         case GET_SPACESHIP:
             return action.spaceship;
-
         default:
             return state
     }

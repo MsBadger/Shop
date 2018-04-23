@@ -5,6 +5,11 @@ const Order = db.define('order', {
     status: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    sessionId: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        defaultValue: ""
     }
 })
 
