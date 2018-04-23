@@ -30,7 +30,6 @@ class Main extends Component {
                 <Navbar />
                 <main>
                     <Switch>
-                        <Route exact path="/weloveyou/agent007" component={GuestCart} />
                         <Route path="/weloveyou/:userId" component={Cart} />
                         <Route path="/spaceships/edit/:id" component={UpdateSpaceship} />
                         <Route exact path="/spaceships/new" component={AddSpaceship} />

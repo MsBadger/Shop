@@ -18,7 +18,6 @@ export class Cart extends Component {
     handleCartDelete () {
         this.props.removeCart(this.props.userId);
         this.props.loadTheCart(this.props.userId);
-        // this.props.history.push('/')
     }
 
     handleItemDelete (event) {
@@ -32,11 +31,11 @@ export class Cart extends Component {
 
 
     render() {
-        const { name, photo, cart , email} = this.props;
+        const { name, photo, cart , email, isLoggedIn} = this.props;
 
         //create dropdown for quantities
         let inventoryOb = {}
-        if (cart.length) {  
+        if (cart.length && cart[0].spaceships) {  
                 cart[0].spaceships.map((spaceship) => {
                 var arrOfNum = []; 
                 for(var i=1; i <= spaceship.inventory; i++) {
@@ -48,13 +47,22 @@ export class Cart extends Component {
 
         return (
             <div>
-                <img src={photo} className="avatar"/>
-                {name ?  <span> Welcome, {name}  </span> : <span> Welcome, {email}  </span> }
-                <button className="remove-cart-btn" onClick={this.handleCartDelete} >🔆 CLEAN CART</button> <br/>
+                <div className="cart-header" >
+                    <span >
+                        <img src="https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/57.png" className="avatar"/>
+                        {name ?  <span> Welcome, {name}  </span> : <span> Welcome!  </span> } 
+                    </span>
+                    <span className="buttons-rows">
+                        { !isLoggedIn ? <Link to="/signup" > <button className="remove-cart-btn-guest" > ✅ SINGUP & SAVE CART </button> <br/></Link> : null}
+                        <button className="remove-cart-btn-guest" onClick={this.handleCartDelete} >🔆 CLEAN CART</button> <br/>
+                    </span>
+                </div>
                 <div className="cart-page">
                 <br/>
                 <hr/>
-                { cart.length && cart[0].spaceships.length 
+
+
+                { cart.length &&  cart[0].spaceships
                     ? (cart[0].spaceships.map((spaceship) => (
                         <span key={spaceship.id} className="cart-container" >
                             <span  className="home-item cart-item">
@@ -98,6 +106,7 @@ export class Cart extends Component {
  */
 const mapState = (state, ownProps) => {
     return {
+        isLoggedIn: !!state.user.id,
         photo: state.user.photo,
         name: state.user.name,
         userId: ownProps.match.params.userId,

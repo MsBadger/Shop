@@ -30,9 +30,9 @@ export const me = () =>
       .catch(err => console.log(err))
       
 //NEW VERSION OF AUTH THUNK 
-export const auth = (email, password, method, guestCart) =>
+export const auth = (email, password, method) =>
   dispatch =>
-    axios.post(`/auth/${method}`, { email, password, guestCart })
+    axios.post(`/auth/${method}`, { email, password })
       .then(res => {
         dispatch(getUser(res.data))
         history.push('/home')
