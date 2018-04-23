@@ -12,10 +12,10 @@ export class ProductPage extends Component {
 		const spaceshipId = this.props.match.params.spaceshipId;
 		const productPageThunk = fetchSingleSpaceship(spaceshipId);
 		const reviewsThunk = fetchReviews(spaceshipId);
-		store.dispatch(productPageThunk);
+		store.dispatch(productPageThunk); // using connect, so NO -- KHLG
 		store.dispatch(reviewsThunk);
 	}
-
+// I would expect with your setup that there is an unmount that clears review store and single spaceship store. -- KHLG
 	render() {
 		const spaceshipId = this.props.match.params.spaceshipId;
 		let inventoryArr = [];
@@ -91,7 +91,7 @@ export class ProductPage extends Component {
 const mapStateToProps = (state) => {
 	console.log('this is the state', state)
 	return {
-		spaceship: state.spaceship,
+		spaceship: state.spaceship, // could spaceships.find(s => s.id === sId) || {}. Then you don't need the store -- KHLG
 		user: state.user,
 		isAdmin: state.user.isAdmin,
 		reviews: state.reviews

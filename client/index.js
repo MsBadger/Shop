@@ -6,6 +6,8 @@ import history from './history'
 import store from './store'
 import App from './app'
 
+// in a project you want all files to have the same rules (4 spaces for tabs everywhere, so adding semicolons) -- KHLG
+
 // establishes socket connection
 import './socket'
 

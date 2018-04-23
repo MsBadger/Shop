@@ -29,10 +29,11 @@ describe('thunk creators', () => {
 
     describe('fetchSingleSpaceship', () => {
         it('fetches a specific spaceship/product', () => {
+            const spaceshipId = 1
             const response = [
                 {
                     title: 'Bombatronster',
-                    spaceshipId: '1',
+                    spaceshipId,
                     description: 'Humble killer with a heart of gold',
                     price: 23,
                     inventory: 10,
@@ -46,9 +47,9 @@ describe('thunk creators', () => {
                     'payload': response
                 }
             ];
-            mockAxios.onGet(`/api/products/:${spaceshipId}`).reply(200, response);
+            mockAxios.onGet(`/api/products/${spaceshipId}`).reply(200, response);
 
-            return store.dispatch(fetchSingleSpaceship())
+            return store.dispatch(fetchSingleSpaceship(spaceshipId))
                 .then(() => {
                     expect(store.getActions()).to.deep.equal(action);
                 })

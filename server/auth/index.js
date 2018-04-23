@@ -66,6 +66,7 @@ router.post('/signup', (req, res, next) => {
 
 
 router.post('/logout', (req, res) => {
+  // I would recommend using passport's req.login here instead -- KHLG
   req.logout()
   req.session.destroy()
   res.redirect('/')

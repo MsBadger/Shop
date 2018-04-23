@@ -18,24 +18,29 @@ router.get('/', (req, res, next) => {
 
 // GET CART
 router.get('/:userId/cart', (req, res, next) => {
+  // userId should be req.user || param IF isAdmin -- KHLG
   Order.findOrCreate({
     where: {
       userId: Number(req.params.userId),
       status: 'open'
     }
     ,
-    include: [{ model: Spaceship }]
+    // include: [{ model: Spaceship }]
   })
-    .then(products => {
-      res.json(products)
-    })
+  .then(([order]) => LineItem.findAll({ where: {orderId: order.id}, include: [Spaceship]}))
+  .then(products => res.json(products)) // KHLG
+  // you should return lineItems
+    // .then(([products]) => {
+      // res.json(products)
+    // })
     .catch(next)
 })
 
 // CREATE NEW CART
 router.post('/:userId/cart', (req, res, next) => {
+  // is it being associated with cart? LineItem should have userId and orderId, so get that from req.user (unless admin) and users open order (findOrCreate) THEN create on the lineItems table -- KHLG
   LineItems.create(
-    req.body)
+    req.body) 
     .then(newLine => {
       console.log("This is NEW LINE", newLine)
       res.json(newLine)
@@ -51,7 +56,7 @@ router.delete('/:userId/cart', (req, res, next) => {
     userId: Number(req.params.userId),
     status: 'open' 
   }
-  })
+  }) // cascade true. Make sure lineItems associated with this order are destroyed. OR just go through and delete all LineItems associated with this open order -- KHLG
     .then(() => {
       res.status(204).send("Successfully deleted cart")
     })
@@ -61,13 +66,13 @@ router.delete('/:userId/cart', (req, res, next) => {
 
 // DELETE ITEM
 //The following route will be used to delete just one line item
-router.delete('/:userId/cart/:orderId/:spaceshipId', (req, res, next) => {
+router.delete('/:userId/cart/:orderId/spaceship/:spaceshipId', (req, res, next) => {
   LineItems.destroy({
     where: { spaceshipId: Number(req.params.spaceshipId) ,
              orderId: Number(req.params.orderId)  }
     })
     .then( () => {
-      res.status(204).send("Successfully deleted item")
+      res.status(204).send("Successfully deleted item") // 204 means no content, so express removes the body (your send message) -- KHLG
     })
     .catch(next)
 }

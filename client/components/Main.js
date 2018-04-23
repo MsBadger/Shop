@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import store, { fetchSpaceships } from '../store';
+import store, { fetchSpaceships } from '../store'; // twice?!
 import { Login, Signup, UserHome, Navbar, Home, ProductPage, ProductsList, 
     UpdateSpaceship, AddSpaceship, Cart , GuestCart} from './index.js';
 // import Cart from './Cart';
-import { me } from '../store'
+import { me } from '../store' // for the second time -- KHLG
 
 
 class Main extends Component {
@@ -16,7 +16,7 @@ class Main extends Component {
 
         const spaceshipsThunk = fetchSpaceships();
 
-        store.dispatch(spaceshipsThunk);
+        store.dispatch(spaceshipsThunk); // no -- you are using connect already. put in load initial data -- KHLG
 
         // this.props.loadTheCart()
 
@@ -51,7 +51,7 @@ class Main extends Component {
 
                         <Route component={Login} />
 
-                        <Redirect to="/" />
+                        <Redirect to="/" /> {/* take me out because I am in switch and match the last one always */}
                     </Switch>
                 </main>
             </div>
@@ -75,7 +75,7 @@ const mapDispatch = (dispatch) => {
     return {
         loadInitialData() {
             dispatch(me())
-
+            // add more dispatch things here -- KHLG
         }
     }
 }

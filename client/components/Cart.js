@@ -5,24 +5,24 @@ import { myCart, removeCart , removeItem } from '../store'
 
 export class Cart extends Component {
 
-    constructor () {
-        super() ;
-        this.handleCartDelete = this.handleCartDelete.bind(this);
-        this.handleItemDelete = this.handleItemDelete.bind(this);
-    }
+    // constructor () {
+    //     super() ;
+    //     // this.handleCartDelete = this.handleCartDelete.bind(this);
+    //     this.handleItemDelete = this.handleItemDelete.bind(this);
+    // }
 
     componentDidMount() {
         this.props.loadTheCart(this.props.userId)
     }
 
-    handleCartDelete () {
+    handleCartDelete = () => { // can do this because babel is using env -- KHLG
         this.props.removeCart(this.props.userId);
         this.props.loadTheCart(this.props.userId);
         // this.props.history.push('/')
     }
 
-    handleItemDelete (event) {
-        let userId = this.props.userId;
+    handleItemDelete = (cartId, spaceshipId, event) => {
+        let userId = this.props.userId; // use const -- KHLG
         let orderId = event.target.name.split('-')[0]
         let spaceshipId = event.target.name.split('-')[1]
 
@@ -38,8 +38,8 @@ export class Cart extends Component {
         let inventoryOb = {}
         if (cart.length) {  
                 cart[0].spaceships.map((spaceship) => {
-                var arrOfNum = []; 
-                for(var i=1; i <= spaceship.inventory; i++) {
+                var arrOfNum = []; // const -- KHLG
+                for(var i=1; i <= spaceship.inventory; i++) { // let -- KHLG
                     arrOfNum.push(i)
                 }
                 inventoryOb[spaceship.id] = arrOfNum;
@@ -49,11 +49,13 @@ export class Cart extends Component {
         return (
             <div>
                 <img src={photo} className="avatar"/>
-                {name ?  <span> Welcome, {name}  </span> : <span> Welcome, {email}  </span> }
+                <span> Welcome {name ? `, ${name}` : email && `, ${email}`} </span>
+                {name ?  <span> Welcome, {name}  </span> : email ? <span> Welcome, {email}  </span> : <span> Welcome </span>}
                 <button className="remove-cart-btn" onClick={this.handleCartDelete} >🔆 CLEAN CART</button> <br/>
                 <div className="cart-page">
                 <br/>
                 <hr/>
+            {/* cart should always be an array of productObjects so cart.map()*/}
                 { cart.length && cart[0].spaceships.length 
                     ? (cart[0].spaceships.map((spaceship) => (
                         <span key={spaceship.id} className="cart-container" >
@@ -76,7 +78,7 @@ export class Cart extends Component {
                                 }
                                 </select>
 
-                                <button className="remove-btn" name={ cart[0].id +'-'+ spaceship.id } onClick={this.handleItemDelete}>❌ REMOVE ITEM</button>
+                                <button className="remove-btn" name={ cart[0].id +'-'+ spaceship.id } onClick={this.handleItemDelete.bind(this, cart[0].id, spaceship.id)}>❌ REMOVE ITEM</button>
                                 </span> 
                                 <span></span>
                                 <span className="item-devider" ><hr  /></span>

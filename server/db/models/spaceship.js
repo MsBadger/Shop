@@ -5,7 +5,7 @@ const { Review } = require('./index.js')
 const Spaceship = db.define('spaceship', {
     title: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false // '' is valid still -- KHLG
     },
     description: {
         type: Sequelize.TEXT,
@@ -21,7 +21,7 @@ const Spaceship = db.define('spaceship', {
         allowNull: true
     },
     vesselType: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING, // enum? -- KHLG
         defaultValue: 'All Purpose'
     },
     capacity: {
@@ -45,7 +45,7 @@ const Spaceship = db.define('spaceship', {
     //     type: Sequelize.NUMBER,
     //     default: 0,
 
-    // }
+    // } // this should work with a hook for every add/update of review -- KHLG
 
 
 })
