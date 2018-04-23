@@ -95,17 +95,21 @@ router.delete('/:userId/cart/:orderId/:spaceshipId', (req, res, next) => {
 
 //Route to add a new item to the cart 
 router.post('/:userId/cart/:orderId/:spaceshipId', (req, res, next) => {
-  LineItems.create(
+  console.log("inside backend route ")
+  LineItems.findOrCreate(
     {
-      quantity: req.body.quantity,
-      spaceshipId: req.params.spaceshipId,
-      orderId: req.params.orderId
-    })
+      where: {
+        orderId: Number(req.params.orderId),
+        spaceshipId: Number(req.params.spaceshipId)
+      },
+      defaults: { quantity: Number(req.body.quantity) }
+    }
+  )
     .then(newLine => {
-      console.log("This is NEW LINE", newLine)
+      if (newLine[1] === false) {
+        newLine[0].increment("quantity", { by: req.body.quantity })
+      }
       res.json(newLine)
     })
     .catch(next)
 })
-
-

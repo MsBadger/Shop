@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import store from '../store';
+import store, { postToCart } from '../store';
 import { fetchSingleSpaceship } from '../store/spaceship.js';
 import { fetchReviews } from '../store/review.js'
 import axios from 'axios'
 
 export class ProductPage extends Component {
+
 
 	componentDidMount() {
 		const spaceshipId = this.props.match.params.spaceshipId;
@@ -16,13 +17,15 @@ export class ProductPage extends Component {
 		store.dispatch(reviewsThunk);
 	}
 
+
+
 	render() {
 		const spaceshipId = this.props.match.params.spaceshipId;
 		let inventoryArr = [];
 		for (let i = 1; i <= this.props.spaceship.inventory; i++) {
 			inventoryArr.push(i);
 		}
-
+		console.log("ORDERID ", this.props.orderId)
 		return (
 			<div className="single">
 				<span>
@@ -32,10 +35,10 @@ export class ProductPage extends Component {
 				<div>Average Rating: {
 
 					this.props.reviews ?
-					Math.round(this.props.reviews.map((reviewObj) => {
-			      		return reviewObj.rating;
-			    	}).reduce((a, b) => a + b, 0) / this.props.reviews.length) :
-			    	null
+						Math.round(this.props.reviews.map((reviewObj) => {
+							return reviewObj.rating;
+						}).reduce((a, b) => a + b, 0) / this.props.reviews.length) :
+						null
 
 				}
 				</div>
@@ -45,21 +48,21 @@ export class ProductPage extends Component {
 					<span>Max. capacity: {this.props.spaceship.capacity} people</span>
 					<div>
 						<h2>Reviews</h2>
-						{	
+						{
 
 							this.props.reviews ?
-							this.props.reviews.map((review) => {
-								return (
-									<div key={this.props.reviews.map(function(review2) { return review2.body; }).indexOf(review.body)}>
-										<div>Rating: {review.rating}</div>
-										<div>{review.snippet}</div>
-									</div>
-								)
-							}) : null
+								this.props.reviews.map((review) => {
+									return (
+										<div key={this.props.reviews.map(function (review2) { return review2.body; }).indexOf(review.body)}>
+											<div>Rating: {review.rating}</div>
+											<div>{review.snippet}</div>
+										</div>
+									)
+								}) : null
 						}
 					</div>
 
-					<form onSubmit={this.props.handleSubmit}>
+					<form onSubmit={this.props.handleAddProduct}>
 						<div>
 							<select name="quantitySelection"> {inventoryArr.length ? inventoryArr.map(quantity => {
 								return (
@@ -70,16 +73,18 @@ export class ProductPage extends Component {
 							}
 							</select>
 
-							<button className="button" type="submit"> Add To Cart </button>
+							<button className="button" type="submit" value={[this.props.user.id, this.props.orderId]} name="btn"> Add To Cart </button>
 
-							{this.props.isAdmin ?
-								<div className="button">
-									<Link to={`/spaceships/edit/${spaceshipId}`}>Edit Product</Link>
-								</div>
-								: null
-							}
+
 						</div>
 					</form>
+					{this.props.isAdmin ?
+						<div className="button">
+							<Link to={`/spaceships/edit/${spaceshipId}`}>Edit Product</Link>
+						</div>
+						: null
+					}
+
 				</span>
 			</div>
 		)
@@ -89,12 +94,14 @@ export class ProductPage extends Component {
 }
 
 const mapStateToProps = (state) => {
-	console.log('this is the state', state)
 	return {
 		spaceship: state.spaceship,
 		user: state.user,
 		isAdmin: state.user.isAdmin,
-		reviews: state.reviews
+		reviews: state.reviews,
+		orderId: state.cart[0].id,
+		userId: state.userId,
+
 
 	};
 };
@@ -111,11 +118,26 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		// 	}
 		// },
 
-		handleSubmit: function (event) {
+		// handleSubmit: function (event) {
+		// 	event.preventDefault();
+
+		// },
+
+		handleAddProduct: (event) => {
 			event.preventDefault();
+			let userIdOrderId = event.target.btn.value.split(',')
+			const userId = Number(userIdOrderId[0]);
+			console.log('our userid at last!!!! ', userId)
+			const orderId = Number(userIdOrderId[1]);
+			console.log('our order id at last!!!! ', orderId)
+			console.log("OWN props for spaceship", ownProps.match.params.spaceshipId)
+			const spaceshipId = ownProps.match.params.spaceshipId;
+			const quantity = event.target.quantitySelection.value;
+
+			dispatch(postToCart(userId, spaceshipId, orderId, quantity))
 
 		}
 	}
 }
-const ProductPageContainer = withRouter(connect(mapStateToProps)(ProductPage))
+const ProductPageContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(ProductPage))
 export default ProductPageContainer
