@@ -14,8 +14,6 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
-// router.get('/:userId')
-
 // NEW GET CART
 router.get('/:userId/cart', (req, res, next) => {
   if (req.params.userId === "guest") {
@@ -28,7 +26,6 @@ router.get('/:userId/cart', (req, res, next) => {
       include: [{ model: Spaceship }]
     })
       .then(cart => {
-        console.log('cart from guest', cart)
         res.json(cart)
       })
   }
@@ -42,29 +39,11 @@ router.get('/:userId/cart', (req, res, next) => {
       include: [{ model: Spaceship }]
     })
       .then(products => {
-        console.log('products', products)
         res.json(products)
       })
       .catch(next)
   }
 })
-
-// // PREVIOUS GET CART
-// router.get('/:userId/cart', (req, res, next) => {
-//   Order.findOrCreate({
-//     where: {
-//       userId: Number(req.params.userId),
-//       status: 'open'
-//     }
-//     ,
-//     include: [{ model: Spaceship }]
-//   })
-//     .then(products => {
-//       res.json(products)
-//     })
-//     .catch(next)
-// })
-
 
 
 // CREATE NEW CART
@@ -72,7 +51,6 @@ router.post('/:userId/cart', (req, res, next) => {
   LineItems.create(
     req.body)
     .then(newLine => {
-      console.log("This is NEW LINE", newLine)
       res.json(newLine)
     })
     .catch(next)
@@ -133,7 +111,6 @@ router.post('/:userId/cart/:orderId/:spaceshipId', (req, res, next) => {
       orderId: req.params.orderId
     })
     .then(newLine => {
-      console.log("This is NEW LINE", newLine)
       res.json(newLine)
     })
     .catch(next)
