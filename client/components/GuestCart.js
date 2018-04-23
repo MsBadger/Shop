@@ -11,10 +11,7 @@ export class GuestCart extends Component {
         this.handleGuestCartDelete = this.handleGuestCartDelete.bind(this);
         this.handleGuestItemDelete = this.handleGuestItemDelete.bind(this);
     }
-
-    // componentDidMount() {
-    // }
-
+  
     handleGuestCartDelete () {
         this.props.guestCartDelete()
     }
@@ -103,7 +100,6 @@ const mapState = (state) => {
         spaceships: state.spaceships
     }
 }
-
 
 const mapDispatch = (dispatch) => {
     return {
