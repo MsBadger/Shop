@@ -97,7 +97,7 @@ router.delete('/:userId/cart', (req, res, next) => {
         res.status(200).send("Successfully deleted cart")
       })
       .catch(next)
-  } 
+  }
   else {
     Order.destroy({
       where: {
@@ -109,7 +109,7 @@ router.delete('/:userId/cart', (req, res, next) => {
         res.status(20).send("Successfully deleted cart")
       })
       .catch(next)
-    }
+  }
 })
 
 
@@ -129,6 +129,17 @@ router.delete('/:userId/cart/:orderId/:spaceshipId', (req, res, next) => {
     .catch(next)
 }
 )
+
+//GETS the order history
+
+router.get('/:userId/orders', (req, res, next) => {
+  LineItems.findAll({
+    where: { userId: req.params.userId },
+    include: [{ model: LineItems }]
+  })
+    .then(orders => res.json(order))
+    .catch(next)
+})
 
 
 

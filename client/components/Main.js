@@ -6,8 +6,6 @@ import store, { fetchSpaceships, myCart, me } from '../store';
 import { Login, Signup, UserHome, Navbar, Home, ProductPage, ProductsList, UpdateSpaceship, AddSpaceship, Cart, Checkout } from './index.js';
 
 
-
-
 class Main extends Component {
 
     componentDidMount() {
@@ -17,6 +15,13 @@ class Main extends Component {
         const spaceshipsThunk = fetchSpaceships();
 
         store.dispatch(spaceshipsThunk);
+
+    }
+    componentDidUpdate() {
+
+        const userId = this.props.userId ? this.props.userId : "guest"
+        console.log("PROPS ID", userId)
+        this.props.loadTheCart(userId)
 
     }
 
@@ -75,6 +80,9 @@ const mapDispatch = (dispatch) => {
     return {
         loadInitialData() {
             dispatch(me())
+        },
+        loadTheCart(userId) {
+            dispatch(myCart(userId))
         }
 
     }
