@@ -3,10 +3,9 @@ import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import store, { fetchSpaceships, myCart } from '../store';
+import store, { fetchSpaceships, myCart, me } from '../store';
 import { Login, Signup, UserHome, Navbar, Home, ProductPage, ProductsList, UpdateSpaceship, AddSpaceship, Cart } from './index.js';
-// import Cart from './Cart';
-import { me } from '../store'
+
 
 
 
@@ -19,6 +18,13 @@ class Main extends Component {
         const spaceshipsThunk = fetchSpaceships();
 
         store.dispatch(spaceshipsThunk);
+
+    }
+    componentDidUpdate() {
+
+        const userId = this.props.userId ? this.props.userId : "guest"
+        console.log("PROPS ID", userId)
+        this.props.loadTheCart(userId)
 
     }
 
@@ -74,6 +80,9 @@ const mapDispatch = (dispatch) => {
     return {
         loadInitialData() {
             dispatch(me())
+        },
+        loadTheCart(userId) {
+            dispatch(myCart(userId))
         }
 
     }
