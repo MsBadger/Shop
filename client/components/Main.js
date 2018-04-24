@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 
-import store, { fetchSpaceships, myCart } from '../store';
+import store, { fetchSpaceships, myCart, me } from '../store';
 import { Checkout , Login, Signup, UserHome, Navbar, Home, ProductPage, ProductsList, UpdateSpaceship, AddSpaceship, Cart } from './index.js';
-import { me } from '../store'
+
 
 
 
