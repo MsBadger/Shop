@@ -250,3 +250,16 @@ hr {
 
 
 
+.user-item img  {
+  height: 100px;
+  width: 100px;
+  border-radius: 15%;
+}
+
+.checkoutHeader {
+  background-color:rgba(242, 240, 248, 0.2);
+  padding: 10px;
+  text-align: left;
+  font-size: 25px;
+  color: #d3d4da;
+}

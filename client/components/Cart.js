@@ -75,9 +75,11 @@ export class Cart extends Component {
                     {cart.length && cart[0].spaceships
                         ? (cart[0].spaceships.map((spaceship) => (
                             <span key={spaceship.id} className="cart-container" >
-                                <span className="home-item cart-item">
-                                    <img src={spaceship.image} />
-                                </span>
+                                <Link to={`/spaceships/${spaceship.id}`}>
+                                    <span className="home-item cart-item">
+                                        <img src={spaceship.image} />
+                                    </span>
+                                </Link>
                                 <span className="home-item cart-item">
                                     <h1>{spaceship.title}</h1>
                                     <h5 className="white" className="item-details">Capacity {spaceship.capacity}</h5>

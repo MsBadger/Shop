@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import store, { fetchHistory, me } from '../store';
+import { Link } from 'react-router-dom'
 
 /**
  * COMPONENT
@@ -26,24 +27,33 @@ export class UserHome extends Component {
     return (
       <div>
         <h3>Welcome, {email}</h3>
-        <div>
+        <div className="cart-page">
+          <br />
+          <hr />
           {this.props.orders.map(orderHis => {
             return (
               <div>
-                <span key={orderHis}>Order id{orderHis.id}</span>
+                <div className="checkoutHeader">
+                  <h5 key={orderHis} >Order id:  {orderHis.id}</h5>
+                  {/* <br /> */}
+                  <h5 >Status:  {orderHis.status}</h5>
 
-                <span >Order status{orderHis.status}</span>
-                <span >Order status{orderHis.spaceships}</span>
-                {/* <span key={spaceship.id} className="cart-container" >
-                  <span className="home-item cart-item">
-                    <img src={spaceship.image} />
-                  </span>
-                  <span className="home-item cart-item">
-                    <h1>{spaceship.title}</h1>
-                    <h5 className="white" className="item-details">Capacity {spaceship.capacity}</h5>
-                    <h5 className="white" >Price per item {spaceship.priceInMills}</h5>
-                  </span> 
-                </span>*/}
+                  <h5>Products:</h5>
+                </div>
+                <div className="home-container">
+                  {orderHis.spaceships.map((spaceship, idx) => (
+                    <span key={idx} className="user-item">
+                      <Link to={`/spaceships/${spaceship.id}`}>
+                        <img src={spaceship.image} />
+                        <h5>{spaceship.title} </h5>
+                      </Link>
+                    </span>
+
+                  )
+                  )}
+                </div>
+                <br />
+                <hr />
 
               </div>
             )
