@@ -141,6 +141,17 @@ router.get('/:userId/orders', (req, res, next) => {
     .catch(next)
 })
 
+//UPDATE quantity of item in cart
+
+router.put('/cart/:lineItemId', (req, res, next) => {
+  LineItems.update(
+    { quantity: req.body.quantity },
+    { where: {id: req.params.lineItemId} }
+  )
+  .then(update => res.json(update))
+  .catch(next)
+})
+
 
 //UPDATE ADDRESS
 
