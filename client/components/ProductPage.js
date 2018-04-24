@@ -7,7 +7,12 @@ import { fetchReviews } from '../store/review.js'
 import axios from 'axios'
 
 export class ProductPage extends Component {
-
+	constructor(props) {
+		super(props);
+		this.state = {
+			userId: 0
+		}
+	}
 
 	componentDidMount() {
 		const spaceshipId = this.props.match.params.spaceshipId;
@@ -15,6 +20,10 @@ export class ProductPage extends Component {
 		const reviewsThunk = fetchReviews(spaceshipId);
 		store.dispatch(productPageThunk);
 		store.dispatch(reviewsThunk);
+
+		const userId = this.props.userId ? this.props.userId : "guest"
+		console.log("PROPS ID", userId)
+		this.props.loadTheCart(userId)
 	}
 
 
@@ -25,7 +34,7 @@ export class ProductPage extends Component {
 		for (let i = 1; i <= this.props.spaceship.inventory; i++) {
 			inventoryArr.push(i);
 		}
-		console.log("ORDERID ", this.props.orderId)
+		console.log("ORDER ID ", this.props.orderId)
 		return (
 			<div className="single">
 				<span>
@@ -99,7 +108,7 @@ const mapStateToProps = (state) => {
 		user: state.user,
 		isAdmin: state.user.isAdmin,
 		reviews: state.reviews,
-		orderId: state.cart[0].id,
+		orderId: state.cart[0] ? state.cart[0].id : '',
 		userId: state.userId,
 
 
@@ -138,6 +147,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 			// dispatch(myCart(userId))
 
+		},
+		loadTheCart(userId) {
+			dispatch(myCart(userId))
 		}
 
 
