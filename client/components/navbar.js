@@ -31,13 +31,11 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin, userId }) => (
         </div>
       </div>
 
-      { isLoggedIn ?
-        <span className='cart-icon'>
-          <Link to={`/weloveyou/${userId}`}>
-            <img src='/images/cart.jpg'  />
-          </Link>
-        </span> : <span></span>
-      }
+      <span className='cart-icon'>
+            <Link to={`/weloveyou/${userId}`}>
+              <img src='/images/cart.jpg'  />
+            </Link>
+          </span> 
 
     <span className="header-underline"><hr /></span>
     </nav>
@@ -49,7 +47,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin, userId }) => (
  */
 const mapState = state => {
   return {
-    userId: state.user.id,
+    userId: state.user.id || 'guest',
     isAdmin: state.user.isAdmin,
     isLoggedIn: !!state.user.id
   }

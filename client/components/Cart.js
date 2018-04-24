@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+
 import { connect } from 'react-redux'
 import { myCart, removeCart, removeItem, postToCart } from '../store'
+
 
 export class Cart extends Component {
 
@@ -18,7 +20,6 @@ export class Cart extends Component {
     handleCartDelete() {
         this.props.removeCart(this.props.userId);
         this.props.loadTheCart(this.props.userId);
-        // this.props.history.push('/')
     }
 
     handleItemDelete(event) {
@@ -32,14 +33,17 @@ export class Cart extends Component {
 
 
     render() {
-        const { name, photo, cart } = this.props;
+        const { name, photo, cart , email, isLoggedIn} = this.props;
 
         //create dropdown for quantities
         let inventoryOb = {}
-        if (cart.length) {
-            cart[0].spaceships.map((spaceship) => {
-                var arrOfNum = [];
-                for (var i = 1; i <= spaceship.inventory; i++) {
+
+        if (cart.length && cart[0].spaceships) {  
+                cart[0].spaceships.map((spaceship) => {
+                var arrOfNum = []; 
+                for(var i=1; i <= spaceship.inventory; i++) {
+
+        
                     arrOfNum.push(i)
                 }
                 inventoryOb[spaceship.id] = arrOfNum;
@@ -48,17 +52,49 @@ export class Cart extends Component {
 
         return (
             <div>
-                <img src={photo} className="avatar" />
-                <span> Welcome, {name}  </span>
-                <button className="remove-cart-btn" onClick={this.handleCartDelete} >❌ REMOVE CART</button> <br />
+
+                <div className="cart-header" >
+                    <span >
+                        <img src="https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/57.png" className="avatar"/>
+                        {name ?  <span> Welcome, {name}  </span> : <span> Welcome!  </span> } 
+                    </span>
+                    <span className="buttons-rows">
+                        { !isLoggedIn ? <Link to="/signup" > <button className="remove-cart-btn-guest" > ✅ SINGUP & SAVE CART </button> <br/></Link> : null}
+                        <button className="remove-cart-btn-guest" onClick={this.handleCartDelete} >🔆 CLEAN CART</button> <br/>
+                    </span>
+                </div>
                 <div className="cart-page">
-                    <br />
-                    <hr />
-                    {cart.length && cart[0].spaceships.length
-                        ? (cart[0].spaceships.map((spaceship) => (
-                            <span key={spaceship.id} className="cart-container" >
-                                <span className="home-item cart-item">
-                                    <img src={spaceship.image} />
+                <br/>
+                <hr/>
+
+
+                { cart.length &&  cart[0].spaceships
+                    ? (cart[0].spaceships.map((spaceship) => (
+                        <span key={spaceship.id} className="cart-container" >
+                            <span  className="home-item cart-item">
+                                <img src={spaceship.image} />
+                            </span>
+                            <span  className="home-item cart-item">
+                                <h1>{spaceship.title}</h1>
+                                <h5 className="white" className="item-details">Capacity {spaceship.capacity}</h5>
+                                <h5 className="white" >Price per item {spaceship.priceInMills}</h5>
+
+                                <select name="quantitySelection"> {
+                                    inventoryOb[spaceship.id]
+                                    ? inventoryOb[spaceship.id].map(quantity => {
+                                    return (
+                                        <option key={quantity} value={quantity}>{quantity}</option>
+                                    )
+                                })
+                                    : <option value="0"> Out Of Stock </option>
+                                }
+                                </select>
+
+                                <button className="remove-btn" name={ cart[0].id +'-'+ spaceship.id } onClick={this.handleItemDelete}>❌ REMOVE ITEM</button>
+                                </span> 
+                                <span></span>
+                                <span className="item-devider" ><hr  /></span>
+
                                 </span>
                                 <span className="home-item cart-item">
                                     <h1>{spaceship.title}</h1>
@@ -98,6 +134,7 @@ export class Cart extends Component {
  */
 const mapState = (state, ownProps) => {
     return {
+        isLoggedIn: !!state.user.id,
         photo: state.user.photo,
         name: state.user.name,
         userId: ownProps.match.params.userId,

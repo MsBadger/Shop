@@ -202,6 +202,15 @@ hr {
   grid-column-gap: 50px;
 }
 
+.cart-header {
+  width: 90%;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 40% 60%;
+  grid-column: 2;
+  grid-column-gap: 50px;
+}
+
 .item-devider {
   grid-column-start: 1;
   grid-column-end: 3;
@@ -214,6 +223,13 @@ hr {
   float: right;
 }
 
+
+.remove-cart-btn-guest {
+  margin: 10px 80px ;
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+
 .cart-item {
   text-align: left;
 }
@@ -221,3 +237,14 @@ hr {
 .item-details {
   margin-top: 80px;
 }
+
+.login-form {
+  padding-left: 80px;
+}
+
+.buttons-rows {
+  text-align: right;
+  grid-template-columns: 100%;
+  grid-template-rows: 50% 50%;
+}
+
