@@ -83,11 +83,18 @@ export class Cart extends Component {
                                     <select name="quantitySelection" value={this.props.value}> {
                                         inventoryOb[spaceship.id]
                                             ? inventoryOb[spaceship.id].map(quantity => {
-                                                return (
+                                                if (quantity === spaceship.lineItems.quantity) {
+                                                    return (
+                                                        //this ensures that the dropdown menu automatically displays the number of items that the user has in their cart. Ignore the react warning in the browser console.
+                                                        <option key={quantity} value={quantity} selected ="selected">{quantity}</option>
+                                                    )
+                                                } else {
+                                                    return (
 
-                                                    <option key={quantity} value={quantity}>{quantity}</option>
+                                                        <option key={quantity} value={quantity}>{quantity}</option>
 
-                                                )
+                                                    )
+                                                }
                                             })
                                             : <option value="0"> Out Of Stock </option>
                                     }
@@ -105,7 +112,7 @@ export class Cart extends Component {
                 </div>
                 <span className="item-devider" ><hr /></span>
 
-                <span >Subtotal ({subtotalItems})= {subtotalPrice}</span>
+                <span >Subtotal: ${subtotalPrice} for ({subtotalItems}) items</span>
 
                 <span></span>
                 <span className="item-devider" ><hr /></span>
@@ -120,13 +127,14 @@ export class Cart extends Component {
  * CONTAINER
  */
 const mapState = (state, ownProps) => {
+    console.log('this is the cart', state.cart)
     return {
         isLoggedIn: !!state.user.id,
         photo: state.user.photo,
         name: state.user.name,
         userId: ownProps.match.params.userId,
         email: state.user.email,
-        cart: state.cart
+        cart: state.cart,
     }
 }
 
