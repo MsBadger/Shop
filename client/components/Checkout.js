@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'; 
 import {connect} from 'react-redux';
@@ -105,3 +106,4 @@ const mapState = (state) => {
   }
 
 export default connect(mapState)(Checkout)
+

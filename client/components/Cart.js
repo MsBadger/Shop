@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import { connect } from 'react-redux'
-import { myCart, removeCart, removeItem, postToCart } from '../store'
+import { connect } from 'react-redux';
+import { myCart, removeCart, removeItem, postToCart } from '../store';
+import { Checkout } from './index';
 
 
 export class Cart extends Component {
@@ -64,6 +65,10 @@ export class Cart extends Component {
                     <span className="buttons-rows">
                         {!isLoggedIn ? <Link to="/signup" > <button className="remove-cart-btn-guest" > ✅ SIGN UP & SAVE CART </button> <br /></Link> : null}
                         <button className="remove-cart-btn-guest" onClick={this.handleCartDelete} >🔆 CLEAN CART</button> <br />
+                        <Checkout
+                            cart={this.props.cart}
+                            amount={1}
+                        />
                         <button className="remove-cart-btn-guest"> ORDER HISTORY</button> <br />
                     </span>
                 </div>
