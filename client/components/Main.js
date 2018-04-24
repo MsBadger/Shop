@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import store, { fetchSpaceships, myCart } from '../store';
-import { Login, Signup, UserHome, Navbar, Home, ProductPage, ProductsList, UpdateSpaceship, AddSpaceship, Cart } from './index.js';
+import { AddressForm, Login, Signup, UserHome, Navbar, Home, ProductPage, ProductsList, UpdateSpaceship, AddSpaceship, Cart } from './index.js';
 // import Cart from './Cart';
 import { me } from '../store'
 
@@ -30,6 +30,7 @@ class Main extends Component {
                 <Navbar />
                 <main>
                     <Switch>
+                        {/*TEST*/} <Route exact path="/test" component={AddressForm} /> 
                         <Route path="/weloveyou/:userId" component={Cart} />
                         <Route path="/spaceships/edit/:id" component={UpdateSpaceship} />
                         <Route exact path="/spaceships/new" component={AddSpaceship} />
