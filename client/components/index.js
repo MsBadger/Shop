@@ -13,10 +13,6 @@ export { default as UpdateSpaceship } from './UpdateSpaceship';
 export { Login, Signup } from './auth-form';
 export { default as Cart } from './Cart';
 export { default as GuestCart } from './GuestCart';
-<<<<<<< HEAD
-=======
+
 export { default as CheckoutForms } from './CheckoutForms';
-
->>>>>>> 2e1b75dcee05093f3dbcf5c9c5976820867e8d96
-
 export { BillingAddress, ShippingAddress } from './AddressForm';

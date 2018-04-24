@@ -13,10 +13,6 @@ const app = express()
 const socketio = require('socket.io')
 module.exports = app
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 2e1b75dcee05093f3dbcf5c9c5976820867e8d96
 /**
  * In your development environment, you can keep all of your
  * app's secret API keys in a file called `secrets.js`, in your project
@@ -37,11 +33,7 @@ passport.deserializeUser((id, done) =>
 const createApp = () => {
   // logging middleware
   app.use(morgan('dev'))
-<<<<<<< HEAD
 
-=======
-  
->>>>>>> 2e1b75dcee05093f3dbcf5c9c5976820867e8d96
   // body parsing middleware
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({ extended: true }))
