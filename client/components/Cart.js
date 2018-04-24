@@ -67,6 +67,7 @@ export class Cart extends Component {
                         <button className="remove-cart-btn-guest" onClick={this.handleCartDelete} >🔆 CLEAN CART</button> <br />
                         <Checkout
                             cart={this.props.cart}
+                            amount={1}
                         />
                         <button className="remove-cart-btn-guest"> ORDER HISTORY</button> <br />
                     </span>

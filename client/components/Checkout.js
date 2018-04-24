@@ -7,7 +7,7 @@ import PAYMENT_SERVER_URL from '../../constants/server';
 
 const CURRENCY = 'USD';
 
-const fromEuroToCent = amount => amount * 100;
+const fromUSDToCent = amount => amount * 100;
 
 const successPayment = data => {
     alert('Payment Successful');
@@ -17,26 +17,30 @@ const errorPayment = data => {
     alert('Payment Error');
 };
 
-const onToken = (amount, description) => token =>
-    axios.post(PAYMENT_SERVER_URL,
-        {
-            description,
-            source: token.id,
-            currency: CURRENCY,
-            amount: fromEuroToCent(amount)
-        })
-        .then(successPayment)
-        .catch(errorPayment);
+const onToken = (amount) => token => axios.post(PAYMENT_SERVER_URL,
+    {
+        // description,
+        source: token.id,
+        currency: CURRENCY,
+        amount: fromUSDToCent(amount)
+    })
+    .then(successPayment)
+    .catch(errorPayment);
 
-const Checkout = ({ cart }) =>
-    <StripeCheckout
-        // name={name}
-        // description={description}
-        // amount={fromEuroToCent(amount)}
-        cart={cart}
-        token={onToken(cart)}
-        currency={CURRENCY}
-        stripeKey={STRIPE_PUBLISHABLE}
-    />
+const Checkout = ({ cart, amount }) => {
+    console.log('fromUSDToCent(amount) : ', fromUSDToCent(amount))
+    return (
+        <StripeCheckout
+            // name={name}
+            // description={description}
+            amount={fromUSDToCent(amount)}
+            cart={cart}
+            token={onToken(amount)}
+            currency={CURRENCY}
+            stripeKey={STRIPE_PUBLISHABLE}
+        />
+    )
+}
+
 
 export default Checkout;
