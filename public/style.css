@@ -55,10 +55,15 @@ form div {
   padding-top: 80px;
   width: 90%;
   text-align: center;
-  display: grid;
+  /* display: grid;
   grid-template-columns: 25% 25% 25% 25%;
   grid-column: 2;
-  grid-column-gap: 50px;
+  grid-column-gap: 50px; */
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .home-item a, .all-item a {
