@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 
 import store, { fetchSpaceships, myCart, me } from '../store';
-import { CheckoutForms , Login, Signup, UserHome, Navbar, Home, ProductPage, ProductsList, UpdateSpaceship, AddSpaceship, Cart } from './index.js';
+import { Checkout, CheckoutForms , Login, Signup, UserHome, Navbar, Home, ProductPage, ProductsList, UpdateSpaceship, AddSpaceship, Cart } from './index.js';
 
 
 
