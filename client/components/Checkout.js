@@ -43,4 +43,6 @@ const Checkout = ({ cart, amount }) => {
 }
 
 
+
+
 export default Checkout;
