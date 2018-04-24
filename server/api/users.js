@@ -13,12 +13,33 @@ router.get('/', (req, res, next) => {
     .then(users => res.json(users))
     .catch(next)
 })
-
+//Route to add a new item to the cart 
+router.post('/:userId/cart/:orderId/:spaceshipId', (req, res, next) => {
+  console.log("inside backend route ")
+  LineItems.findOrCreate(
+    {
+      where: {
+        orderId: Number(req.params.orderId),
+        spaceshipId: Number(req.params.spaceshipId)
+      },
+      defaults: { quantity: Number(req.body.quantity) }
+    }
+  )
+    .then(newLine => {
+      if (newLine[1] === false) {
+        newLine[0].increment("quantity", { by: req.body.quantity })
+      }
+      res.json(newLine)
+    })
+    .catch(next)
+})
 // router.get('/:userId')
 
 // GET CART
 router.get('/:userId/cart', (req, res, next) => {
+  console.log("what AM I? ", req.params.userId)
   if (req.params.userId === "guest") {
+
     Order.findOrCreate({
       where: {
         sessionId: req.session.id,
@@ -50,15 +71,15 @@ router.get('/:userId/cart', (req, res, next) => {
 })
 
 // CREATE NEW CART
-router.post('/:userId/cart', (req, res, next) => {
-  LineItems.create(
-    req.body)
-    .then(newLine => {
-      console.log("This is NEW LINE", newLine)
-      res.json(newLine)
-    })
-    .catch(next)
-})
+// router.post('/:userId/cart', (req, res, next) => {
+//   LineItems.create(
+//     req.body)
+//     .then(newLine => {
+//       console.log("This is NEW LINE", newLine)
+//       res.json(newLine)
+//     })
+//     .catch(next)
+// })
 // DELETE CART
 //This is the route to clear the WHOLE cart  
 // We're saying req.body will have the order Id as a property
@@ -76,6 +97,8 @@ router.delete('/:userId/cart', (req, res, next) => {
 }
 )
 
+
+
 // DELETE ITEM
 //The following route will be used to delete just one line item
 router.delete('/:userId/cart/:orderId/:spaceshipId', (req, res, next) => {
@@ -92,20 +115,5 @@ router.delete('/:userId/cart/:orderId/:spaceshipId', (req, res, next) => {
 }
 )
 
-
-//Route to add a new item to the cart 
-router.post('/:userId/cart/:orderId/:spaceshipId', (req, res, next) => {
-  LineItems.create(
-    {
-      quantity: req.body.quantity,
-      spaceshipId: req.params.spaceshipId,
-      orderId: req.params.orderId
-    })
-    .then(newLine => {
-      console.log("This is NEW LINE", newLine)
-      res.json(newLine)
-    })
-    .catch(next)
-})
 
 
