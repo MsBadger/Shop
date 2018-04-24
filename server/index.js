@@ -11,18 +11,9 @@ const sessionStore = new SequelizeStore({ db })
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
-const SERVER_CONFIGS = require('./constants/server')
-const cors = require('cors')
 module.exports = app
 
-//stripe stuff
-const CORS_WHITELIST = require('./constants/frontend');
-const corsOptions = {
-  origin: (origin, callback) =>
-    (CORS_WHITELIST.indexOf(origin) !== -1 || !origin)
-      ? callback(null, true)
-      : callback(new Error('Not allowed by CORS'))
-};
+
 /**
  * In your development environment, you can keep all of your
  * app's secret API keys in a file called `secrets.js`, in your project
@@ -43,10 +34,7 @@ passport.deserializeUser((id, done) =>
 const createApp = () => {
   // logging middleware
   app.use(morgan('dev'))
-
-  //stripe stuff
-  app.use(cors(corsOptions));
-
+  
   // body parsing middleware
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({ extended: true }))

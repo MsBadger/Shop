@@ -27,11 +27,8 @@
     "chance": "^1.0.13",
     "compression": "^1.7.1",
     "connect-session-sequelize": "^4.1.0",
-<<<<<<< HEAD
     "curl": "^0.1.4",
-=======
     "cors": "^2.8.4",
->>>>>>> e6817a4041d3757df74be63e6a8c53f910b1b342
     "express": "^4.14.1",
     "express-session": "^1.15.1",
     "history": "^4.6.3",
