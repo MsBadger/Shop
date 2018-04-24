@@ -14,4 +14,5 @@ export { Login, Signup } from './auth-form';
 export { default as Cart } from './Cart';
 export { default as GuestCart } from './GuestCart';
 
-export { default as AddressForm } from './AddressForm';
+export { BillingAddress, ShippingAddress } from './AddressForm';
+export { default as Checkout } from './Checkout';
