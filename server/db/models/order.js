@@ -10,6 +10,12 @@ const Order = db.define('order', {
         type: Sequelize.STRING,
         allowNull: true,
         defaultValue: ""
+    },
+    billingAddress: {
+        type: Sequelize.ARRAY(Sequelize.TEXT)
+    },
+    shippingAddress: {
+        type: Sequelize.ARRAY(Sequelize.TEXT)
     }
 })
 
