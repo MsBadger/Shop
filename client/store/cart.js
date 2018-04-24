@@ -77,7 +77,7 @@ export default function (state = currentCart, action) {
         case GET_CART:
             return action.cart;
         case ADD_TO_CART:
-            return action.spaceship
+            return state.concat([action.spaceship])
         default:
             return state;
     }

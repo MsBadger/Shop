@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import store, { postToCart } from '../store';
+import store, { postToCart, myCart } from '../store';
 import { fetchSingleSpaceship } from '../store/spaceship.js';
 import { fetchReviews } from '../store/review.js'
 import axios from 'axios'
@@ -136,8 +136,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 			dispatch(postToCart(userId, spaceshipId, orderId, quantity))
 
+			// dispatch(myCart(userId))
+
 		}
+
+
 	}
 }
+
 const ProductPageContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(ProductPage))
 export default ProductPageContainer

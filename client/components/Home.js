@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { myCart } from '../store'
+import { myCart, me } from '../store'
 import { connect } from 'react-redux'
 
 
 export class Home extends Component {
 
-    componentDidMount() {
-        this.props.loadTheCart(this.props.userId)
+    componentDidUpdate() {
+
+        const userId = this.props.userId ? this.props.userId : "guest"
+        console.log("PROPS ID", userId)
+        this.props.loadTheCart(userId)
+
     }
 
     render() {
+
+
         console.log('rendering home page')
         let categories = [
             ['explorer', 'https://room.eu.com/images/contents/issue8-from-the-dawn-of-humankind-the-need-to-explore-has-driven-expansion-across-our-planet.jpg'],
@@ -49,8 +55,9 @@ export class Home extends Component {
 
 
 const mapState = (state, ownProps) => {
-    if (!state.user.id) return { userId: "guest" };
-    else return { userId: state.user.id }
+    return {
+        userId: state.user.id
+    }
 }
 const mapDispatch = (dispatch) => {
     return {
