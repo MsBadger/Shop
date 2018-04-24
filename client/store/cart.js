@@ -57,9 +57,12 @@ export const removeItem = (userId, orderId, spaceshipId) => dispatch => {
 // "spaceshipId": 3,
 // "orderId": 1
 export const postToCart = (userId, spaceshipId, orderId, quantity) => {
+    console.log("this is inside post reader")
+    console.log("spaceshipid in thunk", spaceshipId)
     return dispatch => {
-        return axios.post(`/${userId}/cart/${orderId}/${spaceshipId}`, { quantity })
+        return axios.post(`/api/users/${userId}/cart/${orderId}/${spaceshipId}`, { quantity })
             .then(res => {
+                console.log('POSTED SUCCESSFULLY ?!?!?!', res)
                 dispatch(addToCart(res.data))
             })
             .catch(err => console.log(err))
@@ -73,6 +76,8 @@ export default function (state = currentCart, action) {
     switch (action.type) {
         case GET_CART:
             return action.cart;
+        case ADD_TO_CART:
+            return state.concat([action.spaceship])
         default:
             return state;
     }

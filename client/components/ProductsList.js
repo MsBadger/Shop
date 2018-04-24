@@ -3,6 +3,7 @@ import { withRouter, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 
+
 function ProductsList(props) {
 
   const { spaceships } = props;
@@ -42,6 +43,8 @@ const mapStateToProps = function (state) {
     spaceships: state.spaceships
   };
 };
+
+
 
 export default withRouter(connect(mapStateToProps)(ProductsList));
 

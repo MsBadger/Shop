@@ -2,20 +2,24 @@ import React, { Component } from 'react';
 import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import store, { fetchSpaceships, me } from '../store';
-import { Login, Signup, UserHome, Navbar, Home, ProductPage, ProductsList, 
-    UpdateSpaceship, AddSpaceship, Cart , GuestCart} from './index.js';
+
+import store, { fetchSpaceships, myCart } from '../store';
+import { Login, Signup, UserHome, Navbar, Home, ProductPage, ProductsList, UpdateSpaceship, AddSpaceship, Cart } from './index.js';
+// import Cart from './Cart';
+import { me } from '../store'
 
 
 
 class Main extends Component {
 
     componentDidMount() {
+
         this.props.loadInitialData()
 
         const spaceshipsThunk = fetchSpaceships();
 
         store.dispatch(spaceshipsThunk);
+
     }
 
     render() {
@@ -70,8 +74,8 @@ const mapDispatch = (dispatch) => {
     return {
         loadInitialData() {
             dispatch(me())
-
         }
+
     }
 }
 
