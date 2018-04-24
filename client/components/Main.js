@@ -43,8 +43,9 @@ class Main extends Component {
                         <Route path="/spaceships/:spaceshipId" component={ProductPage} />
                         <Route exact path="/spaceships" component={ProductsList} />
                         <Route exact path="/" component={Home} />
-                        <Route path="/login" component={Login} />
-                        <Route path="/signup" component={Signup} />
+                        <Route exact path="/login" component={Login} />
+                        <Route exact path="/signup" component={Signup} />
+                        <Route exact path="/home" component={UserHome} />
                         {
                             isLoggedIn &&
                             <Switch>

@@ -109,7 +109,7 @@ const mapStateToProps = (state) => {
 		isAdmin: state.user.isAdmin,
 		reviews: state.reviews,
 		orderId: state.cart[0] ? state.cart[0].id : '',
-		userId: state.userId,
+		userId: state.user.id,
 
 
 	};
