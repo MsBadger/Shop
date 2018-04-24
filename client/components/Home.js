@@ -13,6 +13,12 @@ export class Home extends Component {
         this.props.loadTheCart(userId)
 
     }
+    componentDidMount() {
+        const userId = this.props.userId ? this.props.userId : "guest"
+        console.log("PROPS ID", userId)
+        this.props.loadTheCart(userId)
+
+    }
 
     render() {
 
