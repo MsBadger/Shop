@@ -3,6 +3,19 @@ const { User } = require('../db/models')
 const { Order, LineItems, Spaceship } = require('../db/models')
 module.exports = router
 
+//GETS the order history
+router.get('/orders/:userId', (req, res, next) => {
+  Order.findAll({
+    where: {
+      userId: Number(req.params.userId)
+    },
+    include: [{ model: Spaceship }]
+  })
+    .then(orders => res.json(orders))
+    .catch(next)
+})
+
+
 router.get('/', (req, res, next) => {
   User.findAll({
     // explicitly select only the id and email fields - even though
@@ -13,6 +26,9 @@ router.get('/', (req, res, next) => {
     .then(users => res.json(users))
     .catch(next)
 })
+
+
+
 
 //Route to add a new item to the cart 
 router.post('/:userId/cart/:orderId/:spaceshipId', (req, res, next) => {
@@ -130,15 +146,19 @@ router.delete('/:userId/cart/:orderId/:spaceshipId', (req, res, next) => {
 }
 )
 
-//GETS the order history
 
-router.get('/:userId/orders', (req, res, next) => {
-  LineItems.findAll({
-    where: { userId: req.params.userId },
-    include: [{ model: LineItems }]
-  })
-    .then(orders => res.json(order))
-    .catch(next)
+
+
+
+//UPDATE quantity of item in cart
+
+router.put('/cart/:lineItemId', (req, res, next) => {
+  LineItems.update(
+    { quantity: req.body.quantity },
+    { where: {id: req.params.lineItemId} }
+  )
+  .then(update => res.json(update))
+  .catch(next)
 })
 
 

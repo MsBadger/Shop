@@ -22,8 +22,6 @@ export class Home extends Component {
 
     render() {
 
-
-        console.log('rendering home page')
         let categories = [
             ['explorer', 'https://room.eu.com/images/contents/issue8-from-the-dawn-of-humankind-the-need-to-explore-has-driven-expansion-across-our-planet.jpg'],
             ['conference', 'http://smartplaces.eu/wordpress/wp-content/uploads/2017/11/FG_7275.jpg'],
@@ -40,9 +38,11 @@ export class Home extends Component {
                 <span className="sub-title">
                     <h3>Please explore the options and login to buy</h3>
                 </span>
-                <Link to={`/spaceships`}>
-                    <button className="see-all-btn">See All Spaceships</button>
-                </Link>
+                <div className="see-all-product-btn">
+                    <Link to={`/spaceships`}>
+                        <button className="see-all-btn">See All Spaceships</button>
+                    </Link>
+                </div>
                 <br />
                 <div className="home-container">
                     {categories.map((category, ind) => (
