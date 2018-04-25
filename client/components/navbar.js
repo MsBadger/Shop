@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { logout } from '../store'
 
-const Navbar = ({ handleClick, isLoggedIn, isAdmin, userId }) => (
+const Navbar = ({ handleClick, isLoggedIn, isAdmin, userId, spaceshipId }) => (
   <div>
     {/*<nav className="navbar navbar-inverse navbar-static-top" role="navigation">*/}
     <nav className="header-container">
@@ -15,7 +15,25 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin, userId }) => (
         </Link>
       </span>
 
+      <div className="dropdown">
+        <button className="btn btn-secondary dropdown-toggle btn-lg" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          👽 Search
+        </button>
+        <div className="dropdown-menu dropdown-menu-right " aria-labelledby="dropdownMenuButton">
+          <form>
+            <div>
 
+              <input
+                value={spaceshipId}
+                type='text'
+                name='spaceshipId'
+                placeholder='Spaceship name'
+              />
+              {console.log("SPACESHIP ID", spaceshipId)}
+            </div>
+          </form>
+        </div>
+      </div>
       <div className="dropdown">
         <button className="btn btn-secondary dropdown-toggle btn-lg" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Menu
@@ -32,12 +50,12 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin, userId }) => (
       </div>
 
       <span className='cart-icon'>
-            <Link to={`/weloveyou/${userId}`}>
-              <img src='/images/cart.jpg'  />
-            </Link>
-          </span> 
+        <Link to={`/weloveyou/${userId}`}>
+          <img src='/images/cart.jpg' />
+        </Link>
+      </span>
 
-    <span className="header-underline"><hr /></span>
+      <span className="header-underline"><hr /></span>
     </nav>
   </div>
 )
@@ -49,7 +67,8 @@ const mapState = state => {
   return {
     userId: state.user.id || 'guest',
     isAdmin: state.user.isAdmin,
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    spaceshipId: state.spaceship.id
   }
 }
 
@@ -58,6 +77,9 @@ const mapDispatch = dispatch => {
     handleClick() {
       dispatch(logout())
     }
+    // handleChange(event){
+    //   spaceshipId:evt.tart.value
+    // }
   }
 }
 

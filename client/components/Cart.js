@@ -65,7 +65,7 @@ export class Cart extends Component {
                         {!isLoggedIn ? <Link to="/signup" > <button className="remove-cart-btn-guest" > ✅ SIGN UP & SAVE CART </button> <br /></Link> : null}
                         <button className="remove-cart-btn-guest" onClick={this.handleCartDelete} >🔆 CLEAN CART</button> <br />
                         <Link to="/home">
-                            <button className="remove-cart-btn-guest"> ORDER HISTORY</button> <br />
+                            <button className="remove-cart-btn-guest"> 📋 ORDER HISTORY</button> <br />
                         </Link>
                     </span>
                 </div>
