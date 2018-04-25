@@ -67,11 +67,16 @@ export class Cart extends Component {
                     <span className="buttons-rows">
                         {!isLoggedIn ? <Link to="/signup" > <button className="remove-cart-btn-guest" > ✅ SIGN UP & SAVE CART </button> <br /></Link> : null}
                         <button className="remove-cart-btn-guest" onClick={this.handleCartDelete} >🔆 CLEAN CART</button> <br />
+
+                        <Link to="/home">
+                            <button className="remove-cart-btn-guest"> 📋 ORDER HISTORY</button> <br />
+                        </Link>
+
                         <Checkout
                             cart={this.props.cart}
                             amount={1}
                         />
-                        <button className="remove-cart-btn-guest"> ORDER HISTORY</button> <br />
+
                     </span>
                 </div>
                 <div className="cart-page">
@@ -80,38 +85,40 @@ export class Cart extends Component {
                     {cart.length && cart[0].spaceships
                         ? (cart[0].spaceships.map((spaceship) => (
                             <span key={spaceship.id} className="cart-container" >
-                                <span className="home-item cart-item">
-                                    <img src={spaceship.image} />
-                                </span>
+                                <Link to={`/spaceships/${spaceship.id}`}>
+                                    <span className="home-item cart-item">
+                                        <img src={spaceship.image} />
+                                    </span>
+                                </Link>
                                 <span className="home-item cart-item">
                                     <NavLink to={`/spaceships/${spaceship.id}`}>
                                         <h1>{spaceship.title}</h1>
                                     </NavLink>
                                     <h5 className="white" className="item-details">Capacity {spaceship.capacity}</h5>
                                     <h5 className="white" >Price per item {spaceship.priceInMills}</h5>
-                                        <form onSubmit={this.props.handleChangeQuantity}>
-                                            <div>
-                                                <select name="quantitySelection" value={this.props.value} onChange={(event, spaceship.lineItems.id) => { this.props.handleChangeQuantity(event, spaceship.lineItems.id) }} > {
-                                                    inventoryOb[spaceship.id]
-                                                        ? inventoryOb[spaceship.id].map(quantity => {
-                                                            if (quantity === spaceship.lineItems.quantity) {
-                                                                return (
-                                                                    //this ensures that the dropdown menu automatically displays the number of items that the user has in their cart. Ignore the react warning in the browser console.
-                                                                    <option key={quantity} value={quantity} selected ="selected">{quantity}</option>
-                                                                )
-                                                            } else {
-                                                                return (
+                                    <form onSubmit={this.props.handleChangeQuantity}>
+                                        <div>
+                                            <select name="quantitySelection" value={this.props.value} onChange={(event) => { this.props.handleChangeQuantity(event, spaceship.lineItems.id) }} > {
+                                                inventoryOb[spaceship.id]
+                                                    ? inventoryOb[spaceship.id].map(quantity => {
+                                                        if (quantity === spaceship.lineItems.quantity) {
+                                                            return (
+                                                                //this ensures that the dropdown menu automatically displays the number of items that the user has in their cart. Ignore the react warning in the browser console.
+                                                                <option key={quantity} value={quantity} selected="selected">{quantity}</option>
+                                                            )
+                                                        } else {
+                                                            return (
 
-                                                                    <option key={quantity} value={quantity}>{quantity}</option>
+                                                                <option key={quantity} value={quantity}>{quantity}</option>
 
-                                                                )
-                                                            }
-                                                        })
-                                                        : <option value="0"> Out Of Stock </option>
-                                                    }
-                                                </select>
-                                            </div>
-                                        </form>
+                                                            )
+                                                        }
+                                                    })
+                                                    : <option value="0"> Out Of Stock </option>
+                                            }
+                                            </select>
+                                        </div>
+                                    </form>
                                     <button className="remove-btn" name={cart[0].id + '-' + spaceship.id} onClick={this.handleItemDelete}>❌ REMOVE ITEM</button>
                                 </span>
                                 <span></span>

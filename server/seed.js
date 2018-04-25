@@ -185,7 +185,7 @@ function generateUsers() {
 	const users = doTimes(numUsers, randUser);
 	users.push(User.build({
 		name: 'Zeke Nierenberg',
-		photo: toonAvatar.generate_avatar({gender: 'male'}),
+		photo: toonAvatar.generate_avatar({ gender: 'male' }),
 		phone: '(510) 295-5523',
 		email: 'zeke@zeke.zeke',
 		password: '123',
@@ -193,7 +193,7 @@ function generateUsers() {
 	}));
 	users.push(User.build({
 		name: 'Omri Bernstein',
-		photo: toonAvatar.generate_avatar({gender: 'male'}),
+		photo: toonAvatar.generate_avatar({ gender: 'male' }),
 		phone: '(781) 854-8854',
 		email: 'omri@omri.omri',
 		password: '123',
@@ -201,7 +201,7 @@ function generateUsers() {
 	}));
 	users.push(User.build({
 		name: 'Kate Humphrey',
-		photo: toonAvatar.generate_avatar({gender: 'female'}),
+		photo: toonAvatar.generate_avatar({ gender: 'female' }),
 		phone: '(555) 623-7878',
 		email: 'kate@kate.kate',
 		password: '123',
@@ -242,23 +242,23 @@ const orders = [
 		userId: 4
 	},
 	{
-		status: "closed",
+		status: "processing",
 		userId: 102
 	},
 	{
-		status: "closed",
+		status: "processing",
 		userId: 1
 	},
 	{
-		status: "closed",
+		status: "processing",
 		userId: 2
 	},
 	{
-		status: "closed",
+		status: "processing",
 		userId: 3
 	},
 	{
-		status: "closed",
+		status: "processing",
 		userId: 4
 	},
 	{
@@ -334,6 +334,62 @@ const lineItems = [
 		spaceshipId: 10,
 		orderId: 2
 	},
+	//////
+	{
+		quantity: 1,
+		spaceshipId: 12,
+		orderId: 6
+	},
+	{
+		quantity: 2,
+		spaceshipId: 11,
+		orderId: 7
+	},
+	{
+		quantity: 2,
+		spaceshipId: 10,
+		orderId: 8
+	},
+	{
+		quantity: 1,
+		spaceshipId: 9,
+		orderId: 9
+	},
+	{
+		quantity: 2,
+		spaceshipId: 8,
+		orderId: 10
+	},
+	{
+		quantity: 1,
+		spaceshipId: 7,
+		orderId: 11
+	},
+	{
+		quantity: 2,
+		spaceshipId: 6,
+		orderId: 12
+	},
+	{
+		quantity: 1,
+		spaceshipId: 5,
+		orderId: 13
+	},
+	{
+		quantity: 1,
+		spaceshipId: 4,
+		orderId: 14
+	},
+	{
+		quantity: 1,
+		spaceshipId: 3,
+		orderId: 14
+	},
+	{
+		quantity: 1,
+		spaceshipId: 2,
+		orderId: 15
+	}
 ]
 
 

@@ -35,21 +35,28 @@ export class ProductPage extends Component {
 			inventoryArr.push(i);
 		}
 		console.log("ORDER ID ", this.props.orderId)
+
+		const startTotal = 5;
+
 		return (
 			<div className="single">
 				<span>
 					<h3>{this.props.spaceship.title}</h3>
 					<img src={this.props.spaceship.image} />
 				</span>
-				<div>Average Rating: {
+				<div >
+					<h3>Average Rating: {
 
-					this.props.reviews ?
-						Math.round(this.props.reviews.map((reviewObj) => {
-							return reviewObj.rating;
-						}).reduce((a, b) => a + b, 0) / this.props.reviews.length) :
-						null
+						this.props.reviews ?
+							Math.round(this.props.reviews.map((reviewObj) => {
+								return reviewObj.rating;
+							}).reduce((a, b) => a + b, 0) / this.props.reviews.length)
+							: null
 
-				}
+					}</h3>
+
+					<div class="stars-outer">
+						<div class="stars-inner"></div> </div>
 				</div>
 				<span className="single-details">
 					<div>${this.props.spaceship.priceInMills}</div>
@@ -64,6 +71,14 @@ export class ProductPage extends Component {
 									return (
 										<div key={this.props.reviews.map(function (review2) { return review2.body; }).indexOf(review.body)}>
 											<div>Rating: {review.rating}</div>
+											{/* Tania */}
+											<div class="stars-outer">
+												<div class="stars-inner"></div> </div>
+
+
+
+
+
 											<div>{review.snippet}</div>
 										</div>
 									)
@@ -87,11 +102,12 @@ export class ProductPage extends Component {
 
 						</div>
 					</form>
-					{this.props.isAdmin ?
-						<div className="button">
-							<Link to={`/spaceships/edit/${spaceshipId}`}>Edit Product</Link>
-						</div>
-						: null
+					{
+						this.props.isAdmin ?
+							<div className="button">
+								<Link to={`/spaceships/edit/${spaceshipId}`}>Edit Product</Link>
+							</div>
+							: null
 					}
 
 				</span>
@@ -109,7 +125,7 @@ const mapStateToProps = (state) => {
 		isAdmin: state.user.isAdmin,
 		reviews: state.reviews,
 		orderId: state.cart[0] ? state.cart[0].id : '',
-		userId: state.userId,
+		userId: state.user.id,
 
 
 	};
