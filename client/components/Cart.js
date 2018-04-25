@@ -68,14 +68,12 @@ export class Cart extends Component {
                         {!isLoggedIn ? <Link to="/signup" > <button className="remove-cart-btn-guest" > ✅ SIGN UP & SAVE CART </button> <br /></Link> : null}
                         <button className="remove-cart-btn-guest" onClick={this.handleCartDelete} >🔆 CLEAN CART</button> <br />
 
+
                         <Link to="/home">
                             <button className="remove-cart-btn-guest"> 📋 ORDER HISTORY</button> <br />
                         </Link>
 
-                        <Checkout
-                            cart={this.props.cart}
-                            amount={1}
-                        />
+
 
                     </span>
                 </div>
@@ -133,7 +131,7 @@ export class Cart extends Component {
                 <span className="item-devider" ><hr /></span>
 
                 <span >Subtotal: ${subtotalPrice} for ({subtotalItems}) items</span>
-
+                <button className="button"><Link to="/checkout">Checkout</Link></button>
                 <span></span>
                 <span className="item-devider" ><hr /></span>
             </div>

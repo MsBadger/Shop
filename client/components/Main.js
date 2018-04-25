@@ -41,7 +41,7 @@ class Main extends Component {
                 <main>
                     <Switch>
 
-                        {/*TEST*/} <Route exact path="/test" component={CheckoutForms} /> 
+                        <Route exact path="/checkout" component={CheckoutForms} /> 
                         <Route path="/weloveyou/:userId" component={Cart} />
                         <Route path="/spaceships/edit/:id" component={UpdateSpaceship} />
                         <Route exact path="/spaceships/new" component={AddSpaceship} />
