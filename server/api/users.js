@@ -150,7 +150,31 @@ router.delete('/:userId/cart/:orderId/:spaceshipId', (req, res, next) => {
 
 
 
+//UPDATE quantity of item in cart
+
+router.put('/cart/:lineItemId', (req, res, next) => {
+  LineItems.update(
+    { quantity: req.body.quantity },
+    { where: {id: req.params.lineItemId} }
+  )
+  .then(update => res.json(update))
+  .catch(next)
+})
 
 
+//UPDATE ADDRESS
+
+router.put(`/:userId/addAddress`, (req, res, next) => {
+  let b = req.body.billing;
+  let s = req.body.shipping;
+
+  Order.findOne({ where: {userId: req.params.userId, status: 'open'} })
+    .then(order => order.update({
+        billingAddress: [b.address, b.city, b.state, b.zip, b.country ],
+        shippingAddress: [s.address, s.city, s.state, s.zip, s.country ]
+      }))
+    .then(order => res.json(order))
+    .catch(next)
+})
 
 

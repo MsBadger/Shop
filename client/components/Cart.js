@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
-import { connect } from 'react-redux'
-import { myCart, removeCart, removeItem, postToCart } from '../store'
+
+import { connect } from 'react-redux';
+import { myCart, removeCart, removeItem, postToCart } from '../store';
+import { Checkout } from './index';
+
 
 
 export class Cart extends Component {
@@ -64,9 +67,16 @@ export class Cart extends Component {
                     <span className="buttons-rows">
                         {!isLoggedIn ? <Link to="/signup" > <button className="remove-cart-btn-guest" > ✅ SIGN UP & SAVE CART </button> <br /></Link> : null}
                         <button className="remove-cart-btn-guest" onClick={this.handleCartDelete} >🔆 CLEAN CART</button> <br />
+
                         <Link to="/home">
                             <button className="remove-cart-btn-guest"> 📋 ORDER HISTORY</button> <br />
                         </Link>
+
+                        <Checkout
+                            cart={this.props.cart}
+                            amount={1}
+                        />
+
                     </span>
                 </div>
                 <div className="cart-page">
@@ -81,21 +91,34 @@ export class Cart extends Component {
                                     </span>
                                 </Link>
                                 <span className="home-item cart-item">
-                                    <h1>{spaceship.title}</h1>
+                                    <NavLink to={`/spaceships/${spaceship.id}`}>
+                                        <h1>{spaceship.title}</h1>
+                                    </NavLink>
                                     <h5 className="white" className="item-details">Capacity {spaceship.capacity}</h5>
                                     <h5 className="white" >Price per item {spaceship.priceInMills}</h5>
-                                    <select name="quantitySelection" value={this.props.value}> {
-                                        inventoryOb[spaceship.id]
-                                            ? inventoryOb[spaceship.id].map(quantity => {
-                                                return (
+                                    <form onSubmit={this.props.handleChangeQuantity}>
+                                        <div>
+                                            <select name="quantitySelection" value={this.props.value} onChange={(event) => { this.props.handleChangeQuantity(event, spaceship.lineItems.id) }} > {
+                                                inventoryOb[spaceship.id]
+                                                    ? inventoryOb[spaceship.id].map(quantity => {
+                                                        if (quantity === spaceship.lineItems.quantity) {
+                                                            return (
+                                                                //this ensures that the dropdown menu automatically displays the number of items that the user has in their cart. Ignore the react warning in the browser console.
+                                                                <option key={quantity} value={quantity} selected="selected">{quantity}</option>
+                                                            )
+                                                        } else {
+                                                            return (
 
-                                                    <option key={quantity} value={quantity}>{quantity}</option>
+                                                                <option key={quantity} value={quantity}>{quantity}</option>
 
-                                                )
-                                            })
-                                            : <option value="0"> Out Of Stock </option>
-                                    }
-                                    </select>
+                                                            )
+                                                        }
+                                                    })
+                                                    : <option value="0"> Out Of Stock </option>
+                                            }
+                                            </select>
+                                        </div>
+                                    </form>
                                     <button className="remove-btn" name={cart[0].id + '-' + spaceship.id} onClick={this.handleItemDelete}>❌ REMOVE ITEM</button>
                                 </span>
                                 <span></span>
@@ -109,7 +132,7 @@ export class Cart extends Component {
                 </div>
                 <span className="item-devider" ><hr /></span>
 
-                <span >Subtotal ({subtotalItems})= {subtotalPrice}</span>
+                <span >Subtotal: ${subtotalPrice} for ({subtotalItems}) items</span>
 
                 <span></span>
                 <span className="item-devider" ><hr /></span>
@@ -124,13 +147,14 @@ export class Cart extends Component {
  * CONTAINER
  */
 const mapState = (state, ownProps) => {
+    console.log('this is the cart', state.cart)
     return {
         isLoggedIn: !!state.user.id,
         photo: state.user.photo,
         name: state.user.name,
         userId: ownProps.match.params.userId,
         email: state.user.email,
-        cart: state.cart
+        cart: state.cart,
     }
 }
 
@@ -145,8 +169,12 @@ const mapDispatch = (dispatch) => {
         },
         removeItem(userId, orderId, spaceshipId) {
             dispatch(removeItem(userId, orderId, spaceshipId))
+        },
+        handleChangeQuantity(event) {
+            console.log('got into handleChangeQuantity, event is: ', event.target.value)
+            const newQuantity = event.target.value
+            // dispatch(updateQuantity(lineItemId, newQuantity))
         }
-
     }
 }
 

@@ -25,7 +25,7 @@ function ProductsList(props) {
             <NavLink to={`/spaceships/${spaceship.id}`}>
               <img src={spaceship.image} />
               <div>
-                <span> {spaceship.title}</span>
+                <span className="ship-name"> {spaceship.title}</span>
               </div>
             </NavLink>
           </span>

@@ -40,9 +40,11 @@ export class Home extends Component {
                 <span className="sub-title">
                     <h3>Please explore the options and login to buy</h3>
                 </span>
+                <div className="see-all-product-btn">
                 <Link to={`/spaceships`}>
                     <button className="see-all-btn">See All Spaceships</button>
                 </Link>
+                </div>
                 <br />
                 <div className="home-container">
                     {categories.map((category, ind) => (
