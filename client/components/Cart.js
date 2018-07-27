@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-
-
 import { connect } from 'react-redux';
 import { myCart, removeCart, removeItem, postToCart } from '../store';
 import { Checkout } from './index';
 
-
-
 export class Cart extends Component {
-
     constructor() {
         super();
         this.handleCartDelete = this.handleCartDelete.bind(this);
@@ -47,8 +42,6 @@ export class Cart extends Component {
             cart[0].spaceships.map((spaceship) => {
                 var arrOfNum = [];
                 for (var i = 1; i <= spaceship.inventory; i++) {
-
-
                     arrOfNum.push(i)
                 }
                 inventoryOb[spaceship.id] = arrOfNum;
@@ -72,9 +65,6 @@ export class Cart extends Component {
                         <Link to="/home">
                             <button className="remove-cart-btn-guest"> 📋 ORDER HISTORY</button> <br />
                         </Link>
-
-
-
                     </span>
                 </div>
                 <div className="cart-page">
@@ -135,8 +125,6 @@ export class Cart extends Component {
                 <span></span>
                 <span className="item-devider" ><hr /></span>
             </div>
-
-
         )
     }
 }
@@ -155,7 +143,6 @@ const mapState = (state, ownProps) => {
         cart: state.cart,
     }
 }
-
 
 const mapDispatch = (dispatch) => {
     return {
@@ -176,13 +163,6 @@ const mapDispatch = (dispatch) => {
     }
 }
 
-
-
 export default connect(mapState, mapDispatch)(Cart)
 
-/**
- * PROP TYPES
-// //  */
-// UserHome.propTypes = {
-//     email: PropTypes.string
-// }
+

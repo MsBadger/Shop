@@ -41,17 +41,7 @@ const Spaceship = db.define('spaceship', {
             isUrl: true
         }
     },
-    // avgRating: {
-    //     type: Sequelize.NUMBER,
-    //     default: 0,
-
-    // }
-
 
 })
-
-// Spaceship.prototype.avgRating = () => {
-
-// }
 
 module.exports = Spaceship

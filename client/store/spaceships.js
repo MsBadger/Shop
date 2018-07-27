@@ -6,8 +6,6 @@ const GET_BY_VESSEL_TYPE = 'GET_BY_VESSEL_TYPE';
 const UPDATE_SPACESHIP = 'UPDATE_SPACESHIP';
 const ADD_SPACESHIP = 'ADD_SPACESHIP'
 
-
-
 /*** ACTION CREATORS ***/
 const getSpaceships = spaceships => {
     return {

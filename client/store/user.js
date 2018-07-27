@@ -7,8 +7,6 @@ import history from '../history'
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 
-
-
 /**
  * INITIAL STATE
  */
@@ -54,8 +52,6 @@ export const auth = (email, password, method) =>
 //       dispatch(getUser({ error: authError }))
 //     })
 //     .catch(dispatchOrHistoryErr => console.error(dispatchOrHistoryErr))
-
-
 
 
 

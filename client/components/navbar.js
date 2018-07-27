@@ -48,13 +48,11 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin, userId, spaceshipId }) => (
           {isAdmin && <Link to={'/spaceships/new'} className="dropdown-item" >Add New Spaceship</Link>}
         </div>
       </div>
-
       <span className='cart-icon'>
         <Link to={`/weloveyou/${userId}`}>
           <img src='/images/cart.jpg' />
         </Link>
       </span>
-
       <span className="header-underline"><hr /></span>
     </nav>
   </div>
@@ -77,9 +75,6 @@ const mapDispatch = dispatch => {
     handleClick() {
       dispatch(logout())
     }
-    // handleChange(event){
-    //   spaceshipId:evt.tart.value
-    // }
   }
 }
 

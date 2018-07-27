@@ -20,14 +20,14 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     // Making `.salt` act like a function hides it when serializing to JSON.
     // This is a hack to get around Sequelize's lack of a "private" option.
-    get () {
+    get() {
       return () => this.getDataValue('salt')
     }
   },
   googleId: {
     type: Sequelize.STRING
   },
- //---------------------------- ADDED --------------------------------
+  //---------------------------- ADDED --------------------------------
 
   name: Sequelize.STRING,
   photo: {
@@ -38,17 +38,8 @@ const User = db.define('user', {
   isAdmin: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
-  } 
+  }
 }
-// ,{
-//   scopes: {
-//     populated: () => ({
-//       include: [{
-//         model: db.model('review')
-//       }]
-//     })
-//   }
-// }
 )
 
 module.exports = User

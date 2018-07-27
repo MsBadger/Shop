@@ -3,8 +3,6 @@ import Main from './components/Main.js';
 // import Routes from './routes'
 
 
-
-
 const App = () => {
   return (
     <div>

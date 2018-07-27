@@ -19,7 +19,6 @@ export const fetchHistory = (userId) => dispatch => {
         .catch(console.error('Fetching order history FAILED'));
 }
 
-
 export default function (state = [], action) {
     switch (action.type) {
         case GET_ORDER_HISTORY:
