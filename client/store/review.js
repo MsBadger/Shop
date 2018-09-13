@@ -17,7 +17,6 @@ export const fetchReviews = (spaceshipId) => {
         return axios.get(`/api/products/reviews/${spaceshipId}`)
             .then(res => res.data)
             .then(reviews => {
-                console.log('here are the formatted reviews in the thunk', reviews)
                 dispatch(getReviews(reviews))
             })
             .catch(console.error)

@@ -28,11 +28,9 @@ router.get('/', (req, res, next) => {
 })
 
 
-
-
 //Route to add a new item to the cart 
 router.post('/:userId/cart/:orderId/:spaceshipId', (req, res, next) => {
-  console.log("inside backend route ")
+  console.log("inside back-end route ")
   LineItems.findOrCreate(
     {
       where: {
@@ -50,38 +48,31 @@ router.post('/:userId/cart/:orderId/:spaceshipId', (req, res, next) => {
     })
     .catch(next)
 })
-// router.get('/:userId')
+
 
 // GET CART
 
 router.get('/:userId/cart', (req, res, next) => {
-  console.log("what AM I? ", req.params.userId)
   if (req.params.userId === "guest") {
 
     Order.findOrCreate({
       where: {
         sessionId: req.session.id,
         status: 'open'
-      }
-      ,
+      },
       include: [{ model: Spaceship }]
     })
-      .then(cart => {
-        res.json(cart)
-      })
-  }
-  else {
+      .then(cart => res.json(cart))
+  } else {
     Order.findOrCreate({
       where: {
         userId: Number(req.params.userId),
         status: 'open'
-      }
-      ,
+      },
       include: [{ model: Spaceship }]
     })
-      .then(products => {
-        res.json(products)
-      })
+      .then(products => res.json(products)
+      )
       .catch(next)
   }
 })
@@ -90,17 +81,15 @@ router.get('/:userId/cart', (req, res, next) => {
 // CREATE NEW CART
 
 router.post('/:userId/cart', (req, res, next) => {
-  LineItems.create(
-    req.body)
-    .then(newLine => {
-      res.json(newLine)
-    })
+  LineItems.create(req.body)
+    .then(newLine => res.json(newLine))
     .catch(next)
 })
 
 // DELETE CART
 //This is the route to clear the WHOLE cart  
 // We're saying req.body will have the order Id as a property
+
 router.delete('/:userId/cart', (req, res, next) => {
   if (req.params.userId === 'guest') {
     Order.destroy({
@@ -128,10 +117,9 @@ router.delete('/:userId/cart', (req, res, next) => {
   }
 })
 
-
-
 // DELETE ITEM
 //The following route will be used to delete just one line item
+
 router.delete('/:userId/cart/:orderId/:spaceshipId', (req, res, next) => {
   LineItems.destroy({
     where: {
@@ -143,24 +131,24 @@ router.delete('/:userId/cart/:orderId/:spaceshipId', (req, res, next) => {
       res.status(204).send("Successfully deleted item")
     })
     .catch(next)
-}
-)
-
-
-
+})
 
 
 //UPDATE quantity of item in cart
 
 router.put('/cart/:lineItemId', (req, res, next) => {
-  LineItems.update(
-    { quantity: req.body.quantity },
-    { where: {id: req.params.lineItemId} }
+  LineItems.update({
+    quantity: req.body.quantity
+  },
+    {
+      where: {
+        id: req.params.lineItemId
+      }
+    }
   )
-  .then(update => res.json(update))
-  .catch(next)
+    .then(update => res.json(update))
+    .catch(next)
 })
-
 
 //UPDATE ADDRESS
 
@@ -168,11 +156,11 @@ router.put(`/:userId/addAddress`, (req, res, next) => {
   let b = req.body.billing;
   let s = req.body.shipping;
 
-  Order.findOne({ where: {userId: req.params.userId, status: 'open'} })
+  Order.findOne({ where: { userId: req.params.userId, status: 'open' } })
     .then(order => order.update({
-        billingAddress: [b.address, b.city, b.state, b.zip, b.country ],
-        shippingAddress: [s.address, s.city, s.state, s.zip, s.country ]
-      }))
+      billingAddress: [b.address, b.city, b.state, b.zip, b.country],
+      shippingAddress: [s.address, s.city, s.state, s.zip, s.country]
+    }))
     .then(order => res.json(order))
     .catch(next)
 })

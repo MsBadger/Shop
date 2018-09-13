@@ -1,5 +1,4 @@
 import axios from 'axios'
-import history from '../history'
 
 const GET_ORDER_HISTORY = 'GET_ORDER_HISTORY';
 
