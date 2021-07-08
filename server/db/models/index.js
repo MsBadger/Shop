@@ -17,10 +17,9 @@ Order.belongsToMany(Spaceship, { through: LineItems });
 Review.belongsTo(User);
 User.hasMany(Review);
 
-//reviews associations for spacehip (product)
+//reviews associations for spaceship (product)
 Review.belongsTo(Spaceship);
 Spaceship.hasMany(Review);
-
 
 
 module.exports = {

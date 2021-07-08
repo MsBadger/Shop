@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import store, { postToCart, myCart } from '../store';
 import { fetchSingleSpaceship } from '../store/spaceship.js';
 import { fetchReviews } from '../store/review.js'
-import axios from 'axios'
 
 export class ProductPage extends Component {
 	constructor(props) {
@@ -26,15 +25,12 @@ export class ProductPage extends Component {
 		this.props.loadTheCart(userId)
 	}
 
-
-
 	render() {
 		const spaceshipId = this.props.match.params.spaceshipId;
 		let inventoryArr = [];
 		for (let i = 1; i <= this.props.spaceship.inventory; i++) {
 			inventoryArr.push(i);
 		}
-		console.log("ORDER ID ", this.props.orderId)
 
 		const startTotal = 5;
 
@@ -74,18 +70,12 @@ export class ProductPage extends Component {
 											{/* Tania */}
 											<div class="stars-outer">
 												<div class="stars-inner"></div> </div>
-
-
-
-
-
 											<div>{review.snippet}</div>
 										</div>
 									)
 								}) : null
 						}
 					</div>
-
 					<form onSubmit={this.props.handleAddProduct}>
 						<div>
 							<select name="quantitySelection"> {inventoryArr.length ? inventoryArr.map(quantity => {
@@ -98,8 +88,6 @@ export class ProductPage extends Component {
 							</select>
 
 							<button className="button" type="submit" value={[this.props.user.id, this.props.orderId]} name="btn"> Add To Cart </button>
-
-
 						</div>
 					</form>
 					{
@@ -109,13 +97,10 @@ export class ProductPage extends Component {
 							</div>
 							: null
 					}
-
 				</span>
 			</div>
 		)
-
 	}
-
 }
 
 const mapStateToProps = (state) => {
@@ -126,28 +111,11 @@ const mapStateToProps = (state) => {
 		reviews: state.reviews,
 		orderId: state.cart[0] ? state.cart[0].id : '',
 		userId: state.user.id,
-
-
 	};
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
 	return {
-		// avgRating = function () {
-		// 	if (this.props.reviews) {
-		// 		let ratings = Math.round(this.props.reviews.map((reviewObj) => {
-		//       return reviewObj.rating;
-		//     }).reduce((a, b) => a + b, 0) / this.props.reviews.length)
-		// 	} else {
-		// 		return null;
-		// 	}
-		// },
-
-		// handleSubmit: function (event) {
-		// 	event.preventDefault();
-
-		// },
-
 		handleAddProduct: (event) => {
 			event.preventDefault();
 			let userIdOrderId = event.target.btn.value.split(',')
@@ -158,17 +126,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 			console.log("OWN props for spaceship", ownProps.match.params.spaceshipId)
 			const spaceshipId = ownProps.match.params.spaceshipId;
 			const quantity = event.target.quantitySelection.value;
-
 			dispatch(postToCart(userId, spaceshipId, orderId, quantity))
-
-			// dispatch(myCart(userId))
-
 		},
 		loadTheCart(userId) {
 			dispatch(myCart(userId))
 		}
-
-
 	}
 }
 

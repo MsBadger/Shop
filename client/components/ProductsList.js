@@ -2,10 +2,7 @@ import React from 'react';
 import { withRouter, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-
-
 function ProductsList(props) {
-
   const { spaceships } = props;
   let proxyVar = [];
 
@@ -18,7 +15,6 @@ function ProductsList(props) {
 
   return (
     <div className="all-container">
-
       {proxyVar.map((spaceship, idx) => {
         return (
           <span key={idx} className="all-item">
@@ -31,9 +27,7 @@ function ProductsList(props) {
           </span>
         );
       })
-
       }
-
     </div>
   );
 }
@@ -43,7 +37,6 @@ const mapStateToProps = function (state) {
     spaceships: state.spaceships
   };
 };
-
 
 
 export default withRouter(connect(mapStateToProps)(ProductsList));

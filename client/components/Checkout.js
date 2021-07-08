@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios';
 import StripeCheckout from 'react-stripe-checkout';
-
 import STRIPE_PUBLISHABLE from '../../constants/stripe';
 import PAYMENT_SERVER_URL from '../../constants/server';
 
@@ -31,8 +30,6 @@ const Checkout = ({ cart, amount }) => {
     console.log('fromUSDToCent(amount) : ', fromUSDToCent(amount))
     return (
         <StripeCheckout
-            // name={name}
-            // description={description}
             amount={fromUSDToCent(amount)}
             cart={cart}
             token={onToken(amount)}
@@ -41,8 +38,6 @@ const Checkout = ({ cart, amount }) => {
         />
     )
 }
-
-
 
 
 export default Checkout;

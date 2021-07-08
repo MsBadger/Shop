@@ -7,8 +7,6 @@ import history from '../history'
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 
-
-
 /**
  * INITIAL STATE
  */
@@ -31,7 +29,7 @@ export const me = () =>
         dispatch(getUser(res.data || defaultUser)))
       .catch(err => console.log(err))
 
-//NEW VERSION OF AUTH THUNK 
+//AUTH THUNK 
 export const auth = (email, password, method) =>
   dispatch =>
     axios.post(`/auth/${method}`, { email, password })
@@ -42,21 +40,6 @@ export const auth = (email, password, method) =>
         dispatch(getUser({ error: authError }))
       })
       .catch(dispatchOrHistoryErr => console.error(dispatchOrHistoryErr))
-
-//PREVIOUS VERSION OF AUTH THUNK 
-// export const auth = (email, password, method) =>
-// dispatch =>
-//   axios.post(`/auth/${method}`, { email, password })
-//     .then(res => {
-//       dispatch(getUser(res.data))
-//       history.push('/home')
-//     }, authError => { // rare example: a good use case for parallel (non-catch) error handler
-//       dispatch(getUser({ error: authError }))
-//     })
-//     .catch(dispatchOrHistoryErr => console.error(dispatchOrHistoryErr))
-
-
-
 
 
 export const logout = () =>
@@ -77,7 +60,6 @@ export default function (state = defaultUser, action) {
       return action.user;
     case REMOVE_USER:
       return defaultUser;
-
     default:
       return state;
   }

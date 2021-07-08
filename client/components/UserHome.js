@@ -16,11 +16,6 @@ export class UserHome extends Component {
     this.props.loadHistory(userId)
   }
 
-  // componentDidUpdate() {
-  //   const userId = this.props.userId
-  //   console.log('USERID **', userId)
-  //   this.props.loadHistory(userId)
-  // }
   render() {
     const { email } = this.props;
     //console.log("state for indiv user ", state)
@@ -48,7 +43,6 @@ export class UserHome extends Component {
                         <h5>{spaceship.title} </h5>
                       </Link>
                     </span>
-
                   )
                   )}
                 </div>
@@ -62,7 +56,6 @@ export class UserHome extends Component {
         </div>
       </div>
     )
-
   }
 }
 /**

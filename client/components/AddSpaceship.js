@@ -8,7 +8,6 @@ import axios from 'axios';
 export default class AddSpaceship extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             title: '',
             description: '',
@@ -39,7 +38,7 @@ export default class AddSpaceship extends Component {
                 let formattedRes = res.data;
                 store.dispatch(addSpaceship(formattedRes))
             })
-            .then(() => { 
+            .then(() => {
                 this.props.history.push('/spaceships')
             })
             .catch(err => console.error(err))
@@ -53,19 +52,19 @@ export default class AddSpaceship extends Component {
 
     render() {
         function isUrl(s) {
-           var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
-           return regexp.test(s);
+            var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+            return regexp.test(s);
         }
         let warning;
         if (!this.state.title) {
             warning = 'Please enter a name using letters!'
-        } else if (!this.state.price ) {
+        } else if (!this.state.price) {
             warning = 'Please enter a price, you RASCAL!'
-        } else if ( isNaN ( Number(this.state.price) ) ) {
+        } else if (isNaN(Number(this.state.price))) {
             warning = 'The price has to be a number, silly'
         } else if (!this.state.capacity) {
             warning = 'For realzies? Enter the capacity using numbers, PPPLEASEEEE!'
-        } else if ( isNaN ( Number(this.state.capacity) ) ) {
+        } else if (isNaN(Number(this.state.capacity))) {
             warning = 'The capacity has to be a number, silly'
         } else if (!this.state.image) {
             warning = 'Please add an image URL'
@@ -75,16 +74,15 @@ export default class AddSpaceship extends Component {
         //disable the button if admin does not behave
         let functional = false;
         if (
-            !this.state.title || 
-            !this.state.price || 
-            isNaN ( Number(this.state.price) ) || 
-            !this.state.capacity || 
-            isNaN ( Number(this.state.capacity) ) ||
+            !this.state.title ||
+            !this.state.price ||
+            isNaN(Number(this.state.price)) ||
+            !this.state.capacity ||
+            isNaN(Number(this.state.capacity)) ||
             !this.state.image ||
-            !isUrl(this.state.image) ) {
+            !isUrl(this.state.image)) {
             functional = true;
         }
-
 
         return (
             <div>

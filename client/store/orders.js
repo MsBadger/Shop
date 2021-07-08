@@ -1,5 +1,4 @@
 import axios from 'axios'
-import history from '../history'
 
 const GET_ORDER_HISTORY = 'GET_ORDER_HISTORY';
 
@@ -18,7 +17,6 @@ export const fetchHistory = (userId) => dispatch => {
         })
         .catch(console.error('Fetching order history FAILED'));
 }
-
 
 export default function (state = [], action) {
     switch (action.type) {

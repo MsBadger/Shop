@@ -3,21 +3,18 @@ import { Link } from 'react-router-dom';
 import { myCart, me } from '../store'
 import { connect } from 'react-redux'
 
-
 export class Home extends Component {
 
     componentDidUpdate() {
-
         const userId = this.props.userId ? this.props.userId : "guest"
         console.log("PROPS ID", userId)
         this.props.loadTheCart(userId)
-
     }
+
     componentDidMount() {
         const userId = this.props.userId ? this.props.userId : "guest"
         console.log("PROPS ID", userId)
         this.props.loadTheCart(userId)
-
     }
 
     render() {
